@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("IsWalking", false);
         }
+        // Run
+        if (_inputActions["Run"].IsPressed())
+            _animator.SetBool("IsRunning", true);
+        else
+            _animator.SetBool("IsRunning", false);
+
     }
     private void OnAnimatorMove()
     {

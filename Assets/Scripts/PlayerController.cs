@@ -118,12 +118,14 @@ public class PlayerController : MonoBehaviour
         {
             if (_currentCam == 0)
             {
+                // CurrentCam => FirstPerson
                 _currentCam = 1;
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 20;
             }
             else if (_currentCam == 1)
             {
+                // CurrentCam => ThirdPerson
                 _currentCam = 0;
                 _FirstPersonCamera.Priority = 20;
                 _ThirdPersonCamera.Priority = 10;

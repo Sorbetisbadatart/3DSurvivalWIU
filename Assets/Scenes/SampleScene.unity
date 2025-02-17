@@ -801,6 +801,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5472622940992281205, guid: 64f20f6c6236ef341a5eb12d92fcc7cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.592
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 64f20f6c6236ef341a5eb12d92fcc7cf,
         type: 3}
       propertyPath: m_Controller
@@ -1084,6 +1089,7 @@ MonoBehaviour:
   _characterController: {fileID: 1921018687}
   _playerInput: {fileID: 1921018686}
   mouseSensitivity: 5
+  Gravity: -9.81
 --- !u!95 &1921018689 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 64f20f6c6236ef341a5eb12d92fcc7cf,

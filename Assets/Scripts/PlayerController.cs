@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 JumpVelocity;
     private InputAction JumpAction;
     private float JumpHeight = 3.0f;
+
+    private Vector3 move =Vector3.zero;
+    private float Speed = 3;
+
 
 
 
@@ -74,7 +79,33 @@ public class PlayerController : MonoBehaviour
         else
             _animator.SetBool("IsRunning", false);
 
-        _characterController.Move((JumpVelocity) * Time.deltaTime);
+        // Jump
+        if (_inputActions["Jump"].IsPressed())
+            _animator.SetBool("IsJump", true);
+        else
+            _animator.SetBool("IsJump", false);
+
+        // Fall
+        if (!_characterController.isGrounded)
+        {
+            _animator.SetBool("IsFalling", true);
+            move = transform.right * input.x + transform.forward * input.y;
+
+        }
+        else
+        {
+            _animator.SetBool("IsFalling", false);
+            move = Vector3.zero;
+        }
+
+        // Land
+        if (_characterController.isGrounded)
+            _animator.SetBool("HasLanded", true);
+        else
+            _animator.SetBool("HasLanded", false);
+
+
+        _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
 
     }
 

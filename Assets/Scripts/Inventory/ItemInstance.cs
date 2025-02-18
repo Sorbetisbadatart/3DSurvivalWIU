@@ -9,6 +9,8 @@ public class ItemInstance
     public ItemData itemType;
     public String name;
     public Sprite icon;
+    public int itemCount;
+    public int maxStack;
     public string description;
 
     public ItemInstance(ItemData itemData)
@@ -16,6 +18,8 @@ public class ItemInstance
         itemType = itemData;
         name = itemData.name;
         icon = itemData.icon;
+        itemCount = itemData.itemCount;
+        maxStack = itemData.maxStack;
         description = itemData.description;
     }
 }

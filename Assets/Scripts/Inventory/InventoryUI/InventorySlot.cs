@@ -14,6 +14,32 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             InventoryItem item = eventData.pointerDrag.GetComponent<InventoryItem>();
             item.parentAfterDrag = transform;
         }
+        //for adding item to another item
+        else if(transform.GetChild(0).GetComponent<InventoryItem>().itemInstace.name == eventData.pointerDrag.GetComponent<InventoryItem>().itemInstace.name)
+        {
+            InventoryItem child = transform.GetChild(0).GetComponent<InventoryItem>();
+            if (child.itemInstace.itemCount + eventData.pointerDrag.GetComponent<InventoryItem>().itemInstace.itemCount <= child.itemInstace.maxStack)
+            {
+                //adds to item count
+                child.itemInstace.itemCount += eventData.pointerDrag.GetComponent<InventoryItem>().itemInstace.itemCount;
+
+                //delete other item
+                Destroy(eventData.pointerDrag);
+                CallUpdate();
+            }
+        }
+        //for making items change places
+        else
+        {
+            InventoryItem tempChild = transform.GetChild(0).GetComponent<InventoryItem>();
+            Transform tempSlot = eventData.pointerDrag.GetComponent<InventoryItem>().parentAfterDrag;
+
+            InventoryItem item = eventData.pointerDrag.GetComponent<InventoryItem>();
+            item.parentAfterDrag = transform;
+
+            tempChild.parentAfterDrag = tempSlot;
+            tempChild.UpdateLocation();
+        }
     }
 
     public void GetManager(InventoryManager newManager)

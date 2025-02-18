@@ -36,6 +36,13 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         parentAfterDrag.GetComponent<InventorySlot>().CallUpdate();
     }
 
+    public void UpdateLocation()
+    {
+        image.raycastTarget = true;
+        transform.SetParent(parentAfterDrag);
+        parentAfterDrag.GetComponent<InventorySlot>().CallUpdate();
+    }
+
     public void ObtainItem(ItemInstance newItem)
     {
         if(newItem != null)

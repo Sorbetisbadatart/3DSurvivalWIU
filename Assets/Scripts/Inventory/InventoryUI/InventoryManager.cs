@@ -26,14 +26,14 @@ public class InventoryManager : MonoBehaviour
         for (int ii = 0; ii < hotbarSize; ii++)
         {
             inventorySlots[ii] = Instantiate(inventorySlotPrefab, hotbarUI.transform);
-            inventorySlots[ii].GetComponent<InventorySlot>().GetManager(this);
+            inventorySlots[ii].GetComponent<InventorySlot>().SetManager(this);
         }
 
         //create inventory slots depending on amount of inventory size
         for (int i = hotbarSize; i < inventory.maxItems; i++)
         {
             inventorySlots[i] = Instantiate(inventorySlotPrefab, inventoryUI.transform);
-            inventorySlots[i].GetComponent<InventorySlot>().GetManager(this);
+            inventorySlots[i].GetComponent<InventorySlot>().SetManager(this);
         }
 
         //create items if there are items in the inventory
@@ -42,7 +42,7 @@ public class InventoryManager : MonoBehaviour
             if (i <inventory.items.Length && inventory.items[i] != null)
             {
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
-                temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i]);
+                temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], 1);
             }
         }
 
@@ -74,5 +74,28 @@ public class InventoryManager : MonoBehaviour
                 inventory.items[i] = null;
             }
         }
+    }
+
+    public void AddItem(ItemInstance item, int amt)
+    {
+        Debug.Log("ADDING ITEMS!");
+        //inventory.AddItem(item, amt);
+        //look through inventory for empty slot
+        for (int i = 0; i < inventory.maxItems; i++)
+        {
+            Debug.Log("LOOP " + i);
+            Debug.Log("Inventory: " + inventory.items[i]);
+            //Debug.Log("Inventory: " + inventory.items[i].itemType);
+            //Strange bug here, sometimes wants items[i].itemType but sometimes dosent.
+            if (inventory.items[i] == null)
+            {
+                Debug.Log("INSTANTIATED");
+                ItemInstance newItem = new ItemInstance(item.itemType);
+                GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
+                temp.GetComponent<InventoryItem>().ObtainItem(item, amt);
+                break;
+            }
+        }
+        UpdateSlot();
     }
 }

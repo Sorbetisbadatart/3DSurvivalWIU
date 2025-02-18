@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     private Image image;
 
@@ -43,11 +43,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         parentAfterDrag.GetComponent<InventorySlot>().CallUpdate();
     }
 
-    public void ObtainItem(ItemInstance newItem)
+    public void ObtainItem(ItemInstance newItem, int amt)
     {
         if(newItem != null)
         {
             itemInstace = newItem;
+            itemInstace.itemCount = amt;
 
             if (image == null)
             {
@@ -61,5 +62,18 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public ItemInstance GetItem()
     {
         return itemInstace;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        //if clicked split stack by half
+        if(itemInstace.itemCount >= 2)
+        {
+            if(parentAfterDrag == null) return;
+            Debug.Log("PARENT!: " + parentAfterDrag.gameObject.name);
+            int split = itemInstace.itemCount / 2;
+            itemInstace.itemCount /= 2;
+            parentAfterDrag.gameObject.GetComponent<InventorySlot>().GetManager().AddItem(itemInstace, split);
+        }
     }
 }

@@ -42,9 +42,14 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         }
     }
 
-    public void GetManager(InventoryManager newManager)
+    public void SetManager(InventoryManager newManager)
     {
         manager = newManager;
+    }
+
+    public InventoryManager GetManager()
+    {
+        return manager;
     }
 
     public void CallUpdate()

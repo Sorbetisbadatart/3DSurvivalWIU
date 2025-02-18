@@ -30,12 +30,12 @@ public class ThirstNHunger : MonoBehaviour
 
         if(thirst <= 0)
         {
-            Debug.Log("THIRSTY!");
+            //Debug.Log("THIRSTY!");
         }
 
         if (hunger <= 0)
         {
-            Debug.Log("HUNGRY");
+            //Debug.Log("HUNGRY");
         }
     }
 }

@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
         items = new ItemInstance[maxItems];
     }
 
-    public bool AddItem(ItemInstance newItem)
+    public bool AddItem(ItemInstance newItem, int amt)
     {
         //adds to empty slot when it finds one
         for(int i = 0; i<items.Length;i++)
@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
             if (items[i]==null)
             {
                 items[i] = newItem;
+                items[i].itemCount = amt;
                 return true;
             }
         }

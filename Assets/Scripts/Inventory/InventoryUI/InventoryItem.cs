@@ -10,6 +10,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public Transform parentAfterDrag;
 
+    public ItemInstance itemInstace;
+
     private void Start()
     {
         image = gameObject.GetComponent<Image>();
@@ -31,5 +33,26 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+        parentAfterDrag.GetComponent<InventorySlot>().CallUpdate();
+    }
+
+    public void ObtainItem(ItemInstance newItem)
+    {
+        if(newItem != null)
+        {
+            itemInstace = newItem;
+
+            if (image == null)
+            {
+                image = gameObject.GetComponent<Image>();
+            }
+
+            image.sprite = itemInstace.icon;
+        }
+    }
+
+    public ItemInstance GetItem()
+    {
+        return itemInstace;
     }
 }

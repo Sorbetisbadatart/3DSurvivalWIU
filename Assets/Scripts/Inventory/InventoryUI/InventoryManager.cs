@@ -1,0 +1,78 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InventoryManager : MonoBehaviour
+{
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private int hotbarSize;
+
+    [SerializeField] private GameObject inventorySlotPrefab;
+    [SerializeField] private GameObject inventoryItemPrefab;
+
+    [SerializeField] private GameObject hotbarUI;
+    [SerializeField] private GameObject inventoryUI;
+
+    private GameObject[] inventorySlots;
+
+    [SerializeField] private GameObject InventoryPage;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        inventorySlots = new GameObject[inventory.maxItems];
+
+        for (int ii = 0; ii < hotbarSize; ii++)
+        {
+            inventorySlots[ii] = Instantiate(inventorySlotPrefab, hotbarUI.transform);
+            inventorySlots[ii].GetComponent<InventorySlot>().GetManager(this);
+        }
+
+        //create inventory slots depending on amount of inventory size
+        for (int i = hotbarSize; i < inventory.maxItems; i++)
+        {
+            inventorySlots[i] = Instantiate(inventorySlotPrefab, inventoryUI.transform);
+            inventorySlots[i].GetComponent<InventorySlot>().GetManager(this);
+        }
+
+        //create items if there are items in the inventory
+        for(int i = 0; i<inventory.maxItems;i++)
+        {
+            if (i <inventory.items.Length && inventory.items[i] != null)
+            {
+                GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
+                temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i]);
+            }
+        }
+
+        //turn on canvas
+        gameObject.GetComponent<Canvas>().enabled = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown("e"))
+        {
+            InventoryPage.SetActive(!InventoryPage.activeInHierarchy);
+        }
+    }
+
+    //called when an item switches slot, to update array
+    public void UpdateSlot()
+    {
+        for(int i = 0;i<inventory.maxItems;i++)
+        {
+            //if inventory slot is not null update inventory
+            if (inventorySlots[i].transform.childCount > 0)
+            {
+                inventory.items[i] = inventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().GetItem();
+            }
+            else
+            {
+                inventory.items[i] = null;
+            }
+        }
+    }
+}

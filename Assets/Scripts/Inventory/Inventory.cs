@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private int maxItems = 20;
+    public int maxItems = 28;
     public ItemInstance[] items;
 
     private void Start()

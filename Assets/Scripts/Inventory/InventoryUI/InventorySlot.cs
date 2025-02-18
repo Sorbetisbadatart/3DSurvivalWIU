@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
+    private InventoryManager manager;
+
     public void OnDrop(PointerEventData eventData)
     {
         if(transform.childCount == 0)
@@ -12,5 +14,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             InventoryItem item = eventData.pointerDrag.GetComponent<InventoryItem>();
             item.parentAfterDrag = transform;
         }
+    }
+
+    public void GetManager(InventoryManager newManager)
+    {
+        manager = newManager;
+    }
+
+    public void CallUpdate()
+    {
+        manager.UpdateSlot();
     }
 }

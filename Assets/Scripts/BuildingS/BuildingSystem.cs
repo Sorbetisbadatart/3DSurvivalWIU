@@ -138,6 +138,7 @@ public class Build : MonoBehaviour
     public void ShowPreview(RaycastHit hit)
     {
 
+     
 
         if (direction == MCFace.Up || direction == MCFace.Down)
         {
@@ -164,7 +165,7 @@ public class Build : MonoBehaviour
 
         currentpos -= Vector3.one * offset;
         currentpos /= gridSize;
-        currentpos = new Vector3(Mathf.Round(currentpos.x * 2) / 2, Mathf.Round(currentpos.y * 2) / 2, Mathf.Round(currentpos.z * 2) / 2);
+        currentpos = new Vector3(Mathf.Round(currentpos.x * 20) / 20, Mathf.Round(currentpos.y * 20) / 20, Mathf.Round(currentpos.z * 20) / 20);
         currentpos /= gridSize;
         currentpos += Vector3.one * offset;
         currentpos += Vector3.up * yOffset;
@@ -186,6 +187,9 @@ public class Build : MonoBehaviour
             currentrotation += new Vector3(0, -45, 0);
         }
         currentpreview.localEulerAngles = currentrotation;
+
+        Debug.Log(hit.point);
+        Debug.Log(currentpos);
     }
 
     public void BuildObj()

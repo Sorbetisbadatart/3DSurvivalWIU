@@ -846,6 +846,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1183764354363545948, guid: 7fb2ed3578c30b74189803eea3949544,
+        type: 3}
+      propertyPath: m_StepOffset
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 1289167345177806446, guid: 7fb2ed3578c30b74189803eea3949544,
         type: 3}
       propertyPath: m_Layer

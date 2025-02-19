@@ -46,6 +46,11 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        UpdateInventory();
+
+        //give itself to inventory
+        inventory.SetManager(this);
+
         //turn on canvas
         gameObject.GetComponent<Canvas>().enabled = true;
     }
@@ -60,6 +65,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     //called when an item switches slot, to update array
+    //create items in inventory if there are items in the ui but not in the inventory
     public void UpdateSlot()
     {
         for(int i = 0;i<inventory.maxItems;i++)
@@ -72,6 +78,20 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 inventory.items[i] = null;
+            }
+        }
+    }
+
+    //opposite of update slot where it will create items if there are items in the inventory but not in the slots
+    public void UpdateInventory()
+    {
+        //create items if there are items in the inventory
+        for (int i = 0; i < inventory.maxItems; i++)
+        {
+            if (i < inventory.items.Length && inventory.items[i] != null && inventory.items[i].itemType != null && inventorySlots[i].transform.childCount == 0)
+            {
+                GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
+                temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], 1);
             }
         }
     }

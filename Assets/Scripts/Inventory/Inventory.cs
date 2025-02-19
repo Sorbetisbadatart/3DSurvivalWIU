@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
     public int maxItems = 28;
     public ItemInstance[] items;
 
+    public InventoryManager manager;
+
     private void Start()
     {
         items = new ItemInstance[maxItems];
@@ -17,10 +19,11 @@ public class Inventory : MonoBehaviour
         //adds to empty slot when it finds one
         for(int i = 0; i<items.Length;i++)
         {
-            if (items[i]==null)
+            if (items[i]  == null || items[i].itemType == null)
             {
                 items[i] = newItem;
                 items[i].itemCount = amt;
+                manager.UpdateInventory();
                 return true;
             }
         }
@@ -43,5 +46,10 @@ public class Inventory : MonoBehaviour
     public ItemInstance GetItem(int num)
     {
         return items[num];
+    }
+
+    public void SetManager(InventoryManager newManager)
+    {
+        manager = newManager;
     }
 }

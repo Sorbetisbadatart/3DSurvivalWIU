@@ -19,20 +19,20 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             //check if there item is able to be stacked with another item
-            if (items[i].itemType == newItem.itemType && items[i].itemCount + amt <= items[i].maxStack)
+            if (items[i].itemType == newItem.itemType && (items[i].itemCount + amt) <= items[i].maxStack)
             {
                 //if it fits into the stack
                 items[i].itemCount += amt;
                 manager.UpdateAllCount();
                 return true;
             }
-            //else if(items[i].itemType == newItem.itemType && items[i].itemCount + amt > items[i].maxStack)
-            //{
-            //    //make a new stack
-            //    int overflow = (items[i].itemCount + amt) - items[i].maxStack;
-            //    items[i].itemCount = items[i].maxStack;
-            //    AddItem(newItem, overflow);
-            //}
+            else if (items[i].itemType == newItem.itemType && (items[i].itemCount + amt) > items[i].maxStack)
+            {
+                //make a new stack
+                int overflow = (items[i].itemCount + amt) - items[i].maxStack;
+                items[i].itemCount = items[i].maxStack;
+                OverFlowAddItem(newItem, overflow);
+            }
             else
             {
                 //adds to empty slot when it finds one
@@ -54,6 +54,21 @@ public class Inventory : MonoBehaviour
 
         //if no space return false
         return false;
+    }
+
+    private void OverFlowAddItem(ItemInstance newItem, int amt)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            //adds to empty slot when it finds one
+            if (items[i] == null || items[i].itemType == null)
+            {
+                items[i] = newItem;
+                items[i].itemCount = amt;
+                manager.UpdateInventory();
+                break;
+            }
+        }
     }
 
     public void RemoveItem(ItemInstance itemToRemove)

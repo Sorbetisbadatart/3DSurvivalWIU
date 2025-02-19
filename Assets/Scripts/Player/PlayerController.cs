@@ -75,9 +75,17 @@ public class PlayerController : MonoBehaviour
         }
         // Run
         if (_inputActions["Run"].IsPressed())
+        {
             _animator.SetBool("IsRunning", true);
+            if (_currentCam == 0)
+                _FirstPersonCamera.transform.localPosition = new Vector3(-0.200000003f, 0.920000017f, 0.889999986f);
+        }
         else
+        {
             _animator.SetBool("IsRunning", false);
+            if (_currentCam == 0)
+                _FirstPersonCamera.transform.localPosition = new Vector3(0, 1.36600006f, 0.5f);
+        }
 
         // Jump
         if (_inputActions["Jump"].IsPressed())
@@ -118,12 +126,14 @@ public class PlayerController : MonoBehaviour
         {
             if (_currentCam == 0)
             {
+                // CurrentCam => FirstPerson
                 _currentCam = 1;
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 20;
             }
             else if (_currentCam == 1)
             {
+                // CurrentCam => ThirdPerson
                 _currentCam = 0;
                 _FirstPersonCamera.Priority = 20;
                 _ThirdPersonCamera.Priority = 10;
@@ -150,13 +160,10 @@ public class PlayerController : MonoBehaviour
     }
     public void Look()
     {
-        if (_currentCam == 0)
-        {
-            mouseDelta = lookAction.ReadValue<Vector2>();
-            float mouseX = mouseDelta.x * mouseSensitivity * Time.deltaTime;
-            // Rotate the camera vertically horizontally
-           gameObject.transform.Rotate(Vector3.up * mouseX);
-        }
+        mouseDelta = lookAction.ReadValue<Vector2>();
+        float mouseX = mouseDelta.x * mouseSensitivity * Time.deltaTime;
+        // Rotate the camera vertically horizontally
+        gameObject.transform.Rotate(Vector3.up * mouseX);
     }
 
     public void Fall()

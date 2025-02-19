@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3722574012260617455}
-  - component: {fileID: 1204708361483132293}
-  - component: {fileID: 3970659391556664942}
+  - component: {fileID: 6548602781206393157}
+  - component: {fileID: 7946853369659792987}
   - component: {fileID: 4935257216641655961}
   m_Layer: 0
   m_Name: Map Generator
@@ -34,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1204708361483132293
+--- !u!114 &6548602781206393157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3866258362002275130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7630da9173a53c4694aad2d737c730c, type: 3}
+  m_Script: {fileID: 11500000, guid: 916b4f4143ed7456294aa19afa97bde8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
@@ -51,7 +51,7 @@ MonoBehaviour:
   editorPreviewLOD: 0
   noiseScale: 48.68
   octaves: 8
-  persistance: 0.2
+  persistance: 0.5
   lacunarity: 2
   seed: 146
   offset: {x: 27.86, y: 15.27}
@@ -67,21 +67,57 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
+      time: 0.3921135
+      value: 0.0067466665
+      inSlope: 0.11969591
+      outSlope: 0.11969591
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.48799574
+      value: 0.0595309
+      inSlope: 0.19425277
+      outSlope: 0.19425277
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.66847515
+      value: 0.2084804
+      inSlope: 0.16919716
+      outSlope: 0.16919716
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.82753843
+      value: 0.56445694
+      inSlope: 3.1456046
+      outSlope: 3.1456046
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.1120291
+      value: 1.1415408
+      inSlope: 0.3251441
+      outSlope: 0.3251441
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  autoUpdate: 0
+  autoUpdate: 1
   regions:
   - name: Water Deep
     height: 0
@@ -107,7 +143,7 @@ MonoBehaviour:
   - name: Snow
     height: 0.91
     colour: {r: 1, g: 1, b: 1, a: 0}
---- !u!114 &3970659391556664942
+--- !u!114 &7946853369659792987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,15 +152,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3866258362002275130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 482066f8cce8f3e47a53b7de5d7b5a28, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aeb0f3a8e031433495f2ddd66acbef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureRender: {fileID: 5115006898728318133, guid: d1ed33318e16b1745923341e2d3bcf8b,
-    type: 3}
-  meshFilter: {fileID: 5573111705640975029, guid: 06ed404744112a74a8d6c3ba5f220c12,
-    type: 3}
-  meshRenderer: {fileID: 369638829359302816, guid: 06ed404744112a74a8d6c3ba5f220c12,
-    type: 3}
+  textureRender: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
 --- !u!114 &4935257216641655961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,18 +167,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3866258362002275130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ce6ecc4242344ccb4045ed364cbcc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 881d53bcf98f6b747a753bc62f738356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detailLevels:
   - lod: 0
     visibleDstThreshold: 50
     useForCollider: 0
-  - lod: 1
-    visibleDstThreshold: 150
+  - lod: 2
+    visibleDstThreshold: 100
     useForCollider: 1
   - lod: 4
-    visibleDstThreshold: 200
+    visibleDstThreshold: 150
     useForCollider: 0
-  viewer: {fileID: 3240121699337421084, guid: 7fb2ed3578c30b74189803eea3949544, type: 3}
+  viewer: {fileID: 0}
   mapMaterial: {fileID: 2100000, guid: 9f010c4ba8cfe034c9eff85b665989c1, type: 2}

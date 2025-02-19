@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EndlessTerrainGeneration : MonoBehaviour {
+public class EndlessGeneration: MonoBehaviour {
 
 	const float scale = 0.5f;
 
@@ -100,7 +100,7 @@ public class EndlessTerrainGeneration : MonoBehaviour {
 
 			meshObject.transform.position = positionV3 * scale;
 			meshObject.transform.parent = parent;
-			meshObject.transform.localScale = new Vector3(1 * scale, 1, 1 * scale);
+			meshObject.transform.localScale = Vector3.one * scale;
 			SetVisible(false);
 
 			lodMeshes = new LODMesh[detailLevels.Length];

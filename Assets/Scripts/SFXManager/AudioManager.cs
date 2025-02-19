@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        PlayMusic("BGM1");
+        PlayMusic("NatureBGM");
     }
 
     public void PlayMusic(string name)

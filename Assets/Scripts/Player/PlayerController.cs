@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.Rendering;
 using static UnityEditor.Progress;
 
@@ -39,6 +40,20 @@ public class PlayerController : MonoBehaviour
 
     //interact
     private int InteractRange = 5;
+
+    private int currState = 0;
+    
+
+    private enum state
+    {
+        Idle,
+        Walk,
+        Run,
+        Jump,
+        Land
+    }
+
+    
    
 
 
@@ -67,16 +82,19 @@ public class PlayerController : MonoBehaviour
         Vector2 input =
         _inputActions["Move"].ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
+
+
         if (moveDirection.magnitude > 0)
         {
             _animator.SetBool("IsWalking", true);
             // Modify move direction to where camera is facing
-            
         }
         else
         {
             _animator.SetBool("IsWalking", false);
         }
+
+
         // Run
         if (_inputActions["Run"].IsPressed())
         {
@@ -93,9 +111,20 @@ public class PlayerController : MonoBehaviour
 
         // Jump
         if (_inputActions["Jump"].IsPressed())
+        {
             _animator.SetBool("IsJump", true);
+            
+           
+
+        }
         else
-            _animator.SetBool("IsJump", false);
+            { 
+            _animator.SetBool("IsJump", false);  
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded) {
+            AudioManager.Instance.PlaySFX("Jump");
+        }
 
         // Fall
         if (!_characterController.isGrounded)
@@ -112,7 +141,10 @@ public class PlayerController : MonoBehaviour
 
         // Land
         if (_characterController.isGrounded)
+            
             _animator.SetBool("HasLanded", true);
+           
+        
         else
             _animator.SetBool("HasLanded", false);
 
@@ -120,12 +152,13 @@ public class PlayerController : MonoBehaviour
         _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
 
       if (Input.GetKeyDown(KeyCode.E))
-        {
-           
+        {    
             Interact();
         }
 
     }
+
+
 
     private void Interact()
     {

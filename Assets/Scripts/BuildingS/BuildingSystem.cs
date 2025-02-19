@@ -54,7 +54,8 @@ public class Build : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !choosingMenuObj)
         {
             BuildObj();
-        }
+             extraY = new Vector3(0, 0, 0);
+}
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -167,10 +168,10 @@ public class Build : MonoBehaviour
 
         currentpos -= Vector3.one * offset;
         currentpos /= gridSize;
-        currentpos = new Vector3(Mathf.Round(currentpos.x * 20) / 20, Mathf.Round(currentpos.y * 20) / 20, Mathf.Round(currentpos.z * 20) / 20);
+        currentpos = new Vector3(Mathf.Round(currentpos.x * 5) / 5, Mathf.Round(currentpos.y * 5) / 5, Mathf.Round(currentpos.z * 5) / 5);
         currentpos /= gridSize;
         currentpos += Vector3.one * offset;
-        currentpos += Vector3.up * yOffset;
+        
 
         direction = GetHitFace(hit);
 
@@ -179,7 +180,7 @@ public class Build : MonoBehaviour
         {
             extraY += new Vector3(0, 0.5f, 0);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && extraY.y > 0)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && extraY.y > -1)
         {
             extraY -= new Vector3(0, 0.5f, 0);
         }

@@ -585,6 +585,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &854665837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854665839}
+  - component: {fileID: 854665838}
+  m_Layer: 0
+  m_Name: buildSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &854665838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854665837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10855f58cef69545b9ff427014fcf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - name: h
+    preview: {fileID: 8147784838538336524, guid: f4bc50457fa352441acad668543f8323,
+      type: 3}
+    buildingPrefab: {fileID: 6504849050923447160, guid: 679118ab327616e48855124f48f16009,
+      type: 3}
+    gold: 0
+  currentobject:
+    name: 
+    preview: {fileID: 0}
+    buildingPrefab: {fileID: 0}
+    gold: 0
+  currentpreview: {fileID: 0}
+  cam: {fileID: 511737399}
+  layer:
+    serializedVersion: 2
+    m_Bits: 119
+  offset: 1
+  gridSize: 1
+  isbuilding: 1
+--- !u!4 &854665839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854665837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.372, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380584640
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +1005,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -967,8 +1031,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701209279}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.99084234, z: -0.13502389, w: 0}
-  m_LocalPosition: {x: -0.12, y: 2.1467605, z: 3.5000443}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1.366, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1111,3 +1175,4 @@ SceneRoots:
   - {fileID: 232158601}
   - {fileID: 1535051298}
   - {fileID: 511737399}
+  - {fileID: 854665839}

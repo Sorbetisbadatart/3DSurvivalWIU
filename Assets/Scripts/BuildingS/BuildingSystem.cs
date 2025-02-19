@@ -76,6 +76,7 @@ public class Build : MonoBehaviour
     {
         buildingMenuObj.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         choosingMenuObj = true;
     }
 

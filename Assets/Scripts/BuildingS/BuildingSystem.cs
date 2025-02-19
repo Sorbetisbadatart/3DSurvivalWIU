@@ -126,10 +126,7 @@ public class Build : MonoBehaviour
 
     public void StartPreview()
     {
-        if (currentpreview != null)
-        {
-            return;
-        }
+      
 
         if (Physics.Raycast(cam.position, cam.forward, out hit, 10, layer))
         {

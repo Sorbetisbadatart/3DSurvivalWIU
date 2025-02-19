@@ -30,6 +30,8 @@ public class Build : MonoBehaviour
     public float yOffset = 0.1f;
     public float gridSize = 1f;
 
+    public Vector3 extraY = new Vector3(0,0,0);
+
     public bool isbuilding = false;
     public GameObject buildingMenuObj;
     public bool choosingMenuObj;
@@ -173,8 +175,16 @@ public class Build : MonoBehaviour
         direction = GetHitFace(hit);
 
 
+        if (Input.GetKeyDown(KeyCode.UpArrow) && extraY.y < 1)
+        {
+            extraY += new Vector3(0, 0.5f, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && extraY.y > 0)
+        {
+            extraY -= new Vector3(0, 0.5f, 0);
+        }
 
-        currentpreview.position = currentpos;
+        currentpreview.position = currentpos + extraY;
 
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -197,7 +207,7 @@ public class Build : MonoBehaviour
         PreviewObject _previewObject = currentpreview.GetComponent<PreviewObject>();
         if (_previewObject.canBuild)
         {
-            Instantiate(currentobject.buildingPrefab, currentpos, Quaternion.Euler(currentrotation.x, currentrotation.y, currentrotation.z));
+            Instantiate(currentobject.buildingPrefab, currentpos + extraY, Quaternion.Euler(currentrotation.x, currentrotation.y, currentrotation.z));
 
         }
     }

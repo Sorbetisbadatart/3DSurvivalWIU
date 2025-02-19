@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2866584724201758505
+--- !u!1 &3866258362002275130
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7389455156922366946}
-  - component: {fileID: 1628920612314374471}
-  - component: {fileID: 2500365308324015263}
-  - component: {fileID: 6177961326231585201}
+  - component: {fileID: 3722574012260617455}
+  - component: {fileID: 1204708361483132293}
+  - component: {fileID: 3970659391556664942}
+  - component: {fileID: 4935257216641655961}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7389455156922366946
+--- !u!4 &3722574012260617455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866584724201758505}
+  m_GameObject: {fileID: 3866258362002275130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,27 +34,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1628920612314374471
+--- !u!114 &1204708361483132293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866584724201758505}
+  m_GameObject: {fileID: 3866258362002275130}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7630da9173a53c4694aad2d737c730c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
-  levelOfDetail: 0
-  noiseScale: 25
-  octaves: 5
-  persistance: 0.5
+  normalizeMode: 1
+  editorPreviewLOD: 0
+  noiseScale: 48.68
+  octaves: 8
+  persistance: 0.2
   lacunarity: 2
-  seed: 1
-  offset: {x: 51.11, y: 0}
-  meshHeightMultiplier: 5.6
+  seed: 146
+  offset: {x: 27.86, y: 15.27}
+  useFalloff: 0
+  meshHeightMultiplier: 31.1
   meshHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -68,15 +70,6 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.4008461
-      value: -0.008784816
-      inSlope: 1.3276699
-      outSlope: 1.3276699
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.113034956
-    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 2
@@ -88,58 +81,71 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  autoUpdate: 1
+  autoUpdate: 0
   regions:
-  - name: Deep Water
-    height: 0.35
-    colour: {r: 0.017002556, g: 0.25734356, b: 0.7509433, a: 0}
-  - name: Water
-    height: 0.4
-    colour: {r: 0.43018872, g: 0.43018872, b: 1, a: 0}
+  - name: Water Deep
+    height: 0
+    colour: {r: 0.16381918, g: 0.35942316, b: 0.74264705, a: 0}
+  - name: Water Shallow
+    height: 0.12
+    colour: {r: 0.21204588, g: 0.4037765, b: 0.7794118, a: 0}
   - name: Sand
-    height: 0.45
-    colour: {r: 0, g: 0, b: 0, a: 0}
-  - name: Land
+    height: 0.28
+    colour: {r: 0.8235294, g: 0.81434196, b: 0.49048445, a: 0}
+  - name: Grass
+    height: 0.37
+    colour: {r: 0.33856717, g: 0.5955882, b: 0.09196584, a: 0}
+  - name: Grass 2
     height: 0.55
-    colour: {r: 0.15571381, g: 0.509434, b: 0.15571381, a: 0}
-  - name: Hills
-    height: 0.6
-    colour: {r: 0.45485675, g: 0.6377357, b: 0.045724496, a: 0}
+    colour: {r: 0.24139647, g: 0.41911763, b: 0.07088018, a: 0}
   - name: Rock
-    height: 0.7
-    colour: {r: 0.645283, g: 0.6404129, b: 0.6404129, a: 0}
-  - name: Mountain
-    height: 0.9
-    colour: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
-  - name: Mountain Top
-    height: 1
+    height: 0.61
+    colour: {r: 0.35294116, g: 0.27240184, b: 0.23615916, a: 0}
+  - name: Rock2
+    height: 0.87
+    colour: {r: 0.29411763, g: 0.23507784, b: 0.20977508, a: 0}
+  - name: Snow
+    height: 0.91
     colour: {r: 1, g: 1, b: 1, a: 0}
---- !u!114 &2500365308324015263
+--- !u!114 &3970659391556664942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866584724201758505}
+  m_GameObject: {fileID: 3866258362002275130}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 482066f8cce8f3e47a53b7de5d7b5a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureRender: {fileID: 0}
-  meshFilter: {fileID: 0}
-  meshRenderer: {fileID: 0}
---- !u!114 &6177961326231585201
+  textureRender: {fileID: 5115006898728318133, guid: d1ed33318e16b1745923341e2d3bcf8b,
+    type: 3}
+  meshFilter: {fileID: 5573111705640975029, guid: 06ed404744112a74a8d6c3ba5f220c12,
+    type: 3}
+  meshRenderer: {fileID: 369638829359302816, guid: 06ed404744112a74a8d6c3ba5f220c12,
+    type: 3}
+--- !u!114 &4935257216641655961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866584724201758505}
-  m_Enabled: 0
+  m_GameObject: {fileID: 3866258362002275130}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44f6c9c8d0209e14ea78ed15de313dcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 16ce6ecc4242344ccb4045ed364cbcc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewer: {fileID: 0}
-  mapMaterial: {fileID: 2100000, guid: 0ae31554e5716034e97a0bf75ac40c61, type: 2}
+  detailLevels:
+  - lod: 0
+    visibleDstThreshold: 50
+    useForCollider: 0
+  - lod: 1
+    visibleDstThreshold: 150
+    useForCollider: 1
+  - lod: 4
+    visibleDstThreshold: 200
+    useForCollider: 0
+  viewer: {fileID: 3240121699337421084, guid: 7fb2ed3578c30b74189803eea3949544, type: 3}
+  mapMaterial: {fileID: 2100000, guid: 9f010c4ba8cfe034c9eff85b665989c1, type: 2}

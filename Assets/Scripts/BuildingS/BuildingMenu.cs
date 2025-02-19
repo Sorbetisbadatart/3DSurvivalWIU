@@ -51,7 +51,7 @@ public class BuildingMenu : MonoBehaviour
         }
 
         CurrentMenuItem = (int)(angle / (360 / menuItems));
-        Debug.Log(CurrentMenuItem);
+       
 
         if (CurrentMenuItem != OldMenuItem)
         {

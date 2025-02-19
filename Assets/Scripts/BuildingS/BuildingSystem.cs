@@ -30,7 +30,7 @@ public class Build : MonoBehaviour
     public float yOffset = 0.1f;
     public float gridSize = 1f;
 
-    public bool isbuilding;
+    public bool isbuilding = false;
     public GameObject buildingMenuObj;
     public bool choosingMenuObj;
 
@@ -40,8 +40,6 @@ public class Build : MonoBehaviour
     void Start()
     {
         currentobject = objects[0];
-        ChangeCurrentBuilding(1);
-
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -51,25 +49,46 @@ public class Build : MonoBehaviour
         if (isbuilding && !choosingMenuObj)
             StartPreview();
 
-        if (Input.GetKeyDown(KeyCode.Space) && !choosingMenuObj)
+        if (Input.GetButtonDown("Fire1") && !choosingMenuObj)
         {
             BuildObj();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (buildingMenuObj.activeSelf)
                 DisableMenu();
             else
+            {
                 EnableMenu();
+                StartBuild();
+            }
+        }
 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (isbuilding)
+                CancelBuild();
 
         }
 
 
 
 
+    }
 
+    public void StartBuild()
+    {
+        isbuilding = true;
+    }
+
+    public void CancelBuild()
+    {
+        isbuilding = false;
+        if (currentpreview != null)
+        {
+            Destroy(currentpreview.gameObject);
+        }
     }
 
     public void EnableMenu()
@@ -116,35 +135,44 @@ public class Build : MonoBehaviour
 
     public void ShowPreview(RaycastHit hit)
     {
-        if (currentobject.buildingID == Buildings.floor)
+
+
+        if (direction == MCFace.Up || direction == MCFace.Down)
         {
-            direction = GetHitFace(hit);
-            if (direction == MCFace.Up || direction == MCFace.Down)
-            {
-                currentpos = hit.point;
-            }
-            else
-            {
-                if (direction == MCFace.North)
-                    currentpos = hit.point + new Vector3(0, 0, 2);
-                if (direction == MCFace.South)
-                    currentpos = hit.point + new Vector3(0, 0, -2);
-                if (direction == MCFace.East)
-                    currentpos = hit.point + new Vector3(2, 0, 0);
-                if (direction == MCFace.West)
-                    currentpos = hit.point + new Vector3(-2, 0, 0);
-            }
+            currentpos = hit.point;
         }
         else
+        {
+            if (direction == MCFace.North)
+                currentpos = hit.point + new Vector3(0, 0, 1);
+            if (direction == MCFace.South)
+                currentpos = hit.point + new Vector3(0, 0, -1);
+            if (direction == MCFace.East)
+                currentpos = hit.point + new Vector3(1, 0, 0);
+            if (direction == MCFace.West)
+                currentpos = hit.point + new Vector3(-1, 0, 0);
+        }
 
-            currentpos = hit.point;
+        if (currentobject.buildingID == Buildings.wall)
+        {
+            currentpos = hit.point + new Vector3(0, 1, 0);
+        }
+
+
+
         currentpos -= Vector3.one * offset;
         currentpos /= gridSize;
-        currentpos = new Vector3(Mathf.Round(currentpos.x * 2) / 2, Mathf.Round(currentpos.y  * 2) / 2, Mathf.Round(currentpos.z * 2)/2);
+        currentpos = new Vector3(Mathf.Round(currentpos.x * 2) / 2, Mathf.Round(currentpos.y * 2) / 2, Mathf.Round(currentpos.z * 2) / 2);
         currentpos /= gridSize;
         currentpos += Vector3.one * offset;
         currentpos += Vector3.up * yOffset;
+
+        direction = GetHitFace(hit);
+
+
+
         currentpreview.position = currentpos;
+
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {

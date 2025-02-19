@@ -52,7 +52,7 @@ public class PreviewObject : MonoBehaviour
         }
         else if (sort == Buildings.wall)
         {
-
+            //has to collide with a buildable object to build
             if (ChildCollider._collider.Count > 0)
             {
                 canBuild = true;
@@ -64,7 +64,7 @@ public class PreviewObject : MonoBehaviour
         }
         else
         {
-            if (_collider.Count == 0 && ChildCollider._collider.Count > 0)
+            if ( ChildCollider._collider.Count > 0)
             {
                 canBuild = true;
             }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +36,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 move =Vector3.zero;
     private float Speed = 3;
 
+    //interact
+    private int InteractRange = 50;
+    private int InteractableLayer = 8;
+
 
 
 
@@ -65,9 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("IsWalking", true);
             // Modify move direction to where camera is facing
-            moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 100f);
+            
         }
         else
         {
@@ -115,6 +118,28 @@ public class PlayerController : MonoBehaviour
 
         _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
 
+      if (Input.GetKeyDown(KeyCode.E))
+        {
+           
+            Interact();
+        }
+
+    }
+
+    private void Interact()
+    {
+       
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, InteractRange, 3))
+        {
+            Debug.Log("Hit object: " + hitInfo.collider.gameObject.name);
+            Door item = hitInfo.collider.GetComponent<Door>();
+
+            if (item.isOpen)
+                StartCoroutine(item.CloseDoor());
+            else
+                StartCoroutine(item.OpenDoor());
+        }
     }
 
     private void LateUpdate()

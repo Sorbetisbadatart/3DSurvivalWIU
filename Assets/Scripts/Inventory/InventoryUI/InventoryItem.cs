@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Image image;
 
@@ -14,6 +14,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public ItemInstance itemInstace;
 
     [SerializeField] private TMP_Text countText;
+
+    [SerializeField] private GameObject descriptionBox;
 
     private void Start()
     {
@@ -82,6 +84,20 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             parentAfterDrag.gameObject.GetComponent<InventorySlot>().GetManager().AddItem(itemInstace, 1);
             countText.text = itemInstace.itemCount.ToString();
         }
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //when player hovers over item display item details
+        descriptionBox.SetActive(true);
+        descriptionBox.transform.position = Input.mousePosition;
+        descriptionBox.GetComponentInChildren<TMP_Text>().text = itemInstace.name + "\n" + itemInstace.description;
+        descriptionBox.transform.SetParent(descriptionBox.transform.root);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        descriptionBox.transform.SetParent(transform.root);
+        descriptionBox.SetActive(false);
     }
 
     public void UpdateCount()

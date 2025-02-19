@@ -16,15 +16,33 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemInstance newItem, int amt)
     {
-        //adds to empty slot when it finds one
-        for(int i = 0; i<items.Length;i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            if (items[i]  == null || items[i].itemType == null)
+            //check if there item is able to be stacked with another item
+            if (items[i].itemType == newItem.itemType && items[i].itemCount + amt <= items[i].maxStack)
             {
-                items[i] = newItem;
-                items[i].itemCount = amt;
-                manager.UpdateInventory();
+                //if it fits into the stack
+                items[i].itemCount += amt;
+                manager.UpdateAllCount();
                 return true;
+            }
+            //else if(items[i].itemType == newItem.itemType && items[i].itemCount + amt > items[i].maxStack)
+            //{
+            //    //make a new stack
+            //    int overflow = (items[i].itemCount + amt) - items[i].maxStack;
+            //    items[i].itemCount = items[i].maxStack;
+            //    AddItem(newItem, overflow);
+            //}
+            else
+            {
+                //adds to empty slot when it finds one
+                if (items[i] == null || items[i].itemType == null)
+                {
+                    items[i] = newItem;
+                    items[i].itemCount = amt;
+                    manager.UpdateInventory();
+                    return true;
+                }
             }
         }
 

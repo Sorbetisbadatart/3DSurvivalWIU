@@ -88,10 +88,11 @@ public class InventoryManager : MonoBehaviour
         //create items if there are items in the inventory
         for (int i = 0; i < inventory.maxItems; i++)
         {
+            //add item
             if (i < inventory.items.Length && inventory.items[i] != null && inventory.items[i].itemType != null && inventorySlots[i].transform.childCount == 0)
             {
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
-                temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], 1);
+                temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], inventory.items[i].itemCount);
             }
         }
     }
@@ -115,5 +116,16 @@ public class InventoryManager : MonoBehaviour
             }
         }
         UpdateSlot();
+    }
+
+    public void UpdateAllCount()
+    {
+        for(int i = 0; i < inventorySlots.Length; i++)
+        {
+            if (inventorySlots[i].transform.childCount > 0)
+            {
+                inventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().UpdateCount();
+            }
+        }
     }
 }

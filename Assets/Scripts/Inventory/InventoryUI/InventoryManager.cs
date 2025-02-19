@@ -78,18 +78,16 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemInstance item, int amt)
     {
-        Debug.Log("ADDING ITEMS!");
-        //inventory.AddItem(item, amt);
         //look through inventory for empty slot
         for (int i = 0; i < inventory.maxItems; i++)
         {
-            Debug.Log("LOOP " + i);
-            Debug.Log("Inventory: " + inventory.items[i]);
+            //Debug.Log("LOOP " + i);
+            //Debug.Log("Inventory: " + inventory.items[i]);
             //Debug.Log("Inventory: " + inventory.items[i].itemType);
             //Strange bug here, sometimes wants items[i].itemType but sometimes dosent.
             if (inventory.items[i] == null || inventory.items[i].itemType == null)
             {
-                Debug.Log("INSTANTIATED");
+                //Debug.Log("INSTANTIATED");
                 ItemInstance newItem = new ItemInstance(item.itemType);
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
                 temp.GetComponent<InventoryItem>().ObtainItem(newItem, amt);

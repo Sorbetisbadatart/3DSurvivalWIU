@@ -77,7 +77,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if(itemInstace.itemCount >= 2)
         {
             if(parentAfterDrag == null) return;
-            Debug.Log("PARENT!: " + parentAfterDrag.gameObject.name);
+            //Debug.Log("PARENT!: " + parentAfterDrag.gameObject.name);
             itemInstace.itemCount -= 1;
             parentAfterDrag.gameObject.GetComponent<InventorySlot>().GetManager().AddItem(itemInstace, 1);
             countText.text = itemInstace.itemCount.ToString();

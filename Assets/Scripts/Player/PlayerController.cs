@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
     {
        
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, InteractRange, 3))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, InteractRange, 8))
         {
             Debug.Log("Hit object: " + hitInfo.collider.gameObject.name);
             Door item = hitInfo.collider.GetComponent<Door>();

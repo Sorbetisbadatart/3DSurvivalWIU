@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Door : MonoBehaviour, Iinteractable
@@ -8,39 +9,35 @@ public class Door : MonoBehaviour, Iinteractable
     public float Rotation;
     public float startRotation;
     public float endRotation;
+    public float OriginalRotation;
     public float speed; 
     public bool isOpen = false;
 
-    
-    public void Interact()
-    {
-        Debug.Log("door");
-      if (!isOpen)
-            StartCoroutine(OpenDoor());
-        else
-            StartCoroutine(CloseDoor());
-        isOpen = !isOpen;
-    }
+  
     public IEnumerator OpenDoor() 
     {
-        isOpen = !isOpen;
-        while (door.transform.rotation.y < endRotation) 
+        
+        while (Rotation < 90 )
         {
-            door.rotation = Quaternion.Euler(0, Rotation, 0);
+            door.localRotation = Quaternion.Euler(0, Rotation, 0);
+            
+            
             Rotation += speed * Time.deltaTime;
             
             yield return null; 
         }
+        isOpen = !isOpen;
     }
     public IEnumerator CloseDoor()
     {
-        isOpen = !isOpen;
-        while (door.transform.rotation.y > startRotation)
+       
+        while (Rotation > (0 + OriginalRotation))
         {
-            door.rotation = Quaternion.Euler(0, Rotation, 0);
-            Rotation += speed * Time.deltaTime;
+            door.localRotation = Quaternion.Euler(0, Rotation, 0);
+            Rotation -= speed * Time.deltaTime;
 
             yield return null;
         }
+        isOpen = !isOpen;
     }
 }

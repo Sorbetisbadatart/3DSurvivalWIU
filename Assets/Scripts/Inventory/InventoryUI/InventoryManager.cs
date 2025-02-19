@@ -87,12 +87,12 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Inventory: " + inventory.items[i]);
             //Debug.Log("Inventory: " + inventory.items[i].itemType);
             //Strange bug here, sometimes wants items[i].itemType but sometimes dosent.
-            if (inventory.items[i] == null)
+            if (inventory.items[i] == null || inventory.items[i].itemType == null)
             {
                 Debug.Log("INSTANTIATED");
                 ItemInstance newItem = new ItemInstance(item.itemType);
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
-                temp.GetComponent<InventoryItem>().ObtainItem(item, amt);
+                temp.GetComponent<InventoryItem>().ObtainItem(newItem, amt);
                 break;
             }
         }

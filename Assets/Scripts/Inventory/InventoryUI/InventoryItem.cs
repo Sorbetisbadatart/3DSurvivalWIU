@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public ItemInstance itemInstace;
 
+    [SerializeField] private TMP_Text countText;
+
     private void Start()
     {
         image = gameObject.GetComponent<Image>();
@@ -22,6 +25,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
+        countText.text = itemInstace.itemCount.ToString();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -34,6 +38,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
         parentAfterDrag.GetComponent<InventorySlot>().CallUpdate();
+        countText.text = itemInstace.itemCount.ToString();
     }
 
     public void UpdateLocation()
@@ -41,6 +46,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
         parentAfterDrag.GetComponent<InventorySlot>().CallUpdate();
+        countText.text = itemInstace.itemCount.ToString();
     }
 
     public void ObtainItem(ItemInstance newItem, int amt)
@@ -56,6 +62,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
 
             image.sprite = itemInstace.icon;
+            countText.text = itemInstace.itemCount.ToString();
         }
     }
 
@@ -71,9 +78,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             if(parentAfterDrag == null) return;
             Debug.Log("PARENT!: " + parentAfterDrag.gameObject.name);
-            int split = itemInstace.itemCount / 2;
-            itemInstace.itemCount /= 2;
-            parentAfterDrag.gameObject.GetComponent<InventorySlot>().GetManager().AddItem(itemInstace, split);
+            itemInstace.itemCount -= 1;
+            parentAfterDrag.gameObject.GetComponent<InventorySlot>().GetManager().AddItem(itemInstace, 1);
+            countText.text = itemInstace.itemCount.ToString();
         }
+    }
+
+    public void UpdateCount()
+    {
+        countText.text = itemInstace.itemCount.ToString();
     }
 }

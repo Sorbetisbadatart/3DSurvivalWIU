@@ -26,6 +26,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 //delete other item
                 Destroy(eventData.pointerDrag);
                 CallUpdate();
+                child.UpdateCount();
             }
         }
         //for making items change places

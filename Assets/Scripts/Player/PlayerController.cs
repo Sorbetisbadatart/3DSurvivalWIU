@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     // Camera
     [SerializeField] private CinemachineVirtualCamera _FirstPersonCamera;
     [SerializeField] private CinemachineVirtualCamera _ThirdPersonCamera;
+    [SerializeField] private CinemachineFreeLook _FreeLookCamera;
     private int _currentCam = 1;
 
     // Animator and input
@@ -155,13 +156,24 @@ public class PlayerController : MonoBehaviour
                 _currentCam = 1;
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 20;
+                _FreeLookCamera.Priority = 10;
             }
             else if (_currentCam == 1)
             {
                 // CurrentCam => ThirdPerson
+                _currentCam = 2;
+                _FirstPersonCamera.Priority = 10;
+                _ThirdPersonCamera.Priority = 10;
+                _FreeLookCamera.Priority = 20;
+            }
+            else
+            {
+                // CurrentCam => Freelook
                 _currentCam = 0;
                 _FirstPersonCamera.Priority = 20;
                 _ThirdPersonCamera.Priority = 10;
+                _FreeLookCamera.Priority = 10;
+
             }
         }
     }

@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
     private float Speed = 3;
 
     //interact
-    private int InteractRange = 50;
-    private int InteractableLayer = 8;
+    private int InteractRange = 5;
+   
 
 
 

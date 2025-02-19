@@ -884,6 +884,13 @@ MonoBehaviour:
   maxItems: 28
   items: []
   manager: {fileID: 0}
+  equippedSlot:
+    itemType: {fileID: 0}
+    name: 
+    icon: {fileID: 0}
+    itemCount: 0
+    maxStack: 0
+    description: 
 --- !u!65 &500097964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1456,7 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dcc5d2485be5a4889fe907f0d15b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drop: {fileID: 11400000, guid: 1b7be34f967bf0a4483e51e501a6f6ec, type: 2}
+  drop: {fileID: 11400000, guid: 9f0cceb443d0ac14e8685b46b3cc79a5, type: 2}
   dropAmt: 1
 --- !u!136 &1222390452
 CapsuleCollider:

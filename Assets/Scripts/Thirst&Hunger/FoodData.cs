@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FoodData", menuName = "Food Data", order =2)]
 public class FoodData : ItemData
 {
-    public float HungerRestore;
-    public float ThirstRestore;
+    public float hungerRestore;
+    public float thirstRestore;
+
+    public override float Consume()
+    {
+        return hungerRestore;
+    }
 }

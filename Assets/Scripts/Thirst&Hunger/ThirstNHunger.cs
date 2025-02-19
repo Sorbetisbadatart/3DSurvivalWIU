@@ -38,4 +38,14 @@ public class ThirstNHunger : MonoBehaviour
             //Debug.Log("HUNGRY");
         }
     }
+
+    public void GainHunger(float gain)
+    {
+        hunger += gain;
+    }
+
+    public void GainThirst(float gain)
+    {
+        thirst += gain;
+    }
 }

@@ -10,4 +10,9 @@ public class ItemData : ScriptableObject
     public int itemCount;
     public int maxStack;
     [TextArea] public string description;
+
+    public virtual float Consume()
+    {
+        return 0;
+    }
 }

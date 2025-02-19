@@ -9,9 +9,14 @@ public class Inventory : MonoBehaviour
 
     public InventoryManager manager;
 
+    public ItemInstance equippedSlot;
+
+    private ThirstNHunger thirstNHunger;
+
     private void Start()
     {
         items = new ItemInstance[maxItems];
+        thirstNHunger = gameObject.GetComponent<ThirstNHunger>();
     }
 
     public bool AddItem(ItemInstance newItem, int amt)
@@ -84,5 +89,45 @@ public class Inventory : MonoBehaviour
     public void SetManager(InventoryManager newManager)
     {
         manager = newManager;
+    }
+
+    private void Update()
+    {
+        //for use to equip item in a certain slot to use
+        if (Input.GetKeyDown("1"))
+        {
+            equippedSlot = items[0];
+        }
+        else if(Input.GetKeyDown("2"))
+        {
+            equippedSlot = items[1];
+        }
+        else if (Input.GetKeyDown("3"))
+        {
+            equippedSlot = items[2];
+        }
+        else if (Input.GetKeyDown("4"))
+        {
+            equippedSlot = items[3];
+        }
+        else if (Input.GetKeyDown("5"))
+        {
+            equippedSlot = items[4];
+        }
+        else if (Input.GetKeyDown("6"))
+        {
+            equippedSlot = items[5];
+        }
+        else if (Input.GetKeyDown("7"))
+        {
+            equippedSlot = items[6];
+        }
+
+        if (Input.GetKeyDown("f"))
+        {
+            //use item
+            Debug.Log(equippedSlot.itemType.Consume());
+            thirstNHunger.GainHunger(equippedSlot.itemType.Consume());
+        }
     }
 }

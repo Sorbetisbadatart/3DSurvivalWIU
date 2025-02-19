@@ -623,6 +623,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &697823302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697823304}
+  - component: {fileID: 697823303}
+  m_Layer: 0
+  m_Name: Place Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &697823303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697823302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96cbf4107b8a714f80327b1818bb4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preFab: {fileID: 5790779644391806944, guid: 534e979b9a6ebc74797eec36869fd815, type: 3}
+  density: 500
+  minHeight: 6
+  maxHeight: 10
+  xRange: {x: -50, y: 50}
+  zRange: {x: -50, y: 50}
+  rotateTowardsNormal: 0.1
+  rotationRange: {x: 0, y: 360}
+  minScale: {x: 0.9, y: 0.9, z: 0.9}
+  maxScale: {x: 1.1, y: 1.1, z: 1.1}
+--- !u!4 &697823304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697823302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7469644, y: 52.516197, z: -3.9055195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780273644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,3 +2264,4 @@ SceneRoots:
   - {fileID: 313944908}
   - {fileID: 2045910222}
   - {fileID: 1027576210}
+  - {fileID: 697823304}

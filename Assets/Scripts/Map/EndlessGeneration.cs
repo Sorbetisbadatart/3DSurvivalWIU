@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EndlessGeneration : MonoBehaviour
 {
 
-    public const float maxViewDst = 450;
+    public const float maxViewDst = 50;
     public Transform viewer;
     public Material mapMaterial;
 
@@ -85,6 +85,7 @@ public class EndlessGeneration : MonoBehaviour
             meshObject = new GameObject("Terrain Chunk");
             meshRenderer = meshObject.AddComponent<MeshRenderer>();
             meshFilter = meshObject.AddComponent<MeshFilter>();
+            MeshCollider mesh = meshObject.AddComponent<MeshCollider>();
             meshRenderer.material = material;
 
             meshObject.transform.position = positionV3;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirstNHunger : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class ThirstNHunger : MonoBehaviour
 
     [SerializeField] private float thirstRate;
     [SerializeField] private float hungerRate;
+
+    [SerializeField] private Slider hungerSlider;
+    [SerializeField] private Slider thirstSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,9 @@ public class ThirstNHunger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hungerSlider.value = hunger;
+        thirstSlider.value = thirst;
+
         if(thirst > 0)
         {
             thirst -= thirstRate * Time.deltaTime;

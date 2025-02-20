@@ -33,10 +33,13 @@ public class Inventory : MonoBehaviour
             }
             else if (items[i].itemType == newItem.itemType && (items[i].itemCount + amt) > items[i].maxStack)
             {
+                if (items[i].itemCount == items[i].maxStack) continue;
                 //make a new stack
                 int overflow = (items[i].itemCount + amt) - items[i].maxStack;
                 items[i].itemCount = items[i].maxStack;
                 OverFlowAddItem(newItem, overflow);
+                manager.UpdateAllCount();
+                return true;
             }
             else
             {
@@ -71,14 +74,42 @@ public class Inventory : MonoBehaviour
                 items[i] = newItem;
                 items[i].itemCount = amt;
                 manager.UpdateInventory();
-                break;
+                return;
             }
         }
     }
 
-    public void RemoveItem(ItemInstance itemToRemove)
+    public void RemoveItem(ItemInstance itemToRemove, int amt)
     {
+        //look for item to remove
+        for(int i = 0; i < items.Length;i++)
+        {
+            if (items[i].itemType == itemToRemove.itemType)
+            {
+                if (items[i].itemCount > amt)
+                {
+                    items[i].itemCount -= amt;
+                }
+                else
+                {
+                    items[i] = null;
+                    manager.UpdateInventoryUI();
+                }
+            }
+        }
+    }
 
+    public void RemoveItemAtSlot(int slot, int amt)
+    {
+        if (items[slot].itemCount > amt)
+        {
+            items[slot].itemCount -= amt;
+        }
+        else
+        {
+            items[slot] = null;
+            manager.UpdateInventoryUI();
+        }
     }
 
     public ItemInstance GetItem(int num)
@@ -126,8 +157,14 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown("f"))
         {
             //use item
-            Debug.Log(equippedSlot.itemType.Consume());
-            thirstNHunger.GainHunger(equippedSlot.itemType.Consume());
+            // 0 = Resoruce, 1 = Food
+            if(equippedSlot.itemStatus == 1)
+            {
+                thirstNHunger.GainHunger(equippedSlot.itemType.Consume());
+                thirstNHunger.GainThirst(equippedSlot.itemType.Drink());
+                RemoveItem(equippedSlot, 1);
+                manager.UpdateAllCount();
+            }
         }
     }
 }

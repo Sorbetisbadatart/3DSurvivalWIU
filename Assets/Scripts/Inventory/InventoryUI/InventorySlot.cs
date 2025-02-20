@@ -18,15 +18,25 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         else if(transform.GetChild(0).GetComponent<InventoryItem>().itemInstace.name == eventData.pointerDrag.GetComponent<InventoryItem>().itemInstace.name)
         {
             InventoryItem child = transform.GetChild(0).GetComponent<InventoryItem>();
-            if (child.itemInstace.itemCount + eventData.pointerDrag.GetComponent<InventoryItem>().itemInstace.itemCount <= child.itemInstace.maxStack)
+            InventoryItem heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+            //if its they can fit into one stack
+            if (child.itemInstace.itemCount + heldItem.itemInstace.itemCount <= child.itemInstace.maxStack)
             {
                 //adds to item count
-                child.itemInstace.itemCount += eventData.pointerDrag.GetComponent<InventoryItem>().itemInstace.itemCount;
+                child.itemInstace.itemCount += heldItem.itemInstace.itemCount;
 
                 //delete other item
                 Destroy(eventData.pointerDrag);
                 CallUpdate();
                 child.UpdateCount();
+            }
+            else
+            {
+                int difference = (child.itemInstace.itemCount + heldItem.itemInstace.itemCount) - child.itemInstace.maxStack;
+                child.itemInstace.itemCount = child.itemInstace.maxStack;
+                heldItem.itemInstace.itemCount = difference;
+                child.UpdateCount();
+                heldItem.UpdateCount();
             }
         }
         //for making items change places

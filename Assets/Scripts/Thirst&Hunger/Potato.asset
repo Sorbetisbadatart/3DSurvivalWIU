@@ -16,6 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c5026add5dd2dd14f85b4dc6d9e4928a, type: 3}
   itemCount: 1
   maxStack: 10
+  itemStatus: 1
   description: Granted by the Potato Lords.
   hungerRestore: 10
-  thirstRestore: 0
+  thirstRestore: 5

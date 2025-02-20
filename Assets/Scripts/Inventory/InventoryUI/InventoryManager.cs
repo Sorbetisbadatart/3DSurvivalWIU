@@ -97,6 +97,24 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //Updates ui from inventory
+    public void UpdateInventoryUI()
+    {
+        //create items if there are items in the inventory
+        for (int i = 0; i < inventory.maxItems; i++)
+        {
+            if (inventorySlots[i].transform.childCount > 0)
+            {
+                if (inventory.items[i] == null || inventory.items[i].itemType == null)
+                {
+
+                    Destroy(inventorySlots[i].transform.GetChild(0).gameObject);
+
+                }
+            }
+        }
+    }
+
     public void AddItem(ItemInstance item, int amt)
     {
         //look through inventory for empty slot

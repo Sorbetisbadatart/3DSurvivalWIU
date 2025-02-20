@@ -12,6 +12,7 @@ public class ItemInstance
     public int itemCount;
     public int maxStack;
     public string description;
+    public int itemStatus;
 
     public ItemInstance(ItemData itemData)
     {
@@ -21,5 +22,6 @@ public class ItemInstance
         itemCount = itemData.itemCount;
         maxStack = itemData.maxStack;
         description = itemData.description;
+        itemStatus = (int)itemData.itemStatus;
     }
 }

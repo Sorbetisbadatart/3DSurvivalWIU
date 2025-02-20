@@ -12,4 +12,9 @@ public class FoodData : ItemData
     {
         return hungerRestore;
     }
+
+    public override float Drink()
+    {
+        return thirstRestore;
+    }
 }

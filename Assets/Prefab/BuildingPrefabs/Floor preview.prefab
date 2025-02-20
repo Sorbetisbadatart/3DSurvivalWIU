@@ -52,6 +52,7 @@ MonoBehaviour:
   green: {fileID: 2100000, guid: d5180cfb8195e0645813aa65026d35cb, type: 2}
   red: {fileID: 2100000, guid: a95cd341f2eb01a4481b663040bdfcec, type: 2}
   canBuild: 0
+  InvalidText: {fileID: 0}
   second: 0
   ChildCollider: {fileID: 8969903994666084839}
   MeshRenderer: {fileID: 7082755253609398394}

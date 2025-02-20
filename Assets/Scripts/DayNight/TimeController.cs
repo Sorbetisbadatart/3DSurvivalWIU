@@ -11,8 +11,9 @@ public class TimeController : MonoBehaviour
     [SerializeField] private float startHour;
 
     [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI dayText;
 
-    private DateTime currentTime;
+    public static DateTime currentTime;
     private TimeSpan sunriseTime;
     private TimeSpan sunsetTime;
 
@@ -30,6 +31,8 @@ public class TimeController : MonoBehaviour
     [SerializeField] private Light moonLight;
     [SerializeField] private float maxMoonLightIntensity;
 
+    private int Day = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +49,7 @@ public class TimeController : MonoBehaviour
         UpdateTimeOfDay();
         RotateSun();
         UpdateLightSettings();
+        //SummonRooster();
 
     }
 
@@ -53,10 +57,26 @@ public class TimeController : MonoBehaviour
     {
         currentTime = currentTime.AddSeconds(timeMultiplier * Time.deltaTime);
 
+        
+
         if (timeText != null )
         {
-            timeText.text = currentTime.ToString("HH:mm");
+           timeText.text = currentTime.ToString("HH:mm");
+           dayText.text = (currentTime - DateTime.Now.Date).ToString("dd") ;
+           if (currentTime.TimeOfDay >= TimeSpan.FromHours(sunriseHour) && currentTime.TimeOfDay <= TimeSpan.FromHours(sunriseHour + 0.01) )
+            {
+                SummonRooster() ;
+            }
         }
+
+       
+    }
+
+    private void SummonRooster()
+    {
+      
+            AudioManager.Instance.PlaySFX("Rooster");
+        
     }
 
     private void RotateSun()
@@ -92,6 +112,8 @@ public class TimeController : MonoBehaviour
         }
         return difference;
     }
+
+    
 
     private void UpdateLightSettings()
     {

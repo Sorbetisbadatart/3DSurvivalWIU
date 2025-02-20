@@ -371,6 +371,7 @@ MonoBehaviour:
   green: {fileID: 2100000, guid: d5180cfb8195e0645813aa65026d35cb, type: 2}
   red: {fileID: 2100000, guid: a95cd341f2eb01a4481b663040bdfcec, type: 2}
   canBuild: 0
+  InvalidText: {fileID: 0}
   second: 0
   ChildCollider: {fileID: 4278624173475194282}
   MeshRenderer: {fileID: 1493207539691960964, guid: f4bd5c3eda8f7e04fa755d1ece8b153c,
@@ -729,6 +730,7 @@ MonoBehaviour:
   green: {fileID: 2100000, guid: d5180cfb8195e0645813aa65026d35cb, type: 2}
   red: {fileID: 2100000, guid: a95cd341f2eb01a4481b663040bdfcec, type: 2}
   canBuild: 0
+  InvalidText: {fileID: 0}
   second: 1
   ChildCollider: {fileID: 0}
   MeshRenderer: {fileID: 0}

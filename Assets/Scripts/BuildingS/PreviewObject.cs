@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -12,7 +13,7 @@ public class PreviewObject : MonoBehaviour
     public Material green;
     public Material red;
     public bool canBuild = false;
-
+   
     public bool second;
     public PreviewObject ChildCollider;
     public Transform MeshRenderer;
@@ -50,18 +51,7 @@ public class PreviewObject : MonoBehaviour
                 canBuild = false;
             }
         }
-        else if (sort == Buildings.wall)
-        {
-            //has to collide with a buildable object to build
-            if (ChildCollider._collider.Count > 0)
-            {
-                canBuild = true;
-            }
-            else
-            {
-                canBuild = false;
-            }
-        }
+ 
         else
         {
             if ( ChildCollider._collider.Count > 0)
@@ -70,6 +60,7 @@ public class PreviewObject : MonoBehaviour
             }
             else
             {
+                
                 canBuild = false;
             }
         }
@@ -78,15 +69,18 @@ public class PreviewObject : MonoBehaviour
 
         if (canBuild)
         {
+           
             foreach (Transform child in this.transform)
-                child.GetComponent<Renderer>().material = green;
-
+                    child.GetComponent<Renderer>().material = green;
+            
         }
         else
         {
-            
+           
             foreach (Transform child in this.transform)
                 child.GetComponent<Renderer>().material = red;
+            
+            
         }
 
 

@@ -118,11 +118,11 @@ public class Inventory : MonoBehaviour
         return items[num];
     }
 
-    public ItemInstance SearchItemType(ItemInstance itemtype)
+    public ItemInstance SearchItemType(ItemData itemtype)
     {
         for(int i = 0;i<maxItems;i++)
         {
-            if (items[i].itemType == itemtype.itemType)
+            if (items[i].itemType == itemtype)
             {
                 return items[i];
             }

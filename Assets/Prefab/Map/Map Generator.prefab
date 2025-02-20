@@ -143,6 +143,8 @@ MonoBehaviour:
   - name: Snow
     height: 0.91
     colour: {r: 1, g: 1, b: 1, a: 0}
+  waterPrefab: {fileID: 4835033269100359555, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
+    type: 3}
 --- !u!114 &7946853369659792987
 MonoBehaviour:
   m_ObjectHideFlags: 0

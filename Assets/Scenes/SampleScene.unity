@@ -431,6 +431,18 @@ PrefabInstance:
       propertyPath: mapMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 9f010c4ba8cfe034c9eff85b665989c1, type: 2}
+    - target: {fileID: 4935257216641655961, guid: f5a28da7b01c1fc4dbda102ace8b5db9,
+        type: 3}
+      propertyPath: waterPrefab
+      value: 
+      objectReference: {fileID: 4835033269100359555, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
+        type: 3}
+    - target: {fileID: 4935257216641655961, guid: f5a28da7b01c1fc4dbda102ace8b5db9,
+        type: 3}
+      propertyPath: waterMaterial
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: b98b636c6868b2142bf7b5536dbe9452,
+        type: 3}
     - target: {fileID: 6548602781206393157, guid: f5a28da7b01c1fc4dbda102ace8b5db9,
         type: 3}
       propertyPath: meshHeightCurve.m_Curve.Array.size
@@ -1319,7 +1331,8 @@ PrefabInstance:
         type: 3}
       propertyPath: preFab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 919132149155446097, guid: 64f20f6c6236ef341a5eb12d92fcc7cf,
+        type: 3}
     - target: {fileID: 6368886752772069839, guid: b0cba7218aac43847a7b3397b0c5a61b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1392,6 +1405,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835033269100359555, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706983755296028650, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706983755296028650, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6706983755296028650, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
         type: 3}

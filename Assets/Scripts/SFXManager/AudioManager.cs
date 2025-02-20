@@ -59,6 +59,24 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    public void PlayOneShotSFX(string name)
+    {
+        Sound s = Array.Find(sfx, x => x.name == name);
+        
+        if ( s == null)
+        {
+            Debug.Log("no sound");
+        }
+        else
+        {
+            
+            //make each sound more varied
+            RandomisePitch();
+            sfxSource.Play();
+        }
+
+    }
+
     public void StopBGM()
     {
         bgmSource.Stop();

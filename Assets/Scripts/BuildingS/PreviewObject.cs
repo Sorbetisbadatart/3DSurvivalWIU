@@ -24,6 +24,8 @@ public class PreviewObject : MonoBehaviour
             CanBePlaced();
     }
 
+    
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -50,8 +52,7 @@ public class PreviewObject : MonoBehaviour
             {
                 canBuild = false;
             }
-        }
- 
+        } 
         else
         {
             if ( ChildCollider._collider.Count > 0)
@@ -59,35 +60,21 @@ public class PreviewObject : MonoBehaviour
                 canBuild = true;
             }
             else
-            {
-                
+            {               
                 canBuild = false;
             }
         }
 
-
-
         if (canBuild)
-        {
-           
+        {         
             foreach (Transform child in this.transform)
-                    child.GetComponent<Renderer>().material = green;
-            
+                    child.GetComponent<Renderer>().material = green;           
         }
         else
-        {
-           
+        {          
             foreach (Transform child in this.transform)
-                child.GetComponent<Renderer>().material = red;
-            
-            
+                child.GetComponent<Renderer>().material = red;          
         }
-
-
-
-
-
-
     }
 }
 

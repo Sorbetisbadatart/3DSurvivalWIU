@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
+    public static TimeController Timeinstance;
     [SerializeField] private float timeMultiplier;
 
     [SerializeField] private float startHour;
@@ -33,6 +34,18 @@ public class TimeController : MonoBehaviour
 
     private int Day = 0;
 
+    private void Awake()
+    {
+        if (Timeinstance == null)
+        {
+            Timeinstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

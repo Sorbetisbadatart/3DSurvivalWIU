@@ -85,7 +85,9 @@ public class PlayerController : MonoBehaviour
             //AudioManager.Instance.PlaySFX("Walk");
             _animator.SetBool("IsWalking", true);
             footstepsSfx.enabled = true;
-            
+            move = transform.right * input.x + transform.forward * input.y;
+
+
             // Modify move direction to where camera is facing
         }
         else

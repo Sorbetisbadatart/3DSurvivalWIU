@@ -61,10 +61,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: -0.0023841858
+      value: -0.19628906
       inSlope: 0
       outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1280225
+      value: -0.16714865
+      inSlope: -0.0022431798
+      outSlope: -0.0022431798
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -182,3 +191,5 @@ MonoBehaviour:
     useForCollider: 0
   viewer: {fileID: 0}
   mapMaterial: {fileID: 2100000, guid: 9f010c4ba8cfe034c9eff85b665989c1, type: 2}
+  waterPrefab: {fileID: 4835033269100359555, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
+    type: 3}

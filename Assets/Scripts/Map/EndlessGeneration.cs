@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class EndlessGeneration: MonoBehaviour {
 
@@ -24,6 +25,7 @@ public class EndlessGeneration: MonoBehaviour {
 	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
+	public GameObject waterPrefab;
 	void Start() {
 		mapGenerator = FindObjectOfType<MapGenerator> ();
 
@@ -60,16 +62,16 @@ public class EndlessGeneration: MonoBehaviour {
 				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
+					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab));
 				}
 
 			}
 		}
 	}
-
 	public class TerrainChunk {
 
 		GameObject meshObject;
+		GameObject waterPrefab;
 		Vector2 position;
 		Bounds bounds;
 
@@ -84,8 +86,7 @@ public class EndlessGeneration: MonoBehaviour {
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
-
-		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material) {
+        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab) {
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -101,9 +102,16 @@ public class EndlessGeneration: MonoBehaviour {
 			meshObject.transform.position = positionV3 * scale;
 			meshObject.transform.parent = parent;
 			meshObject.transform.localScale = Vector3.one * scale;
-			SetVisible(false);
 
-			lodMeshes = new LODMesh[detailLevels.Length];
+			waterPrefab = Instantiate(waterPrefab);
+
+            waterPrefab.transform.position = new Vector3(positionV3.x * scale,-0.6f,positionV3.z*scale);
+            waterPrefab.transform.parent = parent;
+			this.waterPrefab = waterPrefab;
+
+            SetVisible(false);
+
+            lodMeshes = new LODMesh[detailLevels.Length];
 			for (int i = 0; i < detailLevels.Length; i++) {
 				lodMeshes[i] = new LODMesh(detailLevels[i].lod, UpdateTerrainChunk);
 				if (detailLevels[i].useForCollider) {
@@ -123,8 +131,6 @@ public class EndlessGeneration: MonoBehaviour {
 
 			UpdateTerrainChunk ();
 		}
-
-	
 
 		public void UpdateTerrainChunk() {
 			if (mapDataReceived) {
@@ -164,11 +170,13 @@ public class EndlessGeneration: MonoBehaviour {
 				}
 
 				SetVisible (visible);
+				//waterPrefab.SetActive(visible);
 			}
 		}
 
 		public void SetVisible(bool visible) {
 			meshObject.SetActive (visible);
+			waterPrefab.SetActive (visible);
 		}
 
 		public bool IsVisible() {

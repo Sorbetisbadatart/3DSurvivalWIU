@@ -6,7 +6,7 @@ public class EndlessGeneration: MonoBehaviour {
 
 	const float scale = 0.5f;
 
-	const float viewerMoveThresholdForChunkUpdate = 25f;
+	const float viewerMoveThresholdForChunkUpdate = 10f;
 	const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
 
 	public LODInfo[] detailLevels;

@@ -118,10 +118,19 @@ public class Inventory : MonoBehaviour
         return items[num];
     }
 
-    //public ItemInstance GetItemType(ItemInstance itemtype)
-    //{
-    //    //for(int i = 0;i<)
-    //}
+    public ItemInstance SearchItemType(ItemInstance itemtype)
+    {
+        for(int i = 0;i<maxItems;i++)
+        {
+            if (items[i].itemType == itemtype.itemType)
+            {
+                return items[i];
+            }
+        }
+
+        //if find nothing return null
+        return null;
+    }
 
     public void SetManager(InventoryManager newManager)
     {

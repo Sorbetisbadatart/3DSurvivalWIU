@@ -18,6 +18,10 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject InventoryPage;
 
+    [SerializeField] private AudioSource audioSource;
+
+    [SerializeField] private AudioClip openClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,9 +62,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("e"))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             InventoryPage.SetActive(!InventoryPage.activeInHierarchy);
+            audioSource.PlayOneShot(openClip);
         }
     }
 

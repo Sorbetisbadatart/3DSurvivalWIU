@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     public InventoryManager manager;
 
     public ItemInstance equippedSlot;
+    private int equippedSlotNum;
 
     private ThirstNHunger thirstNHunger;
 
@@ -117,6 +118,11 @@ public class Inventory : MonoBehaviour
         return items[num];
     }
 
+    //public ItemInstance GetItemType(ItemInstance itemtype)
+    //{
+    //    //for(int i = 0;i<)
+    //}
+
     public void SetManager(InventoryManager newManager)
     {
         manager = newManager;
@@ -128,42 +134,50 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown("1"))
         {
             equippedSlot = items[0];
+            equippedSlotNum = 0;
         }
         else if(Input.GetKeyDown("2"))
         {
             equippedSlot = items[1];
+            equippedSlotNum = 1;
         }
         else if (Input.GetKeyDown("3"))
         {
             equippedSlot = items[2];
+            equippedSlotNum = 2;
         }
         else if (Input.GetKeyDown("4"))
         {
             equippedSlot = items[3];
+            equippedSlotNum = 3;
         }
         else if (Input.GetKeyDown("5"))
         {
             equippedSlot = items[4];
+            equippedSlotNum = 4;
         }
         else if (Input.GetKeyDown("6"))
         {
             equippedSlot = items[5];
+            equippedSlotNum = 5;
         }
         else if (Input.GetKeyDown("7"))
         {
             equippedSlot = items[6];
+            equippedSlotNum = 6;
         }
 
-        if (Input.GetKeyDown("f"))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             //use item
             // 0 = Resoruce, 1 = Food
-            if(equippedSlot.itemStatus == 1)
+            if(equippedSlot.itemStatus == 1 && equippedSlot.itemCount > 0)
             {
                 thirstNHunger.GainHunger(equippedSlot.itemType.Consume());
                 thirstNHunger.GainThirst(equippedSlot.itemType.Drink());
                 RemoveItem(equippedSlot, 1);
                 manager.UpdateAllCount();
+                equippedSlot = items[equippedSlotNum];
             }
         }
     }

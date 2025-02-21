@@ -187,6 +187,7 @@ public class Inventory : MonoBehaviour
                 RemoveItem(equippedSlot, 1);
                 manager.UpdateAllCount();
                 equippedSlot = items[equippedSlotNum];
+                AudioManager.Instance.PlaySFX("Eating");
             }
         }
     }

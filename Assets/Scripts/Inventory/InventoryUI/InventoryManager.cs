@@ -65,7 +65,8 @@ public class InventoryManager : MonoBehaviour
         {
             InventoryPage.SetActive(!InventoryPage.activeInHierarchy);
             ChangeMouseLock();
-            audioSource.PlayOneShot(openClip);
+            //audioSource.PlayOneShot(openClip);
+            AudioManager.Instance.PlaySFX("OpenInventory");
         }
 
         

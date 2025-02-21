@@ -21,7 +21,7 @@ public class MapGenerator : MonoBehaviour {
 	public float persistance;
 	public float lacunarity;
 
-	public int seed;
+	private int seed;
 	public Vector2 offset;
 
 	public bool useFalloff;
@@ -40,6 +40,8 @@ public class MapGenerator : MonoBehaviour {
 
 	void Awake() {
 		falloffMap = FalloffGenerator.GenerateFalloffMap (mapChunkSize);
+
+		seed = UnityEngine.Random.Range(0, 1000);
 	}
 
 	public void DrawMapInEditor() {

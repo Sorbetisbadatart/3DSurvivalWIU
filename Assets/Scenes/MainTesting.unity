@@ -3088,6 +3088,56 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
         type: 3}
+      propertyPath: objects.Array.data[0].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[1].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[2].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[3].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[4].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[0].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[1].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[2].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[3].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
+      propertyPath: objects.Array.data[4].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026904017024256548, guid: 3911cec3614ac7c48a6630bb14ca3ffe,
+        type: 3}
       propertyPath: objects.Array.data[4].buildingID
       value: 3
       objectReference: {fileID: 0}

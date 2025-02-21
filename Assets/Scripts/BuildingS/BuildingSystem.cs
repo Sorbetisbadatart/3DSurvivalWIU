@@ -23,6 +23,10 @@ public class Build : MonoBehaviour
     public Transform cam;
     public RaycastHit hit;
     public LayerMask layer;
+    [SerializeField] public Inventory playerInventory;
+    [SerializeField] public ItemData woodData;
+    [SerializeField] public ItemData rockData;
+
 
     public MCFace direction;
 
@@ -70,6 +74,7 @@ public class Build : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && !choosingMenuObj)
         {
+            
             BuildObj();
             //reset placement height of build for new 
             extraY = new Vector3(0, 0, 0);
@@ -211,12 +216,31 @@ public class Build : MonoBehaviour
 
     public void BuildObj()
     {
+
+       
         PreviewObject _previewObject = currentpreview.GetComponent<PreviewObject>();
         if (_previewObject.canBuild)
         {
-            Instantiate(currentobject.buildingPrefab, currentpos + extraY, Quaternion.Euler(currentrotation.x, currentrotation.y, currentrotation.z));
+            if (playerInventory.CheckItemCount(rockData) < currentobject.StoneCost || playerInventory.CheckItemCount(woodData) < currentobject.WoodCost) 
 
+            {
+                Debug.Log("ran out of materials");
+                CancelBuild();
+
+                return;
+            }
+
+            Debug.Log("vibings");
+           
+            Instantiate(currentobject.buildingPrefab, currentpos + extraY, Quaternion.Euler(currentrotation.x, currentrotation.y, currentrotation.z));
+            playerInventory.RemoveItem(rockData, currentobject.StoneCost);
+            playerInventory.RemoveItem(woodData, currentobject.WoodCost);
         }
+
+        
+
+
+
     }
 
     public static MCFace GetHitFace(RaycastHit hit)
@@ -263,5 +287,4 @@ public class BuildObjects
     public int StoneCost;
     public Buildings buildingID;
     public GameObject buildingPrefab;
-    public int gold;
 }

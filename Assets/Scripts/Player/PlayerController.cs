@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_isGrounded);
+       
         CheckGrounded();
         Fall();
         Jump();
@@ -76,8 +76,8 @@ public class PlayerController : MonoBehaviour
 
         if (moveDirection.magnitude > 0)
         {
-            //AudioManager.Instance.PlaySFX("Walk");
-            footstepsSfx.enabled = true;
+        
+           
             moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
             // Rotate the character facing towards the move direction
             Quaternion targetRotation =
@@ -88,9 +88,10 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (_inputActions["Move"].IsPressed())
+        if (_inputActions["Move"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsWalking", true);
+            footstepsSfx.enabled = true;
         }
         else
         {

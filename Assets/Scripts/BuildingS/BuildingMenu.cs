@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class BuildingMenu : MonoBehaviour
 {
     public List<MenuButton> menuButtons = new List<MenuButton>();
-    [SerializeField] private Inventory playerInventory;
-    [SerializeField] private ItemData woodData;
-    [SerializeField] private ItemData rockData;
+   
+   
     private Vector2 MousePos;
     private Vector2 VectorToMouse = new Vector2(0.5f, 1.0f);
     private Vector2 CenterCircle = new Vector2(0.5f, 0.5f);
@@ -67,18 +66,21 @@ public class BuildingMenu : MonoBehaviour
 
     public void SelectBuild()
     {
-        if (!(playerInventory.CheckItemCount(rockData) >= menuButtons[CurrentMenuItem].StoneCost && playerInventory.CheckItemCount(woodData) >= menuButtons[CurrentMenuItem].StoneCost))
+        if (!(buildSystem.playerInventory.CheckItemCount(buildSystem.rockData) >= buildSystem.currentobject.StoneCost && buildSystem.playerInventory.CheckItemCount(buildSystem.rockData) >= buildSystem.currentobject.WoodCost))
         {
+            
 
             Debug.Log("insufficient materials");
-            Debug.Log(playerInventory.CheckItemCount(rockData));
-            Debug.Log(menuButtons[CurrentMenuItem].StoneCost);
+            Debug.Log(buildSystem.playerInventory.CheckItemCount(buildSystem.rockData));
+            Debug.Log(buildSystem.currentobject.StoneCost);
             Debug.Log("Beans");
-            Debug.Log(playerInventory.CheckItemCount(woodData));
-            Debug.Log(menuButtons[CurrentMenuItem].WoodCost);
+            Debug.Log(buildSystem.playerInventory.CheckItemCount(buildSystem.woodData));
+            Debug.Log(buildSystem.currentobject.WoodCost);
 
             return;
         }
+
+       
         menuButtons[CurrentMenuItem].BuildingImage.color = menuButtons[CurrentMenuItem].SelectedColor;
         buildSystem.ChangeCurrentBuilding (CurrentMenuItem);
         buildSystem.DisableMenu();
@@ -93,8 +95,7 @@ public class MenuButton
 {
     public string BuildingName;
     public Image BuildingImage;
-    public int WoodCost;
-    public int StoneCost;
+   
     public Color Colour = Color.white;
     public Color HighLightedColor = Color.grey;
     public Color SelectedColor = Color.grey;

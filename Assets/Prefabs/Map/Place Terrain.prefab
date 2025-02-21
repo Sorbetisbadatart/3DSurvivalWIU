@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96cbf4107b8a714f80327b1818bb4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preFab: {fileID: 5561061185992809509, guid: 1c656a639d9ec324898f425cc31ab02a, type: 3}
+  preFab:
+  - {fileID: 3170245903894074855, guid: efdedd324e128634da586e3150eedd3f, type: 3}
+  - {fileID: 5561061185992809509, guid: 1c656a639d9ec324898f425cc31ab02a, type: 3}
+  - {fileID: 7685014294869561147, guid: 30344d72678fe5d4cb52352182c0f2da, type: 3}
   density: 1000
   minHeight: 0
   maxHeight: 10

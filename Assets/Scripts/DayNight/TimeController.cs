@@ -32,7 +32,7 @@ public class TimeController : MonoBehaviour
     [SerializeField] private Light moonLight;
     [SerializeField] private float maxMoonLightIntensity;
 
-    private int Day = 0;
+    private int currentDay = 0;
 
     private void Awake()
     {
@@ -56,6 +56,8 @@ public class TimeController : MonoBehaviour
         sunsetTime = TimeSpan.FromHours(sunsetHour);
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -64,6 +66,11 @@ public class TimeController : MonoBehaviour
         UpdateLightSettings();
         //SummonRooster();
 
+    }
+
+    public DateTime GetCurrentTime()
+    {
+        return currentTime;
     }
 
     private void UpdateTimeOfDay()

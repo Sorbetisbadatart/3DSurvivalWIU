@@ -22,8 +22,7 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private AudioClip openClip;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         inventorySlots = new GameObject[inventory.maxItems];
 
@@ -41,9 +40,9 @@ public class InventoryManager : MonoBehaviour
         }
 
         //create items if there are items in the inventory
-        for(int i = 0; i<inventory.maxItems;i++)
+        for (int i = 0; i < inventory.maxItems; i++)
         {
-            if (i <inventory.items.Length && inventory.items[i] != null)
+            if (i < inventory.items.Length && inventory.items[i] != null)
             {
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
                 temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], 1);

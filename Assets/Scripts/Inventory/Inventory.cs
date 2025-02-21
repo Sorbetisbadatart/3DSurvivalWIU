@@ -80,21 +80,39 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(ItemInstance itemToRemove, int amt)
+    public void RemoveItem(ItemData itemToRemove, int amt)
     {
+        int numToRemove = amt;
         //look for item to remove
         for(int i = 0; i < items.Length;i++)
         {
-            if (items[i].itemType == itemToRemove.itemType)
+            if (items[i].itemType == itemToRemove)
             {
-                if (items[i].itemCount > amt)
+                //if item count is greater than amount to remove
+                if (items[i].itemCount > numToRemove)
                 {
-                    items[i].itemCount -= amt;
+                    items[i].itemCount -= numToRemove;
+                    numToRemove = 0;
                 }
-                else
+                //if item has equal number to amount to remove
+                else if (items[i].itemCount == numToRemove)
                 {
                     items[i] = null;
+                    numToRemove = 0;
                     manager.UpdateInventoryUI();
+                }
+                //if item has less than number to remove
+                else
+                {
+                    numToRemove -= items[i].itemCount;
+                    items[i] = null;
+                    manager.UpdateInventoryUI();
+                }
+
+                if(numToRemove<=0)
+                {
+                    manager.UpdateAllCount();
+                    return;
                 }
             }
         }
@@ -118,18 +136,20 @@ public class Inventory : MonoBehaviour
         return items[num];
     }
 
-    public ItemInstance SearchItemType(ItemData itemtype)
+    public int CheckItemCount(ItemData itemtype)
     {
+        int count = 0;
+
         for(int i = 0;i<maxItems;i++)
         {
             if (items[i].itemType == itemtype)
             {
-                return items[i];
+                count += items[i].itemCount;
             }
         }
 
-        //if find nothing return null
-        return null;
+        //return total amount at the end
+        return count;
     }
 
     public void SetManager(InventoryManager newManager)
@@ -184,7 +204,7 @@ public class Inventory : MonoBehaviour
             {
                 thirstNHunger.GainHunger(equippedSlot.itemType.Consume());
                 thirstNHunger.GainThirst(equippedSlot.itemType.Drink());
-                RemoveItem(equippedSlot, 1);
+                RemoveItem(equippedSlot.itemType, 1);
                 manager.UpdateAllCount();
                 equippedSlot = items[equippedSlotNum];
                 AudioManager.Instance.PlaySFX("Eating");

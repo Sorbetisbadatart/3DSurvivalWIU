@@ -65,9 +65,28 @@ public class InventoryManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             InventoryPage.SetActive(!InventoryPage.activeInHierarchy);
+            ChangeMouseLock();
             audioSource.PlayOneShot(openClip);
         }
+
+        
+        
     }
+    public void ChangeMouseLock()
+    {
+        if (InventoryPage.activeInHierarchy)
+        { 
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+
 
     //called when an item switches slot, to update array
     //create items in inventory if there are items in the ui but not in the inventory

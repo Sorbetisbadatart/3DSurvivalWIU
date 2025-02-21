@@ -24,20 +24,30 @@ public class PlacementGenerator : MonoBehaviour
     [SerializeField] Vector3 minScale;
     [SerializeField] Vector3 maxScale;
 
+
+    private void Start()
+    {
+        Debug.Log("gay");
+        Generate();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
+            Clear();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
             Generate();
     }
     public void Generate()
     {
-        Clear();
+        //Clear();
+        xRange += new Vector2(transform.position.x,transform.position.z);
+        zRange += new Vector2(transform.position.x, transform.position.z);
 
         for (int i =0;i<density; i++)
         {
             float sampleX = Random.Range(xRange.x,xRange.y);
-            float sampleY = Random.Range(zRange.x,zRange.y);
-            Vector3 rayStart = new Vector3(sampleX,maxHeight,sampleY);
+            float sampleZ = Random.Range(zRange.x,zRange.y);
+            Vector3 rayStart = new Vector3(sampleX,maxHeight,sampleZ);
 
             if (!Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, Mathf.Infinity))
                 continue;
@@ -64,5 +74,9 @@ public class PlacementGenerator : MonoBehaviour
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
+    }
+
+    public void SetVisibility(bool visibility){
+        gameObject.SetActive(visibility);
     }
 }

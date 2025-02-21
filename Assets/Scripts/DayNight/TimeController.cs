@@ -34,6 +34,8 @@ public class TimeController : MonoBehaviour
 
     private int currentDay = 0;
 
+    bool calledonce = false;
+
     private void Awake()
     {
         if (Timeinstance == null)
@@ -65,12 +67,47 @@ public class TimeController : MonoBehaviour
         RotateSun();
         UpdateLightSettings();
         //SummonRooster();
+        TimePassedThisTime(2);
+        DayPassed();
 
     }
 
-    public DateTime GetCurrentTime()
+    public void DayPassed()
     {
-        return currentTime;
+        if (currentTime.Hour == 0)
+        {
+            calledonce = false;
+        }
+    }
+
+    public int GetCurrentTimeinHours()
+    {
+        return currentTime.Hour;
+    }
+
+    public int GetCurrentTimeinSeconds()
+    {
+        return currentTime.Second;
+    }
+
+    public bool TimePassedThisTime(int TimeToPassinHours)
+    {
+
+        
+
+        if (GetCurrentTimeinHours() >= TimeToPassinHours && !calledonce)
+        {
+
+           
+            calledonce = true;
+            return true;
+
+         
+        }
+
+        //Debug.Log("passedaway");
+
+        return false;
     }
 
     private void UpdateTimeOfDay()
@@ -85,6 +122,7 @@ public class TimeController : MonoBehaviour
            dayText.text = (currentTime - DateTime.Now.Date).ToString("dd") ;
            if (currentTime.TimeOfDay >= TimeSpan.FromHours(sunriseHour) && currentTime.TimeOfDay <= TimeSpan.FromHours(sunriseHour + 0.01) )
             {
+                
                 SummonRooster() ;
             }
         }

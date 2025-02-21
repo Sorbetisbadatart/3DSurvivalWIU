@@ -669,22 +669,22 @@ PrefabInstance:
     - target: {fileID: 106060270620214722, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.124931455
+      value: 0.124931455
       objectReference: {fileID: 0}
     - target: {fileID: 106060270620214722, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.011783451
+      value: 0.011783451
       objectReference: {fileID: 0}
     - target: {fileID: 106060270620214722, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9877117
+      value: 0.9877117
       objectReference: {fileID: 0}
     - target: {fileID: 106060270620214722, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0931603
+      value: -0.0931603
       objectReference: {fileID: 0}
     - target: {fileID: 890559996785552785, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
@@ -1853,7 +1853,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.26
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0}
@@ -2572,7 +2572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeMultiplier: 2000
-  startHour: 12
+  startHour: 1
   timeText: {fileID: 1010544113}
   dayText: {fileID: 88002237}
   sun: {fileID: 112567593}

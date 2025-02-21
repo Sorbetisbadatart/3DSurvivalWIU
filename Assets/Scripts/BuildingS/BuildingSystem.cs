@@ -206,8 +206,7 @@ public class Build : MonoBehaviour
         }
         currentpreview.localEulerAngles = currentrotation;
 
-        Debug.Log(hit.point);
-        Debug.Log(currentpos);
+      
     }
 
     public void BuildObj()

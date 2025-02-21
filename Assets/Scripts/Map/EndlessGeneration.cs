@@ -26,6 +26,7 @@ public class EndlessGeneration: MonoBehaviour {
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
 	public GameObject waterPrefab;
+	public GameObject GenTerrain;
 	void Start() {
 		mapGenerator = FindObjectOfType<MapGenerator> ();
 
@@ -62,7 +63,7 @@ public class EndlessGeneration: MonoBehaviour {
 				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab));
+					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, GenTerrain));
 				}
 
 			}
@@ -72,6 +73,7 @@ public class EndlessGeneration: MonoBehaviour {
 
 		GameObject meshObject;
 		GameObject waterPrefab;
+		GameObject TerrainGenPrefab;
 		Vector2 position;
 		Bounds bounds;
 
@@ -86,7 +88,7 @@ public class EndlessGeneration: MonoBehaviour {
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
-        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab) {
+        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, GameObject TerrainGen) {
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -103,13 +105,21 @@ public class EndlessGeneration: MonoBehaviour {
 			meshObject.transform.parent = parent;
 			meshObject.transform.localScale = Vector3.one * scale;
 
-			waterPrefab = Instantiate(waterPrefab);
 
+			waterPrefab = Instantiate(waterPrefab);
             waterPrefab.transform.position = new Vector3(positionV3.x * scale,-0.6f,positionV3.z*scale);
             waterPrefab.transform.parent = parent;
 			this.waterPrefab = waterPrefab;
 
+
+            TerrainGenPrefab = Instantiate(TerrainGen);
+            TerrainGenPrefab.transform.position = positionV3 * scale;
+            TerrainGenPrefab.transform.parent = parent;
+			TerrainGenPrefab = TerrainGen;
+
+
             SetVisible(false);
+
 
             lodMeshes = new LODMesh[detailLevels.Length];
 			for (int i = 0; i < detailLevels.Length; i++) {
@@ -170,7 +180,8 @@ public class EndlessGeneration: MonoBehaviour {
 				}
 
 				SetVisible (visible);
-				//waterPrefab.SetActive(visible);
+				waterPrefab.SetActive(visible);
+				//TerrainGenPrefab.SetActive(visible);
 			}
 		}
 

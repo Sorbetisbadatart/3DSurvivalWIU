@@ -181,6 +181,8 @@ public class EndlessGeneration: MonoBehaviour {
 
 				SetVisible (visible);
 				waterPrefab.SetActive(visible);
+
+				
 			}
 		}
 
@@ -194,8 +196,11 @@ public class EndlessGeneration: MonoBehaviour {
 			return meshObject.activeSelf;
 		}
 
+		private void ReplaceTerrain(){
+			TerrainGenPrefab.Clear();
+			TerrainGenPrefab.Generate();
+		}
 	}
-
 	class LODMesh {
 
 		public Mesh mesh;

@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     public InventoryManager manager;
 
     public ItemInstance equippedSlot;
-    private int equippedSlotNum;
+    public int equippedSlotNum;
 
     private ThirstNHunger thirstNHunger;
 
@@ -164,36 +164,43 @@ public class Inventory : MonoBehaviour
         {
             equippedSlot = items[0];
             equippedSlotNum = 0;
+            manager.HighlightEquippedSlot(0);
         }
         else if(Input.GetKeyDown("2"))
         {
             equippedSlot = items[1];
             equippedSlotNum = 1;
+            manager.HighlightEquippedSlot(1);
         }
         else if (Input.GetKeyDown("3"))
         {
             equippedSlot = items[2];
             equippedSlotNum = 2;
+            manager.HighlightEquippedSlot(2);
         }
         else if (Input.GetKeyDown("4"))
         {
             equippedSlot = items[3];
             equippedSlotNum = 3;
+            manager.HighlightEquippedSlot(3);
         }
         else if (Input.GetKeyDown("5"))
         {
             equippedSlot = items[4];
             equippedSlotNum = 4;
+            manager.HighlightEquippedSlot(4);
         }
         else if (Input.GetKeyDown("6"))
         {
             equippedSlot = items[5];
             equippedSlotNum = 5;
+            manager.HighlightEquippedSlot(5);
         }
         else if (Input.GetKeyDown("7"))
         {
             equippedSlot = items[6];
             equippedSlotNum = 6;
+            manager.HighlightEquippedSlot(6);
         }
 
         if (Input.GetKeyDown(KeyCode.F))

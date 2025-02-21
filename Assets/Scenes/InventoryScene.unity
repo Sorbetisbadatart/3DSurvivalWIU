@@ -1858,9 +1858,21 @@ PrefabInstance:
       objectReference: {fileID: 500097963}
     - target: {fileID: 1537313788193144804, guid: 9b848d443345bf64ca67e79c1c72bd41,
         type: 3}
+      propertyPath: normalTex
+      value: 
+      objectReference: {fileID: 21300000, guid: 2bdb8f8f995b8dc4f9c313250d39d8f7,
+        type: 3}
+    - target: {fileID: 1537313788193144804, guid: 9b848d443345bf64ca67e79c1c72bd41,
+        type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1537313788193144804, guid: 9b848d443345bf64ca67e79c1c72bd41,
+        type: 3}
+      propertyPath: highlightedTex
+      value: 
+      objectReference: {fileID: 21300000, guid: 46ffd5d275b5a2f4d958e606dd000d71,
+        type: 3}
     - target: {fileID: 4680423689770218480, guid: 9b848d443345bf64ca67e79c1c72bd41,
         type: 3}
       propertyPath: m_Pivot.x

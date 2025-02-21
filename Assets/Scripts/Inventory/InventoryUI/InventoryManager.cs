@@ -18,6 +18,9 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject InventoryPage;
 
+    [SerializeField] private Sprite normalTex;
+    [SerializeField] private Sprite highlightedTex;
+
     private void Awake()
     {
         inventorySlots = new GameObject[inventory.maxItems];
@@ -162,6 +165,21 @@ public class InventoryManager : MonoBehaviour
             if (inventorySlots[i].transform.childCount > 0)
             {
                 inventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().UpdateCount();
+            }
+        }
+    }
+
+    public void HighlightEquippedSlot(int e)
+    {
+        for(int i = 0;i<hotbarSize;i++)
+        {
+            if(i == e)
+            {
+                inventorySlots[i].GetComponent<Image>().sprite = highlightedTex;
+            }
+            else
+            {
+                inventorySlots[i].GetComponent<Image>().sprite = normalTex;
             }
         }
     }

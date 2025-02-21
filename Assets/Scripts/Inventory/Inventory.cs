@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     private ThirstNHunger thirstNHunger;
 
-    private void Start()
+    private void Awake()
     {
         items = new ItemInstance[maxItems];
         thirstNHunger = gameObject.GetComponent<ThirstNHunger>();

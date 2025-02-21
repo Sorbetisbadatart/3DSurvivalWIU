@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     private ThirstNHunger thirstNHunger;
 
-    private void Start()
+    private void Awake()
     {
         items = new ItemInstance[maxItems];
         thirstNHunger = gameObject.GetComponent<ThirstNHunger>();
@@ -118,10 +118,19 @@ public class Inventory : MonoBehaviour
         return items[num];
     }
 
-    //public ItemInstance GetItemType(ItemInstance itemtype)
-    //{
-    //    //for(int i = 0;i<)
-    //}
+    public ItemInstance SearchItemType(ItemData itemtype)
+    {
+        for(int i = 0;i<maxItems;i++)
+        {
+            if (items[i].itemType == itemtype)
+            {
+                return items[i];
+            }
+        }
+
+        //if find nothing return null
+        return null;
+    }
 
     public void SetManager(InventoryManager newManager)
     {

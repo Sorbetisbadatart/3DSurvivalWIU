@@ -97,7 +97,7 @@ public class TimeController : MonoBehaviour
 
         if (GetCurrentTimeinHours() >= TimeToPassinHours && !calledonce)
         {
-
+            Debug.Log("beans");
            
             calledonce = true;
             return true;

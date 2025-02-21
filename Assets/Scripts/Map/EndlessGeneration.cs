@@ -144,7 +144,8 @@ public class EndlessGeneration: MonoBehaviour {
 		}
 
 		public void UpdateTerrainChunk() {
-			if (mapDataReceived) {
+            DailyReset();
+            if (mapDataReceived) {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
 
@@ -185,13 +186,13 @@ public class EndlessGeneration: MonoBehaviour {
 
 				
 			}
-			DailyReset();
+			
 		}
 
 		public void SetVisible(bool visible) {
 			meshObject.SetActive (visible);
 			waterPrefab.SetActive (visible);
-			TerrainGenPrefab.SetVisibility (visible);
+			TerrainGenPrefab.SetVisibility (!visible);
 		}
 
 		public bool IsVisible() {
@@ -208,6 +209,7 @@ public class EndlessGeneration: MonoBehaviour {
 			if (TimeController.Timeinstance.TimePassedThisTime(2))
 			{
 				ReplaceTerrain();
+				Debug.Log("reste");
 			}
 		}
 	}

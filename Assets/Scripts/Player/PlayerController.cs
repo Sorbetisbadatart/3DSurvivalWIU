@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckGrounded();
+        //CheckGrounded();
         Fall();
         Jump();
         Vector2 input =
@@ -181,31 +181,29 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), GetComponent<CapsuleCollider>().bounds.size.x / 2);
-
-
+        //Gizmos.DrawSphere(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), GetComponent<CapsuleCollider>().bounds.size.x / 2);
     }
-    private void CheckGrounded()
-    {
+    //private void CheckGrounded()
+    //{
 
-        //Boxcast to detect whether player touching ground
-        Physics.SphereCast(
-            origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f , this.transform.position.z),
-            radius: GetComponent<CapsuleCollider>().bounds.size.x / 2,
-            direction: Vector2.down,
-            hitInfo: out RaycastHit hitResult,
-            maxDistance: 1.0f
+    //    //Boxcast to detect whether player touching ground
+    //    Physics.SphereCast(
+    //        origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f , this.transform.position.z),
+    //        radius: GetComponent<CapsuleCollider>().bounds.size.x / 2,
+    //        direction: Vector2.down,
+    //        hitInfo: out RaycastHit hitResult,
+    //        maxDistance: 1.0f
             
-            ) ;
+    //        ) ;
 
         
 
 
 
-        _isGrounded = hitResult.collider != null;
+    //    _isGrounded = hitResult.collider != null;
       
 
-    }
+    //}
 
     private void LateUpdate()
     {

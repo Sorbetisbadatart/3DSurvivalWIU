@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preFab: {fileID: 5561061185992809509, guid: 1c656a639d9ec324898f425cc31ab02a, type: 3}
-  density: 10000
-  minHeight: 6
+  density: 1000
+  minHeight: 0
   maxHeight: 10
   xRange: {x: -120, y: 120}
   zRange: {x: 120, y: 120}

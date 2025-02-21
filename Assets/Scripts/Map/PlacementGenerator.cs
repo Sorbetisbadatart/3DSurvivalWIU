@@ -27,7 +27,7 @@ public class PlacementGenerator : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("gay");
+        //Debug.Log("gay");
         Generate();
     }
     private void Update()
@@ -36,6 +36,10 @@ public class PlacementGenerator : MonoBehaviour
             Clear();
         if (Input.GetKeyDown(KeyCode.Alpha2))
             Generate();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SetVisibility(true);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            SetVisibility(false);
     }
     public void Generate()
     {
@@ -65,7 +69,6 @@ public class PlacementGenerator : MonoBehaviour
                 Random.Range(minScale.z, maxScale.z)
                 );
         }
-
     }
 
     public void Clear()
@@ -77,6 +80,8 @@ public class PlacementGenerator : MonoBehaviour
     }
 
     public void SetVisibility(bool visibility){
-        gameObject.SetActive(visibility);
+        foreach(Transform child in this.transform){
+            child.gameObject.SetActive(visibility);
+        }
     }
 }

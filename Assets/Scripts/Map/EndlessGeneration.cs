@@ -26,7 +26,7 @@ public class EndlessGeneration: MonoBehaviour {
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
 	public GameObject waterPrefab;
-	public GameObject GenTerrain;
+	public PlacementGenerator GenTerrain;
 	void Start() {
 		mapGenerator = FindObjectOfType<MapGenerator> ();
 
@@ -73,7 +73,7 @@ public class EndlessGeneration: MonoBehaviour {
 
 		GameObject meshObject;
 		GameObject waterPrefab;
-		GameObject TerrainGenPrefab;
+		PlacementGenerator TerrainGenPrefab;
 		Vector2 position;
 		Bounds bounds;
 
@@ -88,7 +88,7 @@ public class EndlessGeneration: MonoBehaviour {
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
-        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, GameObject TerrainGen) {
+        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, PlacementGenerator TerrainGen) {
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -109,13 +109,13 @@ public class EndlessGeneration: MonoBehaviour {
 			waterPrefab = Instantiate(waterPrefab);
             waterPrefab.transform.position = new Vector3(positionV3.x * scale,-0.6f,positionV3.z*scale);
             waterPrefab.transform.parent = parent;
-			this.waterPrefab = waterPrefab;
+			this.waterPrefab = waterPrefab; // For visibility
 
 
-            TerrainGenPrefab = Instantiate(TerrainGen);
-            TerrainGenPrefab.transform.position = positionV3 * scale;
-            TerrainGenPrefab.transform.parent = parent;
-			TerrainGenPrefab = TerrainGen;
+            TerrainGen = Instantiate(TerrainGen);
+            TerrainGen.transform.position = positionV3 * scale;
+            TerrainGen.transform.parent = parent;
+			TerrainGenPrefab = TerrainGen; // For visibility
 
 
             SetVisible(false);
@@ -181,13 +181,13 @@ public class EndlessGeneration: MonoBehaviour {
 
 				SetVisible (visible);
 				waterPrefab.SetActive(visible);
-				//TerrainGenPrefab.SetActive(visible);
 			}
 		}
 
 		public void SetVisible(bool visible) {
 			meshObject.SetActive (visible);
 			waterPrefab.SetActive (visible);
+			TerrainGenPrefab.SetVisibility (visible);
 		}
 
 		public bool IsVisible() {

@@ -57,10 +57,13 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _isGrounded = true;
     }
     // Start is called before the first frame update
     void Start()
     {
+        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _inputActions = _playerInput.actions;

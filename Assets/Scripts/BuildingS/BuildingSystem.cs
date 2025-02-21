@@ -168,7 +168,7 @@ public class Build : MonoBehaviour
 
         currentpos -= Vector3.one * offset;
         currentpos /= gridSize;
-        currentpos = new Vector3(Mathf.Round(currentpos.x * 5) / 5, Mathf.Round(currentpos.y * 5) / 5, Mathf.Round(currentpos.z * 5) / 5);
+        currentpos = new Vector3(Mathf.Round(currentpos.x * 2) / 2, Mathf.Round(currentpos.y * 2) / 2, Mathf.Round(currentpos.z * 2) / 2);
         currentpos /= gridSize;
         currentpos += Vector3.one * offset;
         

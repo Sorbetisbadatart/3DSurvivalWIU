@@ -144,7 +144,7 @@ public class EndlessGeneration: MonoBehaviour {
 		}
 
 		public void UpdateTerrainChunk() {
-            DailyReset();
+           
             if (mapDataReceived) {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;

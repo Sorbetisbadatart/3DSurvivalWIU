@@ -3377,9 +3377,76 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
         type: 3}
+      propertyPath: rockData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e74b77963d0c9b4fa2c08f2c57b0760,
+        type: 2}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: woodData
+      value: 
+      objectReference: {fileID: 11400000, guid: 27b09888dacfed84893ab74cafd718d5,
+        type: 2}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
       propertyPath: buildSystem
       value: 
       objectReference: {fileID: 1535141556}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 1614374322}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[0].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[1].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[2].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[3].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[4].WoodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[0].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[1].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[2].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[3].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037737071249416654, guid: 6f15981ce28f1894986df095b6a80066,
+        type: 3}
+      propertyPath: menuButtons.Array.data[4].StoneCost
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6994392657964248206, guid: 6f15981ce28f1894986df095b6a80066, type: 3}

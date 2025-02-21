@@ -259,6 +259,8 @@ public class BuildObjects
 {
     public string name;
     public GameObject preview;
+    public int WoodCost;
+    public int StoneCost;
     public Buildings buildingID;
     public GameObject buildingPrefab;
     public int gold;

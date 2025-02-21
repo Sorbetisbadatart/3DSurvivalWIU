@@ -18,10 +18,6 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject InventoryPage;
 
-    [SerializeField] private AudioSource audioSource;
-
-    [SerializeField] private AudioClip openClip;
-
     private void Awake()
     {
         inventorySlots = new GameObject[inventory.maxItems];
@@ -65,7 +61,7 @@ public class InventoryManager : MonoBehaviour
         {
             InventoryPage.SetActive(!InventoryPage.activeInHierarchy);
             ChangeMouseLock();
-            audioSource.PlayOneShot(openClip);
+            AudioManager.Instance.PlaySFX("OpenInventory");
         }
 
         

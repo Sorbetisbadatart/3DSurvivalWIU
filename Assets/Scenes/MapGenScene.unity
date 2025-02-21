@@ -428,6 +428,12 @@ PrefabInstance:
       objectReference: {fileID: 1921018690}
     - target: {fileID: 4935257216641655961, guid: f5a28da7b01c1fc4dbda102ace8b5db9,
         type: 3}
+      propertyPath: GenTerrain
+      value: 
+      objectReference: {fileID: 8947131429879511789, guid: b0cba7218aac43847a7b3397b0c5a61b,
+        type: 3}
+    - target: {fileID: 4935257216641655961, guid: f5a28da7b01c1fc4dbda102ace8b5db9,
+        type: 3}
       propertyPath: mapMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 9f010c4ba8cfe034c9eff85b665989c1, type: 2}
@@ -1387,6 +1393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Place Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8947131429879511789, guid: b0cba7218aac43847a7b3397b0c5a61b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

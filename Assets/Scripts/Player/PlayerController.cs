@@ -46,14 +46,6 @@ public class PlayerController : MonoBehaviour
     public AudioSource footstepsSfx, sprintSfx;
 
     public bool _isGrounded;
-    
-
-
-
-
-
-
-
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -62,8 +54,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _inputActions = _playerInput.actions;
@@ -83,21 +73,30 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
 
 
-        if (moveDirection.magnitude > 0 && _isGrounded)
+        if (moveDirection.magnitude > 0)
         {
             //AudioManager.Instance.PlaySFX("Walk");
-            _animator.SetBool("IsWalking", true);
             footstepsSfx.enabled = true;
-            move = transform.right * input.x + transform.forward * input.y;
+            moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
+            // Rotate the character facing towards the move direction
+            Quaternion targetRotation =
+            Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation =
+            Quaternion.RotateTowards(transform.rotation, targetRotation,
+            Time.deltaTime * 1000f);
 
+        }
 
-            // Modify move direction to where camera is facing
+        if (_inputActions["Move"].IsPressed())
+        {
+            _animator.SetBool("IsWalking", true);
         }
         else
         {
             footstepsSfx.enabled = false;
             _animator.SetBool("IsWalking", false);
         }
+
 
 
         // Run

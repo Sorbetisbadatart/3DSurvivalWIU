@@ -68,7 +68,7 @@ public class Build : MonoBehaviour
         if (!choosingMenuObj)
             StartPreview();
 
-        if (Input.GetButtonDown("Fire1") && !choosingMenuObj && !isbuilding)
+        if (Input.GetButtonDown("Fire1") && !choosingMenuObj)
         {
             BuildObj();
             //reset placement height of build for new 

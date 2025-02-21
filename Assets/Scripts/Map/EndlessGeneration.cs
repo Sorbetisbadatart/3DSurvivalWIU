@@ -39,10 +39,11 @@ public class EndlessGeneration: MonoBehaviour {
 
 	void Update() {
 		viewerPosition = new Vector2 (viewer.position.x, viewer.position.z) / scale;
-
+		
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate) {
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks ();
+
 		}
 	}
 		
@@ -184,6 +185,7 @@ public class EndlessGeneration: MonoBehaviour {
 
 				
 			}
+			DailyReset();
 		}
 
 		public void SetVisible(bool visible) {
@@ -199,6 +201,14 @@ public class EndlessGeneration: MonoBehaviour {
 		private void ReplaceTerrain(){
 			TerrainGenPrefab.Clear();
 			TerrainGenPrefab.Generate();
+		}
+
+		private void DailyReset()
+		{
+			if (TimeController.Timeinstance.TimePassedThisTime(2))
+			{
+				ReplaceTerrain();
+			}
 		}
 	}
 	class LODMesh {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlacementGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject preFab;
+    [SerializeField] List<GameObject> preFab;
 
     [Header("Raycast Settings")]
     [SerializeField] int density;
@@ -27,7 +27,7 @@ public class PlacementGenerator : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("gay");
+        //Debug.Log("gay");
         Generate();
     }
     private void Update()
@@ -36,13 +36,16 @@ public class PlacementGenerator : MonoBehaviour
             Clear();
         if (Input.GetKeyDown(KeyCode.Alpha2))
             Generate();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SetVisibility(true);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            SetVisibility(false);
     }
     public void Generate()
     {
-        //Clear();
+        int selectedObject;
         xRange += new Vector2(transform.position.x,transform.position.z);
         zRange += new Vector2(transform.position.x, transform.position.z);
-
         for (int i =0;i<density; i++)
         {
             float sampleX = Random.Range(xRange.x,xRange.y);
@@ -55,7 +58,9 @@ public class PlacementGenerator : MonoBehaviour
             if (hit.point.y < minHeight)
                 continue;
 
-            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.preFab, transform);
+            selectedObject = Random.Range(0, preFab.Count);
+
+            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.preFab[selectedObject], transform);
             instantiatedPrefab.transform.position = hit.point;
             instantiatedPrefab.transform.Rotate(Vector3.up, Random.Range(rotationRange.x, rotationRange.y), Space.Self);
             instantiatedPrefab.transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.FromToRotation(instantiatedPrefab.transform.up, hit.normal), rotateTowardsNormal);
@@ -65,7 +70,6 @@ public class PlacementGenerator : MonoBehaviour
                 Random.Range(minScale.z, maxScale.z)
                 );
         }
-
     }
 
     public void Clear()
@@ -77,6 +81,8 @@ public class PlacementGenerator : MonoBehaviour
     }
 
     public void SetVisibility(bool visibility){
-        gameObject.SetActive(visibility);
+        foreach(Transform child in this.transform){
+            child.gameObject.SetActive(visibility);
+        }
     }
 }

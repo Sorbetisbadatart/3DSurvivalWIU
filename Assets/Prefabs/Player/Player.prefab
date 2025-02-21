@@ -342,11 +342,16 @@ MonoBehaviour:
   _FirstPersonCamera: {fileID: 2918570266520163193}
   _ThirdPersonCamera: {fileID: 9186979681676996221, guid: d8da407a66f280e4fa6c244b88e254bc,
     type: 3}
+  _FreeLookCamera: {fileID: 4557849376267396127, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
+    type: 3}
   _animator: {fileID: 8797523831564999526}
   _characterController: {fileID: 1183764354363545948}
   _playerInput: {fileID: 2164975770738596664}
   mouseSensitivity: 5
   Gravity: -9.81
+  footstepsSfx: {fileID: 0}
+  sprintSfx: {fileID: 0}
+  _isGrounded: 0
 --- !u!143 &1183764354363545948
 CharacterController:
   m_ObjectHideFlags: 0

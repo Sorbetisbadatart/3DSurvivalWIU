@@ -30,7 +30,7 @@ public class Build : MonoBehaviour
     public float yOffset = 0.1f;
     public float gridSize = 1f;
 
-    public Vector3 extraY = new Vector3(0,0,0);
+    public Vector3 extraY = new Vector3(0, 0, 0);
 
     public bool isbuilding = false;
     public GameObject buildingMenuObj;
@@ -48,14 +48,6 @@ public class Build : MonoBehaviour
 
     void Update()
     {
-        if (isbuilding && !choosingMenuObj)
-            StartPreview();
-
-        if (Input.GetButtonDown("Fire1") && !choosingMenuObj)
-        {
-            BuildObj();
-             extraY = new Vector3(0, 0, 0);
-}
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -68,11 +60,26 @@ public class Build : MonoBehaviour
             }
         }
 
+        if (!isbuilding)
+        {
+            return;
+        }
+
+        if (!choosingMenuObj)
+            StartPreview();
+
+        if (Input.GetButtonDown("Fire1") && !choosingMenuObj && !isbuilding)
+        {
+            BuildObj();
+            //reset placement height of build for new 
+            extraY = new Vector3(0, 0, 0);
+        }
+
+
+
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (isbuilding)
-                CancelBuild();
-
+            CancelBuild();
         }
 
 
@@ -129,7 +136,7 @@ public class Build : MonoBehaviour
 
     public void StartPreview()
     {
-      
+
 
         if (Physics.Raycast(cam.position, cam.forward, out hit, 10, layer))
         {
@@ -141,7 +148,7 @@ public class Build : MonoBehaviour
     public void ShowPreview(RaycastHit hit)
     {
 
-     
+
 
         if (direction == MCFace.Up || direction == MCFace.Down)
         {
@@ -171,7 +178,7 @@ public class Build : MonoBehaviour
         currentpos = new Vector3(Mathf.Round(currentpos.x * 2) / 2, Mathf.Round(currentpos.y * 2) / 2, Mathf.Round(currentpos.z * 2) / 2);
         currentpos /= gridSize;
         currentpos += Vector3.one * offset;
-        
+
 
         direction = GetHitFace(hit);
 

@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Falling");
 
             _animator.SetBool("IsFalling", true);
-            move = transform.right * input.x + transform.forward * input.y;
+            move = transform.forward * input.x + transform.forward * input.y;
         }
         else
         {

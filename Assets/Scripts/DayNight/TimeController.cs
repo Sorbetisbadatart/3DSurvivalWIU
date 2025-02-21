@@ -89,24 +89,16 @@ public class TimeController : MonoBehaviour
     {
         return currentTime.Second;
     }
-
+    
     public bool TimePassedThisTime(int TimeToPassinHours)
     {
-
-        
-
+        //dont put 0 (maybe 1)
         if (GetCurrentTimeinHours() >= TimeToPassinHours && !calledonce)
-        {
-            Debug.Log("beans");
-           
+        {          
             calledonce = true;
-            return true;
-
-         
+            return true;      
         }
-
         //Debug.Log("passedaway");
-
         return false;
     }
 
@@ -131,10 +123,8 @@ public class TimeController : MonoBehaviour
     }
 
     private void SummonRooster()
-    {
-      
-            AudioManager.Instance.PlaySFX("Rooster");
-        
+    {     
+            AudioManager.Instance.PlaySFX("Rooster");      
     }
 
     private void RotateSun()

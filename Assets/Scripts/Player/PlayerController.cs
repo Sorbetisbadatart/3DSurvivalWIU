@@ -46,14 +46,6 @@ public class PlayerController : MonoBehaviour
     public AudioSource footstepsSfx, sprintSfx;
 
     public bool _isGrounded;
-    
-
-
-
-
-
-
-
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -62,8 +54,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _inputActions = _playerInput.actions;
@@ -75,7 +65,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //CheckGrounded();
+        Debug.Log(_isGrounded);
+        CheckGrounded();
         Fall();
         Jump();
         Vector2 input =
@@ -83,21 +74,30 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
 
 
-        if (moveDirection.magnitude > 0 && _isGrounded)
+        if (moveDirection.magnitude > 0)
         {
             //AudioManager.Instance.PlaySFX("Walk");
-            _animator.SetBool("IsWalking", true);
             footstepsSfx.enabled = true;
-            move = transform.right * input.x + transform.forward * input.y;
+            moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
+            // Rotate the character facing towards the move direction
+            Quaternion targetRotation =
+            Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation =
+            Quaternion.RotateTowards(transform.rotation, targetRotation,
+            Time.deltaTime * 1000f);
 
+        }
 
-            // Modify move direction to where camera is facing
+        if (_inputActions["Move"].IsPressed())
+        {
+            _animator.SetBool("IsWalking", true);
         }
         else
         {
             footstepsSfx.enabled = false;
             _animator.SetBool("IsWalking", false);
         }
+
 
 
         // Run
@@ -120,23 +120,25 @@ public class PlayerController : MonoBehaviour
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsJump", true);
-        
+
         }
         else
-            { 
-            _animator.SetBool("IsJump", false);  
+        {
+            _animator.SetBool("IsJump", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded) {
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        {
             AudioManager.Instance.PlaySFX("Jump");
         }
 
         // Fall
         if (!_isGrounded)
         {
+            Debug.Log("Falling");
+
             _animator.SetBool("IsFalling", true);
             move = transform.right * input.x + transform.forward * input.y;
-
         }
         else
         {
@@ -146,7 +148,6 @@ public class PlayerController : MonoBehaviour
 
         // Land
         if (_isGrounded)
-            
             _animator.SetBool("HasLanded", true);
         else
             _animator.SetBool("HasLanded", false);
@@ -154,14 +155,12 @@ public class PlayerController : MonoBehaviour
 
         _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
 
-      if (Input.GetKeyDown(KeyCode.E))
-      {    
+        if (Input.GetKeyDown(KeyCode.E))
+        {
             Interact();
-      }
+        }
 
     }
-
-
 
     private void Interact()
     {
@@ -181,29 +180,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawSphere(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), GetComponent<CapsuleCollider>().bounds.size.x / 2);
+        Gizmos.DrawSphere(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), GetComponent<CapsuleCollider>().bounds.size.x / 2);
     }
-    //private void CheckGrounded()
-    //{
+    private void CheckGrounded()
+    {
 
-    //    //Boxcast to detect whether player touching ground
-    //    Physics.SphereCast(
-    //        origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f , this.transform.position.z),
-    //        radius: GetComponent<CapsuleCollider>().bounds.size.x / 2,
-    //        direction: Vector2.down,
-    //        hitInfo: out RaycastHit hitResult,
-    //        maxDistance: 1.0f
-            
-    //        ) ;
-
-        
-
-
-
-    //    _isGrounded = hitResult.collider != null;
-      
-
-    //}
+        //Boxcast to detect whether player touching ground
+        Physics.SphereCast(
+            origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z),
+            radius: GetComponent<CapsuleCollider>().bounds.size.x / 2,
+            direction: Vector2.down,
+            hitInfo: out RaycastHit hitResult,
+            maxDistance: 1.0f
+            );
+        _isGrounded = hitResult.collider != null;
+    }
 
     private void LateUpdate()
     {

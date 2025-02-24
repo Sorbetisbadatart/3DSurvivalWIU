@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
             float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
             cameraPitch -= mouseY;
             cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90);
-            _FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
+            //_FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
         }
     }
     public void Look()

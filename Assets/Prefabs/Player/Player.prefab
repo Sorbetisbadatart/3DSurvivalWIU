@@ -168,10 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86734097c16609140b0f515f02f3e060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _FirstPersonCamera: {fileID: 0}
+  _FirstPersonCamera: {fileID: 3541084849230751459, guid: 9c3965d50ce3f0d4886d66742d83a6fb,
+    type: 3}
   _ThirdPersonCamera: {fileID: 9186979681676996221, guid: d8da407a66f280e4fa6c244b88e254bc,
     type: 3}
-  _FreeLookCamera: {fileID: 4557849376267396127, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
+  _FreeLookCamera: {fileID: 5305047873794220829, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
     type: 3}
   _animator: {fileID: 8797523831564999526}
   _characterController: {fileID: 1183764354363545948}

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 using System;
 using System.Threading;
 using System.Collections.Generic;
 
+
 public class MapGenerator : MonoBehaviour {
 
+	
 	public enum DrawMode {NoiseMap, ColourMap, Mesh, FalloffMap};
 	public DrawMode drawMode;
 

@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource footstepsSfx, sprintSfx;
 
     public bool _isGrounded;
+
+    [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -201,6 +203,7 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 20;
                 _FreeLookCamera.Priority = 10;
+                AddSkin();
             }
             else if (_currentCam == 1)
             {
@@ -209,6 +212,7 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 10;
                 _FreeLookCamera.Priority = 20;
+               
             }
             else
             {
@@ -217,6 +221,7 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 20;
                 _ThirdPersonCamera.Priority = 10;
                 _FreeLookCamera.Priority = 10;
+                Invoke(nameof(RemoveSkin), 1);
             }
         }
     }
@@ -263,6 +268,16 @@ public class PlayerController : MonoBehaviour
         {
             JumpVelocity.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
         }
+    }
+
+    private void RemoveSkin()
+    {
+        skinmesh.enabled = false;
+    }
+
+    private void AddSkin()
+    {
+        skinmesh.enabled = true;
     }
 }
 

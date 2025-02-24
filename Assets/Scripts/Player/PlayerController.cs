@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource footstepsSfx, sprintSfx;
 
     public bool _isGrounded;
+
+    [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -76,16 +78,10 @@ public class PlayerController : MonoBehaviour
 
         if (moveDirection.magnitude > 0)
         {
-        
-           
             moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
             // Rotate the character facing towards the move direction
-            Quaternion targetRotation =
-            Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation =
-            Quaternion.RotateTowards(transform.rotation, targetRotation,
-            Time.deltaTime * 1000f);
-
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 1000f);
         }
 
         if (_inputActions["Move"].IsPressed() && _isGrounded)
@@ -98,9 +94,6 @@ public class PlayerController : MonoBehaviour
             footstepsSfx.enabled = false;
             _animator.SetBool("IsWalking", false);
         }
-
-
-
         // Run
         if (_inputActions["Run"].IsPressed() && _isGrounded)
         {
@@ -121,7 +114,7 @@ public class PlayerController : MonoBehaviour
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsJump", true);
-
+            _characterController.Move(moveDirection * Speed * Time.deltaTime);
         }
         else
         {
@@ -139,7 +132,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Falling");
 
             _animator.SetBool("IsFalling", true);
-            move = transform.forward * input.x + transform.forward * input.y;
+            //move = transform.right * input.x + transform.forward * input.y;
+            _characterController.Move(moveDirection *Speed *Time.deltaTime);
         }
         else
         {
@@ -165,7 +159,6 @@ public class PlayerController : MonoBehaviour
 
     private void Interact()
     {
-       
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out RaycastHit hitInfo, InteractRange, 8))
         {
@@ -185,7 +178,6 @@ public class PlayerController : MonoBehaviour
     }
     private void CheckGrounded()
     {
-
         //Boxcast to detect whether player touching ground
         Physics.SphereCast(
             origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z),
@@ -199,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        HandleCameraPitch();
+        //HandleCameraPitch();
         Look();
         // Switch Camera
         if (_inputActions["SwitchCamera"].WasPressedThisFrame())
@@ -211,6 +203,7 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 20;
                 _FreeLookCamera.Priority = 10;
+                AddSkin();
             }
             else if (_currentCam == 1)
             {
@@ -219,6 +212,7 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 10;
                 _ThirdPersonCamera.Priority = 10;
                 _FreeLookCamera.Priority = 20;
+               
             }
             else
             {
@@ -227,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 20;
                 _ThirdPersonCamera.Priority = 10;
                 _FreeLookCamera.Priority = 10;
-
+                Invoke(nameof(RemoveSkin), 1);
             }
         }
     }
@@ -246,7 +240,7 @@ public class PlayerController : MonoBehaviour
             float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
             cameraPitch -= mouseY;
             cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90);
-            _FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
+            //_FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
         }
     }
     public void Look()
@@ -274,6 +268,16 @@ public class PlayerController : MonoBehaviour
         {
             JumpVelocity.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
         }
+    }
+
+    private void RemoveSkin()
+    {
+        skinmesh.enabled = false;
+    }
+
+    private void AddSkin()
+    {
+        skinmesh.enabled = true;
     }
 }
 

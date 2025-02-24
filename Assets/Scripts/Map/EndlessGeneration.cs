@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using Unity.AI.Navigation;
+using UnityEngine.AI;
 
 public class EndlessGeneration: MonoBehaviour {
 
@@ -13,7 +15,9 @@ public class EndlessGeneration: MonoBehaviour {
 	public LODInfo[] detailLevels;
 	public static float maxViewDst;
 
-	public Transform viewer;
+
+
+    public Transform viewer;
 	public Material mapMaterial;
 
 	public static Vector2 viewerPosition;
@@ -35,7 +39,8 @@ public class EndlessGeneration: MonoBehaviour {
 		chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
 		UpdateVisibleChunks ();
-	}
+      
+    }
 
 	void Update() {
 		viewerPosition = new Vector2 (viewer.position.x, viewer.position.z) / scale;
@@ -65,7 +70,8 @@ public class EndlessGeneration: MonoBehaviour {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
 					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, GenTerrain));
-				}
+					
+                }
 
 			}
 		}
@@ -81,6 +87,9 @@ public class EndlessGeneration: MonoBehaviour {
 		MeshRenderer meshRenderer;
 		MeshFilter meshFilter;
 		MeshCollider meshCollider;
+		NavMeshSurface navmeshSurface;
+
+
 
 		LODInfo[] detailLevels;
 		LODMesh[] lodMeshes;
@@ -100,6 +109,7 @@ public class EndlessGeneration: MonoBehaviour {
 			meshRenderer = meshObject.AddComponent<MeshRenderer>();
 			meshFilter = meshObject.AddComponent<MeshFilter>();
 			meshCollider = meshObject.AddComponent<MeshCollider>();
+			navmeshSurface = meshObject.AddComponent<NavMeshSurface>();
 			meshRenderer.material = material;
 
 			meshObject.transform.position = positionV3 * scale;
@@ -131,7 +141,10 @@ public class EndlessGeneration: MonoBehaviour {
 			}
 
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
-		}
+            
+
+
+        }
 
 		void OnMapDataReceived(MapData mapData) {
 			this.mapData = mapData;
@@ -179,11 +192,14 @@ public class EndlessGeneration: MonoBehaviour {
 					}
 
 					terrainChunksVisibleLastUpdate.Add (this);
-				}
+                    NavMesh.RemoveAllNavMeshData();
+                    navmeshSurface.BuildNavMesh();
+                }
+			
 
 				SetVisible (visible);
 				waterPrefab.SetActive(visible);
-
+				
 				
 			}
 			

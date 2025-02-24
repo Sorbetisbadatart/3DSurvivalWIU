@@ -76,16 +76,16 @@ public class PlayerController : MonoBehaviour
 
         if (moveDirection.magnitude > 0)
         {
-        
-           
             moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
-            // Rotate the character facing towards the move direction
-            Quaternion targetRotation =
-            Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation =
-            Quaternion.RotateTowards(transform.rotation, targetRotation,
-            Time.deltaTime * 1000f);
-
+            if (_currentCam != 0)
+            {
+                // Rotate the character facing towards the move direction
+                Quaternion targetRotation =
+                Quaternion.LookRotation(moveDirection, Vector3.up);
+                transform.rotation =
+                Quaternion.RotateTowards(transform.rotation, targetRotation,
+                Time.deltaTime * 1000f);
+            }
         }
 
         if (_inputActions["Move"].IsPressed() && _isGrounded)
@@ -98,9 +98,6 @@ public class PlayerController : MonoBehaviour
             footstepsSfx.enabled = false;
             _animator.SetBool("IsWalking", false);
         }
-
-
-
         // Run
         if (_inputActions["Run"].IsPressed() && _isGrounded)
         {
@@ -139,7 +136,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Falling");
 
             _animator.SetBool("IsFalling", true);
-            move = transform.forward * input.x + transform.forward * input.y;
+            move = transform.right * input.x + transform.forward * input.y;
         }
         else
         {

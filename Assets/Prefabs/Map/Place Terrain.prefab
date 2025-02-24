@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preFab:
-  - {fileID: 1143407625890625631, guid: 25cbce84dfa18304b9906db670017c6b, type: 3}
+  - {fileID: 458035890698504780, guid: f85fc0498a5646446a3e4390a01fec04, type: 3}
   - {fileID: 5292983051101853952, guid: 09ba6c8ad770a904da045b0eecd69696, type: 3}
   - {fileID: 5359015817009345122, guid: 1cf9f0468cd0ddc4a8ee065b42f114bd, type: 3}
   density: 1000

@@ -39,10 +39,11 @@ public class EndlessGeneration: MonoBehaviour {
 
 	void Update() {
 		viewerPosition = new Vector2 (viewer.position.x, viewer.position.z) / scale;
-
+		
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate) {
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks ();
+
 		}
 	}
 		
@@ -143,7 +144,8 @@ public class EndlessGeneration: MonoBehaviour {
 		}
 
 		public void UpdateTerrainChunk() {
-			if (mapDataReceived) {
+           
+            if (mapDataReceived) {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
 
@@ -181,21 +183,36 @@ public class EndlessGeneration: MonoBehaviour {
 
 				SetVisible (visible);
 				waterPrefab.SetActive(visible);
+
+				
 			}
+			
 		}
 
 		public void SetVisible(bool visible) {
 			meshObject.SetActive (visible);
 			waterPrefab.SetActive (visible);
-			TerrainGenPrefab.SetVisibility (visible);
+			TerrainGenPrefab.SetVisibility (!visible);
 		}
 
 		public bool IsVisible() {
 			return meshObject.activeSelf;
 		}
 
-	}
+		private void ReplaceTerrain(){
+			TerrainGenPrefab.Clear();
+			TerrainGenPrefab.Generate();
+		}
 
+		private void DailyReset()
+		{
+			if (TimeController.Timeinstance.TimePassedThisTime(2))
+			{
+				ReplaceTerrain();
+				Debug.Log("reste");
+			}
+		}
+	}
 	class LODMesh {
 
 		public Mesh mesh;

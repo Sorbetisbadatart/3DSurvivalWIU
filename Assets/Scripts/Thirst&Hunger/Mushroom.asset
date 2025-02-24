@@ -17,7 +17,6 @@ MonoBehaviour:
   itemCount: 1
   maxStack: 1
   itemStatus: 1
-  description: The Shroom of destiny, by consuming this you become the Destined King
-    of Shroomy Empireo.
+  description: The Shroom of destiny
   hungerRestore: 50
   thirstRestore: 50

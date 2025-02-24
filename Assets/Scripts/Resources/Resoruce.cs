@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ public class Resoruce : MonoBehaviour
     public ItemData drop;
 
     [SerializeField] private int dropAmt = 1;
+
+    [SerializeField] private float timeToObtain = 0f;
+
+    private float timer;
 
     // Start is called before the first frame update
     void Start()

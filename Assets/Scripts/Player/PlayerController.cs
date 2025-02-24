@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("HasLanded", false);
 
 
-        _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
+        _characterController.Move((JumpVelocity + moveDirection * Speed) * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.E))
         {

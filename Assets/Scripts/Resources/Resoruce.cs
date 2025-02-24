@@ -28,11 +28,46 @@ public class Resoruce : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //return if has time to collect
+        if (timeToObtain > 0f) return;
+
         if(collision.gameObject.tag == "Player")
         {
             ItemInstance newDrop = new ItemInstance(drop);
             collision.gameObject.GetComponent<Inventory>().AddItem(newDrop, dropAmt);
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //return if time to collect is 0 or less
+        if (timeToObtain <= 0f) return;
+
+        if(other.gameObject.tag == "Player")
+        {
+            Inventory playerInv = other.gameObject.GetComponent<Inventory>();
+
+            //pick up after certain amount of time
+            if(timer >= timeToObtain)
+            {
+                playerInv.manager.HandPercentage(0, false);
+                ItemInstance newDrop = new ItemInstance(drop);
+                playerInv.AddItem(newDrop, dropAmt);
+                Destroy(gameObject);
+            }
+            else
+            {
+                timer += Time.deltaTime;
+
+                playerInv.manager.HandPercentage((timer / timeToObtain), true);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        timer = 0;
+        other.gameObject.GetComponent<Inventory>().manager.HandPercentage(0, false);
     }
 }

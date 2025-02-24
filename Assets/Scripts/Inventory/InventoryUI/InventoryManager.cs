@@ -21,6 +21,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Sprite normalTex;
     [SerializeField] private Sprite highlightedTex;
 
+    [SerializeField] private Image pickupImage;
+
     private void Awake()
     {
         inventorySlots = new GameObject[inventory.maxItems];
@@ -182,5 +184,12 @@ public class InventoryManager : MonoBehaviour
                 inventorySlots[i].GetComponent<Image>().sprite = normalTex;
             }
         }
+    }
+
+    public void HandPercentage(float fill, bool visible)
+    {
+        pickupImage.gameObject.SetActive(visible);
+
+        pickupImage.fillAmount = fill;
     }
 }

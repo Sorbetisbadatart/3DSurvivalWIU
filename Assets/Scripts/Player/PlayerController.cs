@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation =
             Quaternion.RotateTowards(transform.rotation, targetRotation,
-            Time.deltaTime * 1000f);
+            Time.deltaTime * 100f);
 
         }
 

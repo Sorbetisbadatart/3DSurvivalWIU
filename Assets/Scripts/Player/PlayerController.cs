@@ -77,15 +77,9 @@ public class PlayerController : MonoBehaviour
         if (moveDirection.magnitude > 0)
         {
             moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
-            if (_currentCam != 0)
-            {
                 // Rotate the character facing towards the move direction
-                Quaternion targetRotation =
-                Quaternion.LookRotation(moveDirection, Vector3.up);
-                transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, targetRotation,
-                Time.deltaTime * 1000f);
-            }
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 1000f);
         }
 
         if (_inputActions["Move"].IsPressed() && _isGrounded)
@@ -118,7 +112,7 @@ public class PlayerController : MonoBehaviour
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsJump", true);
-
+            _characterController.Move(moveDirection * Speed * Time.deltaTime);
         }
         else
         {
@@ -136,7 +130,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Falling");
 
             _animator.SetBool("IsFalling", true);
-            move = transform.right * input.x + transform.forward * input.y;
+            //move = transform.right * input.x + transform.forward * input.y;
+            _characterController.Move(moveDirection *Speed *Time.deltaTime);
         }
         else
         {
@@ -162,7 +157,6 @@ public class PlayerController : MonoBehaviour
 
     private void Interact()
     {
-       
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out RaycastHit hitInfo, InteractRange, 8))
         {
@@ -182,7 +176,6 @@ public class PlayerController : MonoBehaviour
     }
     private void CheckGrounded()
     {
-
         //Boxcast to detect whether player touching ground
         Physics.SphereCast(
             origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z),
@@ -224,7 +217,6 @@ public class PlayerController : MonoBehaviour
                 _FirstPersonCamera.Priority = 20;
                 _ThirdPersonCamera.Priority = 10;
                 _FreeLookCamera.Priority = 10;
-
             }
         }
     }

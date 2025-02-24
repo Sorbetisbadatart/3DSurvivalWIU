@@ -76,15 +76,12 @@ public class PlayerController : MonoBehaviour
 
         if (moveDirection.magnitude > 0)
         {
-        
-           
+                 
             moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
             // Rotate the character facing towards the move direction
             Quaternion targetRotation =
             Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation =
-            Quaternion.RotateTowards(transform.rotation, targetRotation,
-            Time.deltaTime * 100f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 100f);
 
         }
 

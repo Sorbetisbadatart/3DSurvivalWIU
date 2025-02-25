@@ -135,7 +135,6 @@ public class EndlessGeneration: MonoBehaviour {
 				}
 			}
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
-            navmeshSurface.BuildNavMesh();
         }
 
         void OnMapDataReceived(MapData mapData) {
@@ -185,9 +184,8 @@ public class EndlessGeneration: MonoBehaviour {
 
 					terrainChunksVisibleLastUpdate.Add (this);
 					//NavMesh.RemoveAllNavMeshData();
-					//navmeshSurface.BuildNavMesh();
+					navmeshSurface.BuildNavMesh();
 				}
-				else{ NavMesh.RemoveAllNavMeshData();navmeshSurface.BuildNavMesh();}
                 SetVisible (visible);
 			}
 		}

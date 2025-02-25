@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 5359015817009345122, guid: 1cf9f0468cd0ddc4a8ee065b42f114bd, type: 3}
   density: 1000
   minHeight: 0
-  maxHeight: 10
+  maxHeight: 5
   xRange: {x: -120, y: 120}
   zRange: {x: 120, y: 120}
   rotateTowardsNormal: 0.1

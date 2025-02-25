@@ -123,6 +123,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
+           
+            TextManager.TextInstance.CreateText(new Vector3(100, 100, 1), "gae", Color.white);
+
             AudioManager.Instance.PlaySFX("Jump");
         }
 
@@ -148,7 +151,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("HasLanded", false);
 
 
-        _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
+        _characterController.Move((JumpVelocity + moveDirection * Speed) * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.E))
         {

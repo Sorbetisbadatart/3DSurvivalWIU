@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PatrolState : EnemyState
 {
@@ -10,7 +9,7 @@ public class PatrolState : EnemyState
     private EnemyController _enemyController;
 
     private int _currentWaypointIndex = 0;
-    private float _waypointThreshold = 0.5f;
+    //private float _waypointThreshold = 0.5f;
 
     public PatrolState(EnemyController enemy)
     {

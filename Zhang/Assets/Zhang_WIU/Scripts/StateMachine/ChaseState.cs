@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ChaseState : EnemyState
 {
@@ -18,7 +17,8 @@ public class ChaseState : EnemyState
     {
         Debug.Log("ENTER STATE CHASE");
 
-        _enemyController._animator.CrossFadeInFixedTime("Enemy1_Walk", 0.5f);
+        //_enemyController._animator.CrossFadeInFixedTime("Enemy1_Walk", 0.5f);
+        _enemyController._animator.CrossFadeInFixedTime("Enemy1_Run", 0.5f);
 
         _enemyController._agent.speed = _enemyController.patrolSpeed;
         _enemyController._agent.isStopped = false;

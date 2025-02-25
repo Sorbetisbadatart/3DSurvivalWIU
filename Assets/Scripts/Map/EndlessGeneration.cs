@@ -15,8 +15,6 @@ public class EndlessGeneration: MonoBehaviour {
 	public LODInfo[] detailLevels;
 	public static float maxViewDst;
 
-
-
     public Transform viewer;
 	public Material mapMaterial;
 
@@ -40,7 +38,6 @@ public class EndlessGeneration: MonoBehaviour {
 		chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
 		UpdateVisibleChunks ();
-      
     }
 
 	void Update() {
@@ -49,7 +46,6 @@ public class EndlessGeneration: MonoBehaviour {
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate) {
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks ();
-
 		}
 	}
 		
@@ -70,10 +66,8 @@ public class EndlessGeneration: MonoBehaviour {
 				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));
-					
+					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));	
                 }
-
 			}
 		}
 	}
@@ -90,8 +84,6 @@ public class EndlessGeneration: MonoBehaviour {
 		MeshFilter meshFilter;
 		MeshCollider meshCollider;
 		NavMeshSurface navmeshSurface;
-
-
 
 		LODInfo[] detailLevels;
 		LODMesh[] lodMeshes;
@@ -145,11 +137,7 @@ public class EndlessGeneration: MonoBehaviour {
 					collisionLODMesh = lodMeshes[i];
 				}
 			}
-
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
-            
-
-
         }
 
 		void OnMapDataReceived(MapData mapData) {
@@ -201,12 +189,8 @@ public class EndlessGeneration: MonoBehaviour {
 					NavMesh.RemoveAllNavMeshData();
 					navmeshSurface.BuildNavMesh();
 				}
-
-
 				SetVisible (visible);
 				waterPrefab.SetActive(visible);
-				
-				
 			}
 			
 		}
@@ -237,7 +221,6 @@ public class EndlessGeneration: MonoBehaviour {
 		}
 	}
 	class LODMesh {
-
 		public Mesh mesh;
 		public bool hasRequestedMesh;
 		public bool hasMesh;
@@ -260,7 +243,6 @@ public class EndlessGeneration: MonoBehaviour {
 			hasRequestedMesh = true;
 			mapGenerator.RequestMeshData (mapData, lod, OnMeshDataReceived);
 		}
-
 	}
 
 	[System.Serializable]

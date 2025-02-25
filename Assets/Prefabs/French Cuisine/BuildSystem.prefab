@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2612298649484000418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3236829104933119074}
+  - component: {fileID: 7755258161844118175}
+  m_Layer: 0
+  m_Name: BuildSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3236829104933119074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612298649484000418}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.0371706, y: -0.55762506, z: 0.7331813}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7755258161844118175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612298649484000418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10855f58cef69545b9ff427014fcf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - name: Foundation
+    preview: {fileID: 1050139230771787735, guid: f4bd5c3eda8f7e04fa755d1ece8b153c,
+      type: 3}
+    WoodCost: 1
+    StoneCost: 1
+    buildingID: 1
+    buildingPrefab: {fileID: 8352972531383986294, guid: 12770ea2ae1ba3c4b88c11138cdad59e,
+      type: 3}
+  - name: Stairs
+    preview: {fileID: 5790779644391806944, guid: 04dc09c6ea2f772428cc171aa299b471,
+      type: 3}
+    WoodCost: 1
+    StoneCost: 1
+    buildingID: 0
+    buildingPrefab: {fileID: 5790779644391806944, guid: 534e979b9a6ebc74797eec36869fd815,
+      type: 3}
+  - name: Floor
+    preview: {fileID: 1050139230771787735, guid: 0035d0d3472b3644e8a44a8258d5ea3a,
+      type: 3}
+    WoodCost: 1
+    StoneCost: 1
+    buildingID: 2
+    buildingPrefab: {fileID: 8352972531383986294, guid: d1088211c394f2646ba1987aa1cf3f07,
+      type: 3}
+  - name: Wall
+    preview: {fileID: 1050139230771787735, guid: c83e328db4ddffb45a55de0646c07a54,
+      type: 3}
+    WoodCost: 1
+    StoneCost: 1
+    buildingID: 3
+    buildingPrefab: {fileID: 6504849050923447160, guid: 74d11198d9ae10041990fc6d1b7ca9de,
+      type: 3}
+  - name: Wall+Door
+    preview: {fileID: 1050139230771787735, guid: 5b5b058c750cf754680894d2bc4304af,
+      type: 3}
+    WoodCost: 1
+    StoneCost: 1
+    buildingID: 3
+    buildingPrefab: {fileID: 6504849050923447160, guid: 6b02bacee9480934792800195eaf4f5a,
+      type: 3}
+  currentobject:
+    name: 
+    preview: {fileID: 0}
+    WoodCost: 0
+    StoneCost: 0
+    buildingID: 0
+    buildingPrefab: {fileID: 0}
+  currentpreview: {fileID: 2569482066577255403, guid: c57e9cd16e8cf2f45a90782505811b69,
+    type: 3}
+  cam: {fileID: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 63
+  playerInventory: {fileID: 0}
+  woodData: {fileID: 0}
+  rockData: {fileID: 0}
+  direction: 0
+  offset: 1
+  yOffset: 0.1
+  gridSize: 1
+  extraY: {x: 0, y: 0, z: 0}
+  isbuilding: 1
+  buildingMenuObj: {fileID: 0}
+  choosingMenuObj: 0

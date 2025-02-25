@@ -53,7 +53,6 @@ MonoBehaviour:
   octaves: 8
   persistance: 0.5
   lacunarity: 2
-  seed: 146
   offset: {x: 27.86, y: 15.27}
   useFalloff: 0
   meshHeightMultiplier: 31.1
@@ -106,22 +105,22 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.82753843
-      value: 0.56445694
-      inSlope: 3.1456046
-      outSlope: 3.1456046
+      time: 0.8410577
+      value: 0.39154434
+      inSlope: 0.83147377
+      outSlope: 0.83147377
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.37763917
     - serializedVersion: 3
-      time: 1.1120291
-      value: 1.1415408
-      inSlope: 0.3251441
-      outSlope: 0.3251441
+      time: 1.103301
+      value: 0.50670266
+      inSlope: 1.849072
+      outSlope: 1.849072
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.27329147
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -193,3 +192,6 @@ MonoBehaviour:
   mapMaterial: {fileID: 2100000, guid: 9f010c4ba8cfe034c9eff85b665989c1, type: 2}
   waterPrefab: {fileID: 4835033269100359555, guid: 97b5b74fed6a12444a3c1d005bd84f8d,
     type: 3}
+  cloudPrefab: {fileID: 7080408299542209388, guid: 0108208e3096e7845a2de6892e600104,
+    type: 3}
+  GenTerrain: {fileID: 0}

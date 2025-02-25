@@ -110,7 +110,6 @@ public class EndlessGeneration: MonoBehaviour {
 			meshObject.transform.parent = parent;
 			meshObject.transform.localScale = Vector3.one * scale;
 
-
 			waterPrefab = Instantiate(waterPrefab);
             waterPrefab.transform.position = new Vector3(positionV3.x * scale,-0.6f,positionV3.z*scale);
             waterPrefab.transform.parent = parent;
@@ -126,9 +125,7 @@ public class EndlessGeneration: MonoBehaviour {
             TerrainGen.transform.parent = parent;
 			TerrainGenPrefab = TerrainGen; // For visibility
 
-
             SetVisible(false);
-
 
             lodMeshes = new LODMesh[detailLevels.Length];
 			for (int i = 0; i < detailLevels.Length; i++) {
@@ -138,9 +135,10 @@ public class EndlessGeneration: MonoBehaviour {
 				}
 			}
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
+            navmeshSurface.BuildNavMesh();
         }
 
-		void OnMapDataReceived(MapData mapData) {
+        void OnMapDataReceived(MapData mapData) {
 			this.mapData = mapData;
 			mapDataReceived = true;
 
@@ -186,13 +184,12 @@ public class EndlessGeneration: MonoBehaviour {
 					}
 
 					terrainChunksVisibleLastUpdate.Add (this);
-					NavMesh.RemoveAllNavMeshData();
-					navmeshSurface.BuildNavMesh();
+					//NavMesh.RemoveAllNavMeshData();
+					//navmeshSurface.BuildNavMesh();
 				}
-				SetVisible (visible);
-				waterPrefab.SetActive(visible);
+				else{ NavMesh.RemoveAllNavMeshData();navmeshSurface.BuildNavMesh();}
+                SetVisible (visible);
 			}
-			
 		}
 
 		public void SetVisible(bool visible) {

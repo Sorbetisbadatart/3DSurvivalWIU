@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -14,6 +14,8 @@ public class Inventory : MonoBehaviour
 
     private ThirstNHunger thirstNHunger;
 
+    private bool inWater;
+
     private void Awake()
     {
         items = new ItemInstance[maxItems];
@@ -24,6 +26,15 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
+            //adds to empty slot when it finds one
+            if (items[i] == null || items[i].itemType == null)
+            {
+                items[i] = newItem;
+                items[i].itemCount = amt;
+                manager.UpdateInventory();
+                return true;
+            }
+
             //check if there item is able to be stacked with another item
             if (items[i].itemType == newItem.itemType && (items[i].itemCount + amt) <= items[i].maxStack)
             {
@@ -42,17 +53,17 @@ public class Inventory : MonoBehaviour
                 manager.UpdateAllCount();
                 return true;
             }
-            else
-            {
-                //adds to empty slot when it finds one
-                if (items[i] == null || items[i].itemType == null)
-                {
-                    items[i] = newItem;
-                    items[i].itemCount = amt;
-                    manager.UpdateInventory();
-                    return true;
-                }
-            }
+            //else
+            //{
+            //    //adds to empty slot when it finds one
+            //    if (items[i] == null || items[i].itemType == null)
+            //    {
+            //        items[i] = newItem;
+            //        items[i].itemCount = amt;
+            //        manager.UpdateInventory();
+            //        return true;
+            //    }
+            //}
         }
 
         //if(items.Length < maxItems)
@@ -160,43 +171,43 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         //for use to equip item in a certain slot to use
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             equippedSlot = items[0];
             equippedSlotNum = 0;
             manager.HighlightEquippedSlot(0);
         }
-        else if(Input.GetKeyDown("2"))
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             equippedSlot = items[1];
             equippedSlotNum = 1;
             manager.HighlightEquippedSlot(1);
         }
-        else if (Input.GetKeyDown("3"))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             equippedSlot = items[2];
             equippedSlotNum = 2;
             manager.HighlightEquippedSlot(2);
         }
-        else if (Input.GetKeyDown("4"))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             equippedSlot = items[3];
             equippedSlotNum = 3;
             manager.HighlightEquippedSlot(3);
         }
-        else if (Input.GetKeyDown("5"))
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             equippedSlot = items[4];
             equippedSlotNum = 4;
             manager.HighlightEquippedSlot(4);
         }
-        else if (Input.GetKeyDown("6"))
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             equippedSlot = items[5];
             equippedSlotNum = 5;
             manager.HighlightEquippedSlot(5);
         }
-        else if (Input.GetKeyDown("7"))
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             equippedSlot = items[6];
             equippedSlotNum = 6;
@@ -206,7 +217,7 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             //use item
-            // 0 = Resoruce, 1 = Food
+            // 0 = Resoruce, 1 = Food, 2 = Tool
             if(equippedSlot.itemStatus == 1 && equippedSlot.itemCount > 0)
             {
                 thirstNHunger.GainHunger(equippedSlot.itemType.Consume());
@@ -216,6 +227,37 @@ public class Inventory : MonoBehaviour
                 equippedSlot = items[equippedSlotNum];
                 AudioManager.Instance.PlaySFX("Eating");
             }
+            else if(equippedSlot.itemStatus == 2 && equippedSlot.itemCount > 0)
+            {
+                //check if mug is the item equipped to get water
+                //check if player is in water to get a mug of water
+                if (equippedSlot.itemType.name == "Mug" && inWater)
+                {
+                    ItemInstance newItem = new ItemInstance(equippedSlot.itemType.GetFoodData());
+                    RemoveItem(equippedSlot.itemType, 1);
+                    equippedSlot = items[equippedSlotNum];
+                    AddItem(newItem, 1);
+                    equippedSlot = items[equippedSlotNum];
+
+                    manager.InvokeUpdateInventory(0.1f);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Water(Clone)")
+        {
+            inWater = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Water(Clone)")
+        {
+            inWater = false;
         }
     }
 }

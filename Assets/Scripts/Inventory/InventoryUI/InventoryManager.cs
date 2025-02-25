@@ -110,10 +110,10 @@ public class InventoryManager : MonoBehaviour
     public void UpdateInventory()
     {
         //create items if there are items in the inventory
-        for (int i = 0; i < inventory.maxItems; i++)
+        for (int i = 0; i < inventory.items.Length; i++)
         {
             //add item
-            if (i < inventory.items.Length && inventory.items[i] != null && inventory.items[i].itemType != null && inventorySlots[i].transform.childCount == 0)
+            if (inventory.items[i] != null && inventory.items[i].itemType != null && inventorySlots[i].transform.childCount == 0)
             {
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
                 temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], inventory.items[i].itemCount);
@@ -124,7 +124,6 @@ public class InventoryManager : MonoBehaviour
     //Updates ui from inventory
     public void UpdateInventoryUI()
     {
-        //create items if there are items in the inventory
         for (int i = 0; i < inventory.maxItems; i++)
         {
             if (inventorySlots[i].transform.childCount > 0)
@@ -191,5 +190,10 @@ public class InventoryManager : MonoBehaviour
         pickupImage.gameObject.SetActive(visible);
 
         pickupImage.fillAmount = fill;
+    }
+
+    public void InvokeUpdateInventory(float time)
+    {
+        Invoke("UpdateInventory", time);
     }
 }

@@ -7,15 +7,13 @@ using UnityEngine.AI;
 
 public class EndlessGeneration: MonoBehaviour {
 
-	const float scale = 0.5f;
+	const float scale = 1;
 
 	const float viewerMoveThresholdForChunkUpdate = 10f;
 	const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
 
 	public LODInfo[] detailLevels;
 	public static float maxViewDst;
-
-
 
     public Transform viewer;
 	public Material mapMaterial;
@@ -30,6 +28,7 @@ public class EndlessGeneration: MonoBehaviour {
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
 	public GameObject waterPrefab;
+	public GameObject cloudPrefab;
 	public PlacementGenerator GenTerrain;
 	void Start() {
 		mapGenerator = FindObjectOfType<MapGenerator> ();
@@ -39,7 +38,6 @@ public class EndlessGeneration: MonoBehaviour {
 		chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
 		UpdateVisibleChunks ();
-      
     }
 
 	void Update() {
@@ -48,7 +46,6 @@ public class EndlessGeneration: MonoBehaviour {
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate) {
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks ();
-
 		}
 	}
 		
@@ -69,10 +66,8 @@ public class EndlessGeneration: MonoBehaviour {
 				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, GenTerrain));
-					
+					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));	
                 }
-
 			}
 		}
 	}
@@ -80,6 +75,7 @@ public class EndlessGeneration: MonoBehaviour {
 
 		GameObject meshObject;
 		GameObject waterPrefab;
+		GameObject cloudPrefab;
 		PlacementGenerator TerrainGenPrefab;
 		Vector2 position;
 		Bounds bounds;
@@ -89,8 +85,6 @@ public class EndlessGeneration: MonoBehaviour {
 		MeshCollider meshCollider;
 		NavMeshSurface navmeshSurface;
 
-
-
 		LODInfo[] detailLevels;
 		LODMesh[] lodMeshes;
 		LODMesh collisionLODMesh;
@@ -98,7 +92,7 @@ public class EndlessGeneration: MonoBehaviour {
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
-        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, PlacementGenerator TerrainGen) {
+        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, GameObject cloudPrefab, PlacementGenerator TerrainGen) {
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -116,21 +110,22 @@ public class EndlessGeneration: MonoBehaviour {
 			meshObject.transform.parent = parent;
 			meshObject.transform.localScale = Vector3.one * scale;
 
-
 			waterPrefab = Instantiate(waterPrefab);
             waterPrefab.transform.position = new Vector3(positionV3.x * scale,-0.6f,positionV3.z*scale);
             waterPrefab.transform.parent = parent;
 			this.waterPrefab = waterPrefab; // For visibility
 
+			cloudPrefab = Instantiate(cloudPrefab);
+            cloudPrefab.transform.position = new Vector3(positionV3.x * scale,33,positionV3.z*scale);
+            cloudPrefab.transform.parent = parent;
+			this.cloudPrefab = cloudPrefab; // For visibility
 
             TerrainGen = Instantiate(TerrainGen);
             TerrainGen.transform.position = positionV3 * scale;
             TerrainGen.transform.parent = parent;
 			TerrainGenPrefab = TerrainGen; // For visibility
 
-
             SetVisible(false);
-
 
             lodMeshes = new LODMesh[detailLevels.Length];
 			for (int i = 0; i < detailLevels.Length; i++) {
@@ -139,14 +134,11 @@ public class EndlessGeneration: MonoBehaviour {
 					collisionLODMesh = lodMeshes[i];
 				}
 			}
-
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
-            
-
-
+            navmeshSurface.BuildNavMesh();
         }
 
-		void OnMapDataReceived(MapData mapData) {
+        void OnMapDataReceived(MapData mapData) {
 			this.mapData = mapData;
 			mapDataReceived = true;
 
@@ -192,22 +184,18 @@ public class EndlessGeneration: MonoBehaviour {
 					}
 
 					terrainChunksVisibleLastUpdate.Add (this);
-                    NavMesh.RemoveAllNavMeshData();
-                    navmeshSurface.BuildNavMesh();
-                }
-			
-
-				SetVisible (visible);
-				waterPrefab.SetActive(visible);
-				
-				
+					//NavMesh.RemoveAllNavMeshData();
+					//navmeshSurface.BuildNavMesh();
+				}
+				else{ NavMesh.RemoveAllNavMeshData();navmeshSurface.BuildNavMesh();}
+                SetVisible (visible);
 			}
-			
 		}
 
 		public void SetVisible(bool visible) {
 			meshObject.SetActive (visible);
 			waterPrefab.SetActive (visible);
+			cloudPrefab.SetActive (visible);
 			TerrainGenPrefab.SetVisibility (!visible);
 		}
 
@@ -230,7 +218,6 @@ public class EndlessGeneration: MonoBehaviour {
 		}
 	}
 	class LODMesh {
-
 		public Mesh mesh;
 		public bool hasRequestedMesh;
 		public bool hasMesh;
@@ -253,7 +240,6 @@ public class EndlessGeneration: MonoBehaviour {
 			hasRequestedMesh = true;
 			mapGenerator.RequestMeshData (mapData, lod, OnMeshDataReceived);
 		}
-
 	}
 
 	[System.Serializable]

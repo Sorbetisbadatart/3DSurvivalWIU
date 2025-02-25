@@ -27,11 +27,11 @@ public class PlacementGenerator : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("gay");
         Generate();
     }
     private void Update()
     {
+        // Testing purposes
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Clear();
         if (Input.GetKeyDown(KeyCode.Alpha2))

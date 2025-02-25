@@ -10,16 +10,32 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float playerSafeDistance;
     [SerializeField] private float enemySpawnDistance;
 
+    private bool canSpawn = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemy();
+        
     }
 
+    private void Update()
+    {
+        if (TimeController.Timeinstance.TimePassedThisTime(0) && canSpawn)
+        { 
+            SpawnEnemy();
+            canSpawn = false;
+        }
+
+        if (TimeController.Timeinstance.TimePassedThisTime(23) && !canSpawn)
+        {
+            SpawnEnemy();
+            canSpawn = true;
+        }
+    }
     private void SpawnEnemy()
     {
-        Instantiate(EnemyPrefab, CheckEnemyCanSpawnInRadius(enemySpawnDistance, playerSafeDistance, PlayerPrefab.transform.position,5), Quaternion.identity);
+        Instantiate(EnemyPrefab, CheckEnemyCanSpawnInRadius(enemySpawnDistance, playerSafeDistance, PlayerPrefab.transform.position, 5), Quaternion.identity);
     }
 
     private Vector3 CheckEnemyCanSpawnInRadius(float EnemySpawnRadius, float PlayerSafeDistance, Vector3 center, float height)

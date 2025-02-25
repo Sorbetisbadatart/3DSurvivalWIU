@@ -93,7 +93,7 @@ public class TimeController : MonoBehaviour
     public bool TimePassedThisTime(int TimeToPassinHours)
     {
         //dont put 0 (maybe 1)
-        if (GetCurrentTimeinHours() >= TimeToPassinHours && !calledonce)
+        if (GetCurrentTimeinHours() == TimeToPassinHours && !calledonce)
         {          
             calledonce = true;
             return true;      

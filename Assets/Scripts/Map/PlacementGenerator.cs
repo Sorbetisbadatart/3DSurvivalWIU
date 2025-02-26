@@ -46,7 +46,7 @@ public class PlacementGenerator : MonoBehaviour
         int selectedObject;
         xRange += new Vector2(transform.position.x,transform.position.z);
         zRange += new Vector2(transform.position.x, transform.position.z);
-        for (int i =0;i<density; i++)
+        for (int i =0;i < density; i++)
         {
             float sampleX = Random.Range(xRange.x,xRange.y);
             float sampleZ = Random.Range(zRange.x,zRange.y);
@@ -68,7 +68,7 @@ public class PlacementGenerator : MonoBehaviour
                 Random.Range(minScale.x, maxScale.x),
                 Random.Range(minScale.y, maxScale.y),
                 Random.Range(minScale.z, maxScale.z)
-                );
+             );
         }
     }
 

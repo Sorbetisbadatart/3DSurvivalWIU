@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour
     // Jump
     private Vector3 JumpVelocity;
     private InputAction JumpAction;
-    private readonly float JumpHeight = 3.0f;
+    private float JumpHeight = 3.0f;
 
     private Vector3 move = Vector3.zero;
-    private readonly float Speed = 3;
+    private  float Speed = 3;
 
     //interact
     private readonly int InteractRange = 5;
@@ -111,9 +111,11 @@ public class PlayerController : MonoBehaviour
             if (_currentCam == 0)
                 _FirstPersonCamera.transform.localPosition = new Vector3(-0.200000003f, 0.920000017f, 0.889999986f);
             sprintSfx.enabled = true;
+            Speed = 9;
         }
         else
         {
+            Speed = 3;
             _animator.SetBool("IsRunning", false);
             if (_currentCam == 0)
                 _FirstPersonCamera.transform.localPosition = new Vector3(0, 1.36600006f, 0.5f);
@@ -142,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
             _animator.SetBool("IsFalling", true);
             //move = transform.right * input.x + transform.forward * input.y;
-            _characterController.Move(moveDirection * Speed * Time.deltaTime);
+            _characterController.Move(Speed * Time.deltaTime * moveDirection);
         }
         else
         {

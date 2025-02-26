@@ -30,7 +30,8 @@ public class EnemySpawner : MonoBehaviour
     private void Update()
     {
         if (TimeController.Timeinstance.TimePassedThisTime(0) && canSpawn)
-        { 
+        {
+            Debug.Log("pain1");
             SpawnEnemy();
             canSpawn = false;
             TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "The beast has awoke", Color.red);
@@ -39,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (TimeController.Timeinstance.TimePassedThisTime(7))
         {
-            
+            Debug.Log("pain");
             if (_enemy = GameObject.Find("Enemy1(Clone)"))
             {
                 Destroy(_enemy);
@@ -49,6 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (TimeController.Timeinstance.TimePassedThisTime(23) && !canSpawn)
         {
+            Debug.Log("pain2");
             TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "Better hide now", Color.red);
             canSpawn = true;
         }

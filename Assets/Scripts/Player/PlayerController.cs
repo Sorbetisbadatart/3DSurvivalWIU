@@ -11,9 +11,10 @@ using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private int health = 100;
     // Camera
     [SerializeField] private CinemachineVirtualCamera _FirstPersonCamera;
-    [SerializeField] private CinemachineVirtualCamera _ThirdPersonCamera;
     [SerializeField] private CinemachineFreeLook _FreeLookCamera;
     private int _currentCam = 1;
 
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private InputAction JumpAction;
     private readonly float JumpHeight = 3.0f;
 
-    private Vector3 move =Vector3.zero;
+    private Vector3 move = Vector3.zero;
     private readonly float Speed = 3;
 
     //interact
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         CheckGrounded();
         Fall();
         Jump();
@@ -123,8 +124,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
-           
-
             AudioManager.Instance.PlaySFX("Jump");
         }
 
@@ -135,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
             _animator.SetBool("IsFalling", true);
             //move = transform.right * input.x + transform.forward * input.y;
-            _characterController.Move(moveDirection *Speed *Time.deltaTime);
+            _characterController.Move(moveDirection * Speed * Time.deltaTime);
         }
         else
         {
@@ -203,27 +202,20 @@ public class PlayerController : MonoBehaviour
                 // CurrentCam => FirstPerson
                 _currentCam = 1;
                 _FirstPersonCamera.Priority = 10;
-                _ThirdPersonCamera.Priority = 20;
-                _FreeLookCamera.Priority = 10;
+                _FreeLookCamera.Priority = 20;
                 AddSkin();
             }
-            else if (_currentCam == 1)
-            {
-                // CurrentCam => ThirdPerson
-                _currentCam = 2;
-                _FirstPersonCamera.Priority = 10;
-                _ThirdPersonCamera.Priority = 10;
-                _FreeLookCamera.Priority = 20;
-               
-            }
             else
+             if (_currentCam == 1)
             {
+                
                 // CurrentCam => Freelook
                 _currentCam = 0;
                 _FirstPersonCamera.Priority = 20;
-                _ThirdPersonCamera.Priority = 10;
+
                 _FreeLookCamera.Priority = 10;
                 Invoke(nameof(RemoveSkin), 1);
+                RemoveSkin();
             }
         }
     }

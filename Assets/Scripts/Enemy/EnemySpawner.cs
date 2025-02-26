@@ -6,6 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private GameObject PlayerWaypoints;
+
 
     [SerializeField] private float playerSafeDistance;
     [SerializeField] private float enemySpawnDistance;
@@ -16,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //EnemyPrefab.GetComponent<EnemyController>()._waypoints = ;
     }
 
     private void Update()

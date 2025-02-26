@@ -58,8 +58,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.038154602
-      value: -0.16845703
+      time: -0.0023841858
+      value: -0.19628906
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -67,8 +67,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.08379491
-      value: -0.14197165
+      time: 0.1280225
+      value: -0.16714865
       inSlope: -0.0022431798
       outSlope: -0.0022431798
       tangentMode: 0
@@ -103,27 +103,45 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8410577
-      value: 0.39154434
-      inSlope: 0.83147377
-      outSlope: 0.83147377
+      time: 0.82753843
+      value: 0.56445694
+      inSlope: 3.1456046
+      outSlope: 3.1456046
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.37763917
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.103301
-      value: 0.50670266
-      inSlope: 1.849072
-      outSlope: 1.849072
+      time: 1.1120291
+      value: 1.1415408
+      inSlope: 0.3251441
+      outSlope: 0.3251441
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.27329147
+      inWeight: 0.33333334
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  regionsColor: []
+  regionsColor:
+  - name: DeepUnderWater
+    height: 0.1
+    colour: {r: 0.3283019, g: 0.27385986, b: 0, a: 0}
+  - name: UnderWater
+    height: 0.2
+    colour: {r: 0.5056603, g: 0.42180705, b: 0, a: 0}
+  - name: Land
+    height: 0.5
+    colour: {r: 0.24313727, g: 0.8196079, b: 0, a: 0}
+  - name: Hills
+    height: 0.6
+    colour: {r: 0.39756218, g: 0.4716981, b: 0.0035599999, a: 0}
+  - name: Mountains
+    height: 0.8
+    colour: {r: 0.2669124, g: 0.5471698, b: 0.024777502, a: 1}
+  - name: Mountain Top
+    height: 1
+    colour: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &7946853369659792987
 MonoBehaviour:
   m_ObjectHideFlags: 0

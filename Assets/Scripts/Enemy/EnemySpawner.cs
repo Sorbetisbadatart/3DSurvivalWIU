@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private GameObject PlayerPrefab;
     [SerializeField] private List<GameObject> PlayerWaypoints;
+
+    private GameObject _enemy = null;
 
 
     [SerializeField] private float playerSafeDistance;
@@ -19,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         //give estimate of player's location
-        for (int i = 0; i < PlayerWaypoints.Count; i++)
+        for (int i = 0; i < PlayerWaypoints.Count - 1; i++)
          EnemyPrefab.GetComponent<EnemyController>()._waypoints[i] = PlayerWaypoints[i].transform;
 
     }
@@ -33,9 +36,19 @@ public class EnemySpawner : MonoBehaviour
             TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "The beast has awoke", Color.red);
         }
 
+        if (TimeController.Timeinstance.TimePassedThisTime(7))
+        {
+            _enemy = GameObject.Find("Enemy1(Clone)");
+            if (_enemy)
+            {
+                Destroy(_enemy);
+                TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "The beast now rests", Color.white);
+            }
+        }
+
         if (TimeController.Timeinstance.TimePassedThisTime(23) && !canSpawn)
         {
-            SpawnEnemy();
+            TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "Better hide now", Color.red);
             canSpawn = true;
         }
     }

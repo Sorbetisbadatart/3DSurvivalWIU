@@ -124,7 +124,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
            
-            TextManager.TextInstance.CreateText(new Vector3(1000, 100, 1), "poopoo", Color.white);
 
             AudioManager.Instance.PlaySFX("Jump");
         }

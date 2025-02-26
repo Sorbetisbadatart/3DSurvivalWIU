@@ -29,9 +29,9 @@ public class Text : MonoBehaviour
     }
     public void Explode()
     {
-        if (transform.position.y > Screen.height)
+        if (transform.position.y > Screen.height + 100)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

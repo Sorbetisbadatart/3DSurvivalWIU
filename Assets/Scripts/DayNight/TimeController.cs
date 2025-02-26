@@ -76,6 +76,8 @@ public class TimeController : MonoBehaviour
     {
         if (currentTime.Hour == 0)
         {
+            currentDay++;
+            PFUserManager.instance.SendLeaderboard(currentDay);
             calledonce = false;
         }
     }
@@ -93,10 +95,10 @@ public class TimeController : MonoBehaviour
     public bool TimePassedThisTime(int TimeToPassinHours)
     {
         //dont put 0 (maybe 1)
-        if (GetCurrentTimeinHours() >= TimeToPassinHours && !calledonce)
+        if (GetCurrentTimeinHours() == TimeToPassinHours && !calledonce)
         {          
             calledonce = true;
-            return true;      
+            return calledonce;      
         }
         //Debug.Log("passedaway");
         return false;
@@ -113,10 +115,10 @@ public class TimeController : MonoBehaviour
            timeText.text = currentTime.ToString("HH:mm");
            dayText.text = (currentTime - DateTime.Now.Date).ToString("dd") ;
            if (currentTime.TimeOfDay >= TimeSpan.FromHours(sunriseHour) && currentTime.TimeOfDay <= TimeSpan.FromHours(sunriseHour + 0.01) )
-            {
+           {
                 
                 SummonRooster() ;
-            }
+           }
         }
 
        

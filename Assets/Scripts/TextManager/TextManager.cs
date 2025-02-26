@@ -30,7 +30,7 @@ public class TextManager : MonoBehaviour
     {
         GameObject _Text = Instantiate(textPrefab, position, Quaternion.identity);
         _Text.transform.SetParent(canvasTransform);
-        _Text.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
+        _Text.GetComponent<RectTransform>().localScale = new Vector3(2,2,2);
         _Text.GetComponent<Text>().Initialize(speed,direction,fadingTime);
         _Text.GetComponent<TMP_Text>().text = text;
         _Text.GetComponent<TMP_Text>().color = colour;

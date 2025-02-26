@@ -7,9 +7,9 @@ using UnityEngine;
 public class Text : MonoBehaviour
 {
 
-    private float speed;
-    private Vector3 direction;
-    private float fadingTime;
+    [SerializeField] private float speed;
+    [SerializeField] private Vector3 direction;
+    [SerializeField] private float fadingTime;
 
     // Update is called once per frame
     void Update()
@@ -29,9 +29,9 @@ public class Text : MonoBehaviour
     }
     public void Explode()
     {
-        if (transform.position.y > Screen.height)
+        if (transform.position.y > Screen.height + 100)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

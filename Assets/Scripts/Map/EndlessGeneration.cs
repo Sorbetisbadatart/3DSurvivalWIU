@@ -183,7 +183,6 @@ public class EndlessGeneration: MonoBehaviour {
 					}
 
 					terrainChunksVisibleLastUpdate.Add (this);
-					//NavMesh.RemoveAllNavMeshData();
 					navmeshSurface.BuildNavMesh();
 				}
                 SetVisible (visible);

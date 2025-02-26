@@ -98,7 +98,7 @@ public class TimeController : MonoBehaviour
         if (GetCurrentTimeinHours() == TimeToPassinHours && !calledonce)
         {          
             calledonce = true;
-            return true;      
+            return calledonce;      
         }
         //Debug.Log("passedaway");
         return false;
@@ -115,10 +115,10 @@ public class TimeController : MonoBehaviour
            timeText.text = currentTime.ToString("HH:mm");
            dayText.text = (currentTime - DateTime.Now.Date).ToString("dd") ;
            if (currentTime.TimeOfDay >= TimeSpan.FromHours(sunriseHour) && currentTime.TimeOfDay <= TimeSpan.FromHours(sunriseHour + 0.01) )
-            {
+           {
                 
                 SummonRooster() ;
-            }
+           }
         }
 
        

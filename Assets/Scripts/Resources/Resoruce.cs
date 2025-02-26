@@ -33,6 +33,7 @@ public class Resoruce : MonoBehaviour
 
         if(collision.gameObject.tag == "Player")
         {
+            AudioManager.Instance.PlaySFX("Pickup");
             ItemInstance newDrop = new ItemInstance(drop);
             collision.gameObject.GetComponent<Inventory>().AddItem(newDrop, dropAmt);
             Destroy(gameObject);

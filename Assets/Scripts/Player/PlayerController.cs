@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     ThirstNHunger ThirstHunger;
 
     // Water Layer
-    LayerMask waterLayer;
+    public LayerMask waterLayer;
 
     [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 1000f);
         }
 
+
+        #region Animation Trigger
         if (_inputActions["Move"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsWalking", true);
@@ -137,7 +139,6 @@ public class PlayerController : MonoBehaviour
         // Fall
         if (!_isGrounded)
         {
-            Debug.Log("Falling");
 
             _animator.SetBool("IsFalling", true);
             //move = transform.right * input.x + transform.forward * input.y;
@@ -155,6 +156,7 @@ public class PlayerController : MonoBehaviour
         else
             _animator.SetBool("HasLanded", false);
 
+        #endregion
 
         _characterController.Move((JumpVelocity + moveDirection * Speed) * Time.deltaTime);
 
@@ -162,7 +164,6 @@ public class PlayerController : MonoBehaviour
         {
             Interact();
         }
-
     }
 
     private void Interact()
@@ -181,6 +182,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo1, InteractRange, waterLayer))
         {
+            Debug.Log(hitInfo1.collider.gameObject.name);
             ThirstHunger.GainThirst(10);
         }
     }
@@ -204,8 +206,8 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        //HandleCameraPitch();
         Look();
+
         // Switch Camera
         if (_inputActions["SwitchCamera"].WasPressedThisFrame())
         {
@@ -237,18 +239,6 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(velocity);
     }
 
-    private void HandleCameraPitch()
-    {
-        if (_currentCam == 0)
-        {
-            mouseDelta = lookAction.ReadValue<Vector2>();
-
-            float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
-            cameraPitch -= mouseY;
-            cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90);
-            //_FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
-        }
-    }
     public void Look()
     {
         mouseDelta = lookAction.ReadValue<Vector2>();
@@ -256,7 +246,7 @@ public class PlayerController : MonoBehaviour
         // Rotate the camera vertically horizontally
         gameObject.transform.Rotate(Vector3.up * mouseX);
     }
-
+   
     public void Fall()
     {
         //falling
@@ -275,12 +265,10 @@ public class PlayerController : MonoBehaviour
             JumpVelocity.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
         }
     }
-
     private void RemoveSkin()
     {
         skinmesh.enabled = false;
     }
-
     private void AddSkin()
     {
         skinmesh.enabled = true;

@@ -9,6 +9,7 @@ public class Campfire : MonoBehaviour
     private bool playerInside = false;
     private bool listOpen = false;
 
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")

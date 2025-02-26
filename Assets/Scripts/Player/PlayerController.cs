@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.Rendering;
+using UnityEngine.Timeline;
 using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
@@ -48,6 +49,11 @@ public class PlayerController : MonoBehaviour
 
     public bool _isGrounded;
 
+    ThirstNHunger ThirstHunger;
+
+    // Water Layer
+    LayerMask waterLayer;
+
     [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
     {
@@ -59,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        ThirstHunger = GetComponent<ThirstNHunger>();
         _inputActions = _playerInput.actions;
         lookAction = _playerInput.actions["Look"];
         JumpAction = _playerInput.actions["Jump"];
@@ -151,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
         _characterController.Move((JumpVelocity + moveDirection * Speed) * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Interact();
         }
@@ -170,6 +177,11 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(item.CloseDoor());
             else
                 StartCoroutine(item.OpenDoor());
+        }
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo1, InteractRange, waterLayer))
+        {
+            ThirstHunger.GainThirst(10);
         }
     }
 

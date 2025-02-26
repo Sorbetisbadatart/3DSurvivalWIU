@@ -20,7 +20,8 @@ public class EnemySpawner : MonoBehaviour
     {
         //give estimate of player's location
         for (int i = 0; i < PlayerWaypoints.Count; i++)
-        EnemyPrefab.GetComponent<EnemyController>()._waypoints[i] = PlayerWaypoints[i].transform;
+         EnemyPrefab.GetComponent<EnemyController>()._waypoints[i] = PlayerWaypoints[i].transform;
+
     }
 
     private void Update()
@@ -29,6 +30,7 @@ public class EnemySpawner : MonoBehaviour
         { 
             SpawnEnemy();
             canSpawn = false;
+            TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "The beast has awoke", Color.red);
         }
 
         if (TimeController.Timeinstance.TimePassedThisTime(23) && !canSpawn)

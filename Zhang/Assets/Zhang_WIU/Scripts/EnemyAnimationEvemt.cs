@@ -13,6 +13,11 @@ public class EnemyAnimationEvemt : MonoBehaviour
 
     [SerializeField] private Collider[] detectors;
 
+
+    [SerializeField] private GameObject _tailTrail;
+    [SerializeField] private GameObject _rightTrail;
+    [SerializeField] private GameObject _leftTrail;
+
     private void Start()
     {
         DisableCollider();
@@ -112,6 +117,38 @@ public class EnemyAnimationEvemt : MonoBehaviour
         else if (a == 2)
         {
             _par2.SetActive(false);
+        }
+    }
+
+    public void EnableTrail(int a)
+    {
+        switch (a)
+        {
+            case 1:
+                _leftTrail.SetActive(true);
+                break;
+            case 2:
+                _rightTrail.SetActive(true);
+                break;
+            case 3:
+                _tailTrail.SetActive(true);
+                break;
+        }
+    }
+
+    public void DisableTrail(int a)
+    {
+        switch (a)
+        {
+            case 1:
+                _leftTrail.SetActive(false);
+                break;
+            case 2:
+                _rightTrail.SetActive(false);
+                break;
+            case 3:
+                _tailTrail.SetActive(false);
+                break;
         }
     }
 }

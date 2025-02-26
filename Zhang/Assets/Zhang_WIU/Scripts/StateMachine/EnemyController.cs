@@ -79,39 +79,39 @@ public class EnemyController : MonoBehaviour
             _currentHealth = 0;
         }
 
-        //
-        //if (Input.GetKeyUp(KeyCode.Q))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Run", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.W))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Attack1_Left", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.E))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Attack2_Right", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.R))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Attack3_Tail", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.T))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Walk", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.Y))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Attack4_Roar", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.U))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Attack5_", 0.5f);
-        //}
-        //if (Input.GetKeyUp(KeyCode.I))
-        //{
-        //    _animator.CrossFadeInFixedTime("Enemy1_Idle", 0.5f);
-        //}
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Run", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Attack1_Left", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Attack2_Right", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Attack3_Tail", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Walk", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.Y))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Attack4_Roar", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.U))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Attack5_", 0.5f);
+        }
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            _animator.CrossFadeInFixedTime("Enemy1_Idle", 0.5f);
+        }
     }
 
 

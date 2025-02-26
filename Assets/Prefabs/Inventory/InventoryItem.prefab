@@ -98,6 +98,7 @@ MonoBehaviour:
     itemCount: 0
     maxStack: 0
     description: 
+    itemStatus: 0
   countText: {fileID: 8368120720055966390}
   descriptionBox: {fileID: 4248824802695756512}
 --- !u!1 &4248824802695756512

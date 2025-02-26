@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 1000f);
         }
 
+
+        #region Animation Trigger
         if (_inputActions["Move"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsWalking", true);
@@ -155,6 +157,7 @@ public class PlayerController : MonoBehaviour
         else
             _animator.SetBool("HasLanded", false);
 
+        #endregion
 
         _characterController.Move((JumpVelocity + moveDirection * Speed) * Time.deltaTime);
 
@@ -162,7 +165,6 @@ public class PlayerController : MonoBehaviour
         {
             Interact();
         }
-
     }
 
     private void Interact()
@@ -205,8 +207,8 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        //HandleCameraPitch();
         Look();
+
         // Switch Camera
         if (_inputActions["SwitchCamera"].WasPressedThisFrame())
         {
@@ -238,18 +240,6 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(velocity);
     }
 
-    private void HandleCameraPitch()
-    {
-        if (_currentCam == 0)
-        {
-            mouseDelta = lookAction.ReadValue<Vector2>();
-
-            float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
-            cameraPitch -= mouseY;
-            cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90);
-            //_FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
-        }
-    }
     public void Look()
     {
         mouseDelta = lookAction.ReadValue<Vector2>();

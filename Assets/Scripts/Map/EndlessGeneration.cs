@@ -29,7 +29,7 @@ public class EndlessGeneration: MonoBehaviour {
 
 	public GameObject waterPrefab;
 	public GameObject cloudPrefab;
-	public List <PlacementGenerator> GenTerrain;
+	public PlacementGenerator GenTerrain;
 	void Start() {
 		mapGenerator = FindObjectOfType<MapGenerator> ();
 
@@ -92,7 +92,7 @@ public class EndlessGeneration: MonoBehaviour {
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
-        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, GameObject cloudPrefab, List<PlacementGenerator> TerrainGen) {
+        public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, GameObject waterPrefab, GameObject cloudPrefab, PlacementGenerator TerrainGen) {
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -120,12 +120,10 @@ public class EndlessGeneration: MonoBehaviour {
             cloudPrefab.transform.parent = parent;
 			this.cloudPrefab = cloudPrefab; // For visibility
 
-			for (int i = 0; i < TerrainGen.Count; i++){
-				TerrainGen[i] = Instantiate(TerrainGen[i]);
-				TerrainGen[i].transform.position = positionV3 * scale;
-				TerrainGen[i].transform.parent = parent;
-				TerrainGenPrefab = TerrainGen[i]; // For visibility
-			}
+            TerrainGen = Instantiate(TerrainGen);
+            TerrainGen.transform.position = positionV3 * scale;
+            TerrainGen.transform.parent = parent;
+			TerrainGenPrefab = TerrainGen; // For visibility
 
             SetVisible(false);
 

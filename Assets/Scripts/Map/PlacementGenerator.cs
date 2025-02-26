@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlacementGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject preFab;
+    [SerializeField] List<GameObject> preFab;
 
     [Header("Raycast Settings")]
     [SerializeField] int density;
@@ -31,15 +31,15 @@ public class PlacementGenerator : MonoBehaviour
     }
     private void Update()
     {
-        //// Testing purposes
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    Clear();
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //    Generate();
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //    SetVisibility(true);
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //    SetVisibility(false);
+        // Testing purposes
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            Clear();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            Generate();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SetVisibility(true);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            SetVisibility(false);
     }
     public void Generate()
     {
@@ -58,8 +58,9 @@ public class PlacementGenerator : MonoBehaviour
             if (hit.point.y < minHeight)
                 continue;
 
+            selectedObject = Random.Range(0, preFab.Count);
 
-            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.preFab, transform);
+            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.preFab[selectedObject], transform);
             instantiatedPrefab.transform.position = hit.point;
             instantiatedPrefab.transform.Rotate(Vector3.up, Random.Range(rotationRange.x, rotationRange.y), Space.Self);
             instantiatedPrefab.transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.FromToRotation(instantiatedPrefab.transform.up, hit.normal), rotateTowardsNormal);

@@ -35,6 +35,8 @@ public class Resoruce : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX("Pickup");
             ItemInstance newDrop = new ItemInstance(drop);
+            TextManager.TextInstance.CreateText(new Vector3(350, 800, 1), "Picked up " + newDrop.name, Color.white);
+
             collision.gameObject.GetComponent<Inventory>().AddItem(newDrop, dropAmt);
             Destroy(gameObject);
         }

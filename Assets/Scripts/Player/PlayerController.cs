@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
         // Fall
         if (!_isGrounded)
         {
-            Debug.Log("Falling");
 
             _animator.SetBool("IsFalling", true);
             //move = transform.right * input.x + transform.forward * input.y;
@@ -183,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo1, InteractRange, waterLayer))
         {
-            Debug.Log(hitInfo1);
+            Debug.Log(hitInfo1.collider.gameObject.name);
             ThirstHunger.GainThirst(10);
         }
     }
@@ -247,7 +246,7 @@ public class PlayerController : MonoBehaviour
         // Rotate the camera vertically horizontally
         gameObject.transform.Rotate(Vector3.up * mouseX);
     }
-
+   
     public void Fall()
     {
         //falling
@@ -266,12 +265,10 @@ public class PlayerController : MonoBehaviour
             JumpVelocity.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
         }
     }
-
     private void RemoveSkin()
     {
         skinmesh.enabled = false;
     }
-
     private void AddSkin()
     {
         skinmesh.enabled = true;

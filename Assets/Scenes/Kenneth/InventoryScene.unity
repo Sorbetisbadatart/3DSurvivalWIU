@@ -4267,7 +4267,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 07de3158617dd4340b0227d41ad5cfb4, type: 3}
+      objectReference: {fileID: 8300000, guid: 11aaa0fa28c273d4f98fac74889fca64, type: 3}
     - target: {fileID: 2208143121405427675, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
         type: 3}
       propertyPath: m_PlayOnAwake
@@ -4341,27 +4341,47 @@ PrefabInstance:
     - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
         type: 3}
       propertyPath: sfx.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
         type: 3}
       propertyPath: sfx.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 07de3158617dd4340b0227d41ad5cfb4, type: 3}
+      objectReference: {fileID: 8300000, guid: 11aaa0fa28c273d4f98fac74889fca64, type: 3}
     - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
         type: 3}
       propertyPath: sfx.Array.data[0].name
-      value: OpenInventory
+      value: NatureBGM
       objectReference: {fileID: 0}
     - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
         type: 3}
       propertyPath: sfx.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 1eb990bcc1e19294f8c8e3e6b665e63e, type: 3}
+      objectReference: {fileID: 8300000, guid: 07de3158617dd4340b0227d41ad5cfb4, type: 3}
     - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
         type: 3}
       propertyPath: sfx.Array.data[1].name
+      value: OpenInventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
+        type: 3}
+      propertyPath: sfx.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb990bcc1e19294f8c8e3e6b665e63e, type: 3}
+    - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
+        type: 3}
+      propertyPath: sfx.Array.data[2].name
       value: Eating
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
+        type: 3}
+      propertyPath: sfx.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a70a54dea2abe7488b10f4ec8c6a212, type: 3}
+    - target: {fileID: 8606136861890201972, guid: ffcc68cdd2cf87d4c9a30071444ef7e5,
+        type: 3}
+      propertyPath: sfx.Array.data[3].name
+      value: Cooking
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -37,6 +37,7 @@ public class CookingManger : MonoBehaviour
 
             if(!gameResult)
             {
+                AudioManager.Instance.PlaySFX("Cooking");
                 //slider move left and right until player inputs space
                 if (sliderRight)
                 {

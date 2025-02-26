@@ -196,4 +196,9 @@ public class InventoryManager : MonoBehaviour
     {
         Invoke("UpdateInventory", time);
     }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
 }

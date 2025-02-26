@@ -187,6 +187,7 @@ public class EndlessGeneration: MonoBehaviour {
 					navmeshSurface.BuildNavMesh();
 				}
                 SetVisible (visible);
+				DailyReset();
 			}
 		}
 

@@ -77,7 +77,7 @@ public class TimeController : MonoBehaviour
         if (currentTime.Hour == 0)
         {
             currentDay++;
-            PFUserManager.instance.SendLeaderboard(currentDay);
+           // PFUserManager.instance.SendLeaderboard(currentDay);
             calledonce = false;
         }
     }
@@ -92,13 +92,25 @@ public class TimeController : MonoBehaviour
         return currentTime.Second;
     }
     
+    //public bool TimePassedThisTime(int TimeToPassinHours)
+    //{
+    //    //dont put 0 (maybe 1)
+    //    if (GetCurrentTimeinHours() == TimeToPassinHours && !calledonce)
+    //    {          
+    //        calledonce = true;
+    //        return calledonce;      
+    //    }
+    //    //Debug.Log("passedaway");
+    //    return false;
+    //}
+
     public bool TimePassedThisTime(int TimeToPassinHours)
     {
         //dont put 0 (maybe 1)
-        if (GetCurrentTimeinHours() == TimeToPassinHours && !calledonce)
-        {          
-            calledonce = true;
-            return calledonce;      
+        if (GetCurrentTimeinHours() == TimeToPassinHours)
+        {
+        
+            return true;
         }
         //Debug.Log("passedaway");
         return false;

@@ -9,6 +9,8 @@ public class EndlessGeneration: MonoBehaviour {
 
 	const float scale = .5f;
 
+	
+
 	const float viewerMoveThresholdForChunkUpdate = 10f;
 	const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
 
@@ -73,6 +75,8 @@ public class EndlessGeneration: MonoBehaviour {
 	}
 	public class TerrainChunk {
 
+		const float TimeToUpdate = 100;
+		private float currTime = 0;
 		GameObject meshObject;
 		GameObject waterPrefab;
 		GameObject cloudPrefab;
@@ -154,6 +158,7 @@ public class EndlessGeneration: MonoBehaviour {
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
 
 				if (visible) {
+					currTime += Time.deltaTime;
 					int lodIndex = 0;
 
 					for (int i = 0; i < detailLevels.Length - 1; i++) {
@@ -182,8 +187,13 @@ public class EndlessGeneration: MonoBehaviour {
 						}
 					}
 
-					terrainChunksVisibleLastUpdate.Add (this);
-					navmeshSurface.BuildNavMesh();
+                    terrainChunksVisibleLastUpdate.Add(this);
+                   
+					if (currTime > TimeToUpdate)
+					{					
+						navmeshSurface.BuildNavMesh();
+						currTime = 0;
+					}
 				}
                 SetVisible (visible);
 			}

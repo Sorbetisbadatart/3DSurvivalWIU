@@ -31,7 +31,7 @@ public class PatrolState : EnemyState
 
     public void OnUpdate()
     {
-        Debug.Log("ONUPDATE STATE PATROL");
+      //  Debug.Log("ONUPDATE STATE PATROL");
 
         if (_enemyController._waypoints == null ||
             _enemyController._waypoints.Length == 0)

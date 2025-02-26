@@ -7,13 +7,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.Rendering;
+using UnityEngine.Timeline;
 using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private int health = 100;
     // Camera
     [SerializeField] private CinemachineVirtualCamera _FirstPersonCamera;
-    [SerializeField] private CinemachineVirtualCamera _ThirdPersonCamera;
     [SerializeField] private CinemachineFreeLook _FreeLookCamera;
     private int _currentCam = 1;
 
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private InputAction JumpAction;
     private readonly float JumpHeight = 3.0f;
 
-    private Vector3 move =Vector3.zero;
+    private Vector3 move = Vector3.zero;
     private readonly float Speed = 3;
 
     //interact
@@ -46,23 +48,24 @@ public class PlayerController : MonoBehaviour
     public AudioSource footstepsSfx, sprintSfx;
 
     public bool _isGrounded;
-    
 
+    ThirstNHunger ThirstHunger;
 
+    // Water Layer
+    LayerMask waterLayer;
 
-
-
-
-
+    [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _isGrounded = true;
     }
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        ThirstHunger = GetComponent<ThirstNHunger>();
         _inputActions = _playerInput.actions;
         lookAction = _playerInput.actions["Look"];
         JumpAction = _playerInput.actions["Jump"];
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         CheckGrounded();
         Fall();
         Jump();
@@ -80,23 +84,24 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
 
 
-        if (moveDirection.magnitude > 0 && _isGrounded)
+        if (moveDirection.magnitude > 0)
         {
-            //AudioManager.Instance.PlaySFX("Walk");
+            moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up) * moveDirection;
+            // Rotate the character facing towards the move direction
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 1000f);
+        }
+
+        if (_inputActions["Move"].IsPressed() && _isGrounded)
+        {
             _animator.SetBool("IsWalking", true);
             footstepsSfx.enabled = true;
-            move = transform.right * input.x + transform.forward * input.y;
-
-
-            // Modify move direction to where camera is facing
         }
         else
         {
             footstepsSfx.enabled = false;
             _animator.SetBool("IsWalking", false);
         }
-
-
         // Run
         if (_inputActions["Run"].IsPressed() && _isGrounded)
         {
@@ -117,23 +122,26 @@ public class PlayerController : MonoBehaviour
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsJump", true);
-        
+            _characterController.Move(moveDirection * Speed * Time.deltaTime);
         }
         else
-            { 
-            _animator.SetBool("IsJump", false);  
+        {
+            _animator.SetBool("IsJump", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded) {
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        {
             AudioManager.Instance.PlaySFX("Jump");
         }
 
         // Fall
         if (!_isGrounded)
         {
-            _animator.SetBool("IsFalling", true);
-            move = transform.right * input.x + transform.forward * input.y;
+            Debug.Log("Falling");
 
+            _animator.SetBool("IsFalling", true);
+            //move = transform.right * input.x + transform.forward * input.y;
+            _characterController.Move(moveDirection * Speed * Time.deltaTime);
         }
         else
         {
@@ -143,26 +151,22 @@ public class PlayerController : MonoBehaviour
 
         // Land
         if (_isGrounded)
-            
             _animator.SetBool("HasLanded", true);
         else
             _animator.SetBool("HasLanded", false);
 
 
-        _characterController.Move((JumpVelocity + move * Speed) * Time.deltaTime);
+        _characterController.Move((JumpVelocity + moveDirection * Speed) * Time.deltaTime);
 
-      if (Input.GetKeyDown(KeyCode.E))
-      {    
+        if (Input.GetKeyDown(KeyCode.F))
+        {
             Interact();
-      }
+        }
 
     }
 
-
-
     private void Interact()
     {
-       
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out RaycastHit hitInfo, InteractRange, 8))
         {
@@ -174,39 +178,33 @@ public class PlayerController : MonoBehaviour
             else
                 StartCoroutine(item.OpenDoor());
         }
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo1, InteractRange, waterLayer))
+        {
+            ThirstHunger.GainThirst(10);
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), GetComponent<CapsuleCollider>().bounds.size.x / 2);
-
-
     }
     private void CheckGrounded()
     {
-
         //Boxcast to detect whether player touching ground
         Physics.SphereCast(
-            origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f , this.transform.position.z),
+            origin: new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z),
             radius: GetComponent<CapsuleCollider>().bounds.size.x / 2,
             direction: Vector2.down,
             hitInfo: out RaycastHit hitResult,
             maxDistance: 1.0f
-            
-            ) ;
-
-        
-
-
-
+            );
         _isGrounded = hitResult.collider != null;
-      
-
     }
 
     private void LateUpdate()
     {
-        HandleCameraPitch();
+        //HandleCameraPitch();
         Look();
         // Switch Camera
         if (_inputActions["SwitchCamera"].WasPressedThisFrame())
@@ -216,25 +214,20 @@ public class PlayerController : MonoBehaviour
                 // CurrentCam => FirstPerson
                 _currentCam = 1;
                 _FirstPersonCamera.Priority = 10;
-                _ThirdPersonCamera.Priority = 20;
-                _FreeLookCamera.Priority = 10;
-            }
-            else if (_currentCam == 1)
-            {
-                // CurrentCam => ThirdPerson
-                _currentCam = 2;
-                _FirstPersonCamera.Priority = 10;
-                _ThirdPersonCamera.Priority = 10;
                 _FreeLookCamera.Priority = 20;
+                AddSkin();
             }
             else
+             if (_currentCam == 1)
             {
+                
                 // CurrentCam => Freelook
                 _currentCam = 0;
                 _FirstPersonCamera.Priority = 20;
-                _ThirdPersonCamera.Priority = 10;
-                _FreeLookCamera.Priority = 10;
 
+                _FreeLookCamera.Priority = 10;
+                Invoke(nameof(RemoveSkin), 1);
+                RemoveSkin();
             }
         }
     }
@@ -253,7 +246,7 @@ public class PlayerController : MonoBehaviour
             float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
             cameraPitch -= mouseY;
             cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90);
-            _FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
+            //_FirstPersonCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
         }
     }
     public void Look()
@@ -281,6 +274,16 @@ public class PlayerController : MonoBehaviour
         {
             JumpVelocity.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
         }
+    }
+
+    private void RemoveSkin()
+    {
+        skinmesh.enabled = false;
+    }
+
+    private void AddSkin()
+    {
+        skinmesh.enabled = true;
     }
 }
 

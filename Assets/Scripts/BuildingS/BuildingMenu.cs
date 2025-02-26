@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class BuildingMenu : MonoBehaviour
 {
     public List<MenuButton> menuButtons = new List<MenuButton>();
+   
+   
     private Vector2 MousePos;
     private Vector2 VectorToMouse = new Vector2(0.5f, 1.0f);
     private Vector2 CenterCircle = new Vector2(0.5f, 0.5f);
@@ -33,8 +35,8 @@ public class BuildingMenu : MonoBehaviour
     {
         GetCurrentMenuItems();
         if (Input.GetButtonDown("Fire1"))
-        {
-            ButtonPress();
+        {     
+                SelectBuild();
         }
     }
 
@@ -53,6 +55,7 @@ public class BuildingMenu : MonoBehaviour
         CurrentMenuItem = (int)(angle / (360 / menuItems));
        
 
+
         if (CurrentMenuItem != OldMenuItem)
         {
             menuButtons[OldMenuItem].BuildingImage.color = menuButtons[OldMenuItem].Colour;
@@ -61,14 +64,30 @@ public class BuildingMenu : MonoBehaviour
         }
     }
 
-    public void ButtonPress()
+    public void SelectBuild()
     {
-        menuButtons[CurrentMenuItem].BuildingImage.color = menuButtons[CurrentMenuItem].SelectedColor;
+        if (!(buildSystem.playerInventory.CheckItemCount(buildSystem.rockData) >= buildSystem.currentobject.StoneCost && buildSystem.playerInventory.CheckItemCount(buildSystem.rockData) >= buildSystem.currentobject.WoodCost))
+        {
+            
 
+            Debug.Log("insufficient materials");
+            Debug.Log(buildSystem.playerInventory.CheckItemCount(buildSystem.rockData));
+            Debug.Log(buildSystem.currentobject.StoneCost);
+            Debug.Log("Beans");
+            Debug.Log(buildSystem.playerInventory.CheckItemCount(buildSystem.woodData));
+            Debug.Log(buildSystem.currentobject.WoodCost);
+
+            return;
+        }
+
+       
+        menuButtons[CurrentMenuItem].BuildingImage.color = menuButtons[CurrentMenuItem].SelectedColor;
         buildSystem.ChangeCurrentBuilding (CurrentMenuItem);
         buildSystem.DisableMenu();
 
     }
+
+   
 }
 
 [System.Serializable]
@@ -76,6 +95,7 @@ public class MenuButton
 {
     public string BuildingName;
     public Image BuildingImage;
+   
     public Color Colour = Color.white;
     public Color HighLightedColor = Color.grey;
     public Color SelectedColor = Color.grey;

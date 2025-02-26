@@ -18,12 +18,12 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject InventoryPage;
 
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Sprite normalTex;
+    [SerializeField] private Sprite highlightedTex;
 
-    [SerializeField] private AudioClip openClip;
+    [SerializeField] private Image pickupImage;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         inventorySlots = new GameObject[inventory.maxItems];
 
@@ -41,9 +41,9 @@ public class InventoryManager : MonoBehaviour
         }
 
         //create items if there are items in the inventory
-        for(int i = 0; i<inventory.maxItems;i++)
+        for (int i = 0; i < inventory.maxItems; i++)
         {
-            if (i <inventory.items.Length && inventory.items[i] != null)
+            if (i < inventory.items.Length && inventory.items[i] != null)
             {
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
                 temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], 1);
@@ -65,9 +65,28 @@ public class InventoryManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             InventoryPage.SetActive(!InventoryPage.activeInHierarchy);
-            audioSource.PlayOneShot(openClip);
+            ChangeMouseLock();
+            AudioManager.Instance.PlaySFX("OpenInventory");
+        }
+
+        
+        
+    }
+    public void ChangeMouseLock()
+    {
+        if (InventoryPage.activeInHierarchy)
+        { 
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
+
+
 
     //called when an item switches slot, to update array
     //create items in inventory if there are items in the ui but not in the inventory
@@ -91,10 +110,10 @@ public class InventoryManager : MonoBehaviour
     public void UpdateInventory()
     {
         //create items if there are items in the inventory
-        for (int i = 0; i < inventory.maxItems; i++)
+        for (int i = 0; i < inventory.items.Length; i++)
         {
             //add item
-            if (i < inventory.items.Length && inventory.items[i] != null && inventory.items[i].itemType != null && inventorySlots[i].transform.childCount == 0)
+            if (inventory.items[i] != null && inventory.items[i].itemType != null && inventorySlots[i].transform.childCount == 0)
             {
                 GameObject temp = Instantiate(inventoryItemPrefab, inventorySlots[i].transform);
                 temp.GetComponent<InventoryItem>().ObtainItem(inventory.items[i], inventory.items[i].itemCount);
@@ -105,7 +124,6 @@ public class InventoryManager : MonoBehaviour
     //Updates ui from inventory
     public void UpdateInventoryUI()
     {
-        //create items if there are items in the inventory
         for (int i = 0; i < inventory.maxItems; i++)
         {
             if (inventorySlots[i].transform.childCount > 0)
@@ -150,5 +168,37 @@ public class InventoryManager : MonoBehaviour
                 inventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().UpdateCount();
             }
         }
+    }
+
+    public void HighlightEquippedSlot(int e)
+    {
+        for(int i = 0;i<hotbarSize;i++)
+        {
+            if(i == e)
+            {
+                inventorySlots[i].GetComponent<Image>().sprite = highlightedTex;
+            }
+            else
+            {
+                inventorySlots[i].GetComponent<Image>().sprite = normalTex;
+            }
+        }
+    }
+
+    public void HandPercentage(float fill, bool visible)
+    {
+        pickupImage.gameObject.SetActive(visible);
+
+        pickupImage.fillAmount = fill;
+    }
+
+    public void InvokeUpdateInventory(float time)
+    {
+        Invoke("UpdateInventory", time);
+    }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
     }
 }

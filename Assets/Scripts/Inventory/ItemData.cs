@@ -8,7 +8,8 @@ public class ItemData : ScriptableObject
     public enum ItemStatus
     {
         Resource,
-        Food
+        Food,
+        Tool
     }
 
 
@@ -27,5 +28,10 @@ public class ItemData : ScriptableObject
     public virtual float Drink()
     {
         return 0;
+    }
+
+    public virtual FoodData GetFoodData()
+    {
+        return null;
     }
 }

@@ -32,7 +32,9 @@ public class TimeController : MonoBehaviour
     [SerializeField] private Light moonLight;
     [SerializeField] private float maxMoonLightIntensity;
 
-    private int Day = 0;
+    private int currentDay = 0;
+
+    bool calledonce = false;
 
     private void Awake()
     {
@@ -56,6 +58,8 @@ public class TimeController : MonoBehaviour
         sunsetTime = TimeSpan.FromHours(sunsetHour);
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -63,7 +67,41 @@ public class TimeController : MonoBehaviour
         RotateSun();
         UpdateLightSettings();
         //SummonRooster();
+        TimePassedThisTime(2);
+        DayPassed();
 
+    }
+
+    public void DayPassed()
+    {
+        if (currentTime.Hour == 0)
+        {
+            currentDay++;
+            PFUserManager.instance.SendLeaderboard(currentDay);
+            calledonce = false;
+        }
+    }
+
+    public int GetCurrentTimeinHours()
+    {
+        return currentTime.Hour;
+    }
+
+    public int GetCurrentTimeinSeconds()
+    {
+        return currentTime.Second;
+    }
+    
+    public bool TimePassedThisTime(int TimeToPassinHours)
+    {
+        //dont put 0 (maybe 1)
+        if (GetCurrentTimeinHours() == TimeToPassinHours && !calledonce)
+        {          
+            calledonce = true;
+            return calledonce;      
+        }
+        //Debug.Log("passedaway");
+        return false;
     }
 
     private void UpdateTimeOfDay()
@@ -77,19 +115,18 @@ public class TimeController : MonoBehaviour
            timeText.text = currentTime.ToString("HH:mm");
            dayText.text = (currentTime - DateTime.Now.Date).ToString("dd") ;
            if (currentTime.TimeOfDay >= TimeSpan.FromHours(sunriseHour) && currentTime.TimeOfDay <= TimeSpan.FromHours(sunriseHour + 0.01) )
-            {
+           {
+                
                 SummonRooster() ;
-            }
+           }
         }
 
        
     }
 
     private void SummonRooster()
-    {
-      
-            AudioManager.Instance.PlaySFX("Rooster");
-        
+    {     
+            AudioManager.Instance.PlaySFX("Rooster");      
     }
 
     private void RotateSun()

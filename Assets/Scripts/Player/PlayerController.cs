@@ -186,6 +186,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(hitInfo1.collider.gameObject.name);
             ThirstHunger.GainThirst(10);
+            AudioManager.Instance.PlaySFX("Drink");
         }
     }
 

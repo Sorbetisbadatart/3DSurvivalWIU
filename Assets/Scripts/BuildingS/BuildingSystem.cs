@@ -194,7 +194,8 @@ public class Build : MonoBehaviour
                 CancelBuild();
                 return;
             }
-            Debug.Log("vibings");          
+            Debug.Log("vibings");
+            AudioManager.Instance.PlaySFX("Build");
             Instantiate(currentobject.buildingPrefab, currentpos + extraY, Quaternion.Euler(currentrotation.x, currentrotation.y, currentrotation.z));
             playerInventory.RemoveItem(rockData, currentobject.StoneCost);
             playerInventory.RemoveItem(woodData, currentobject.WoodCost);

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     ThirstNHunger ThirstHunger;
 
     // Water Layer
-    LayerMask waterLayer;
+    public LayerMask waterLayer;
 
     [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
@@ -181,6 +181,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo1, InteractRange, waterLayer))
         {
+            Debug.Log(hitInfo1);
             ThirstHunger.GainThirst(10);
         }
     }

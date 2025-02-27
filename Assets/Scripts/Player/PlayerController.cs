@@ -1,14 +1,10 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR.Haptics;
-using UnityEngine.Rendering;
-using UnityEngine.Timeline;
-using static UnityEditor.Progress;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -61,6 +57,8 @@ public class PlayerController : MonoBehaviour
     private int _attackStep;
 
     [SerializeField] SkinnedMeshRenderer skinmesh;
+
+    public HealthBar healthBar;
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -317,6 +315,24 @@ public class PlayerController : MonoBehaviour
                 RemoveSkin();
             }
         }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+
+        AudioManager.Instance.PlaySFX("Hurt");
+        health -= damage;
+        healthBar.SetHealth(health);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
     private void OnAnimatorMove()
     {

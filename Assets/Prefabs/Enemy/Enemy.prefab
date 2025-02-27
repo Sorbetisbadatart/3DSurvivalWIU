@@ -8721,7 +8721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 25
-  attackRange: 10
+  attackRange: 5
   patrolSpeed: 2
   chaseSpeed: 5
   _waypoints:
@@ -30164,6 +30164,9 @@ MonoBehaviour:
   - {fileID: 6318866553904581183}
   - {fileID: 1799505168989575667}
   - {fileID: 2509024139859752933}
+  collider: {fileID: 0}
+  source: {fileID: 0}
+  Damageablelayer: PlayerDamagable
   _tailTrail: {fileID: 8656864511332721889}
   _rightTrail: {fileID: 1391624554585591828}
   _leftTrail: {fileID: 5420161928200023343}

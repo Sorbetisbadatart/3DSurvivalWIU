@@ -11,13 +11,17 @@ public class EnemyAttackCollider : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            //Enemies player = other.GetComponent<Enemies>();
-            //if (player != null)
-            //{
-            //    player.TakeDamage(_damage, transform.root.gameObject); //
-            //}
+            
             Debug.Log($"Damageed from {transform.root.gameObject.name}");
             Debug.Log($"{other.gameObject.name}");
+
+
+            if (other.gameObject.GetComponent<PlayerController>())
+            {
+                Debug.Log("Beat the player");
+                PlayerController targetController = other.GetComponent<PlayerController>();
+                targetController.TakeDamage(1);
+            }
         }
     }
 }

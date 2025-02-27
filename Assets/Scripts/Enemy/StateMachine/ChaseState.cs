@@ -15,7 +15,7 @@ public class ChaseState : EnemyState
 
     public void OnEnter()
     {
-        Debug.Log("ENTER STATE CHASE");
+       // Debug.Log("ENTER STATE CHASE");
 
         //_enemyController._animator.CrossFadeInFixedTime("Enemy1_Walk", 0.5f);
         _enemyController._animator.CrossFadeInFixedTime("Enemy1_Run", 0.5f);
@@ -26,7 +26,7 @@ public class ChaseState : EnemyState
 
     public void OnUpdate()
     {
-        Debug.Log("ONUPDATE STATE CHASE");
+       // Debug.Log("ONUPDATE STATE CHASE");
 
         _enemyController._agent.isStopped = false;
         _enemyController._agent.speed = _enemyController.chaseSpeed;
@@ -46,7 +46,7 @@ public class ChaseState : EnemyState
 
     public void OnExit()
     {
-        Debug.Log("EXIT STATE CHASE");
+       // Debug.Log("EXIT STATE CHASE");
 
         _enemyController._agent.isStopped = true;
     }

@@ -94,7 +94,7 @@ public class AttackState : EnemyState
 
     public void OnExit()
     {
-        //Debug.Log("EXIT STATE ATTACK");
+      //  Debug.Log("EXIT STATE ATTACK");
     }
 
     private void PerformAttack()

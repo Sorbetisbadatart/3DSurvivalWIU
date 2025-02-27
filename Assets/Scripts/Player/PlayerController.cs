@@ -144,9 +144,6 @@ public class PlayerController : MonoBehaviour
 
         }
       
-
-       
-
         // Jump
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
         {

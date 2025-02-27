@@ -2073,6 +2073,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969077259801212516, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
         type: 3}
+      propertyPath: hungerRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969077259801212516, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
+      propertyPath: thirstRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969077259801212516, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
+      propertyPath: dmgTickDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969077259801212516, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
       propertyPath: hungerSlider
       value: 
       objectReference: {fileID: 1701735893}

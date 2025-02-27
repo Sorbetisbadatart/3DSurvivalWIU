@@ -14,10 +14,15 @@ public class ThirstNHunger : MonoBehaviour
     [SerializeField] private Slider hungerSlider;
     [SerializeField] private Slider thirstSlider;
 
+    private PlayerController player;
+
+    [SerializeField] private float dmgTickDelay;
+    private float dmgTick;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -38,11 +43,20 @@ public class ThirstNHunger : MonoBehaviour
         if(thirst <= 0)
         {
             //Debug.Log("THIRSTY!");
+            dmgTick -= Time.deltaTime;
         }
 
         if (hunger <= 0)
         {
             //Debug.Log("HUNGRY");
+            dmgTick -= Time.deltaTime;
+        }
+
+        if(dmgTick <= 0)
+        {
+            player.SetHealth(player.GetHealth() - 1);
+            dmgTick = dmgTickDelay;
+            Debug.Log("PLAYER HEALTH: " + player.GetHealth());
         }
     }
 

@@ -75,8 +75,6 @@ public class EndlessGeneration: MonoBehaviour {
 	}
 	public class TerrainChunk {
 
-		const float TimeToUpdate = 100;
-		private float currTime = 0;
 		GameObject meshObject;
 		GameObject waterPrefab;
 		GameObject cloudPrefab;
@@ -139,6 +137,7 @@ public class EndlessGeneration: MonoBehaviour {
 				}
 			}
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
+            navmeshSurface.BuildNavMesh();
         }
 
         void OnMapDataReceived(MapData mapData) {
@@ -157,43 +156,46 @@ public class EndlessGeneration: MonoBehaviour {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
 
-				if (visible) {
-					currTime += Time.deltaTime;
+				if (visible)
+				{
 					int lodIndex = 0;
 
-					for (int i = 0; i < detailLevels.Length - 1; i++) {
-						if (viewerDstFromNearestEdge > detailLevels [i].visibleDstThreshold) {
+					for (int i = 0; i < detailLevels.Length - 1; i++)
+					{
+						if (viewerDstFromNearestEdge > detailLevels[i].visibleDstThreshold)
+						{
 							lodIndex = i + 1;
-						} else {
+						}
+						else
+						{
 							break;
 						}
 					}
 
-					if (lodIndex != previousLODIndex) {
-						LODMesh lodMesh = lodMeshes [lodIndex];
-						if (lodMesh.hasMesh) {
+					if (lodIndex != previousLODIndex)
+					{
+						LODMesh lodMesh = lodMeshes[lodIndex];
+						if (lodMesh.hasMesh)
+						{
 							previousLODIndex = lodIndex;
 							meshFilter.mesh = lodMesh.mesh;
-						} else if (!lodMesh.hasRequestedMesh) {
-							lodMesh.RequestMesh (mapData);
 						}
+						else if (!lodMesh.hasRequestedMesh)
+							lodMesh.RequestMesh(mapData);
 					}
 
-					if (lodIndex == 0) {
-						if (collisionLODMesh.hasMesh) {
+					if (lodIndex == 0)
+					{
+						if (collisionLODMesh.hasMesh)
 							meshCollider.sharedMesh = collisionLODMesh.mesh;
-						} else if (!collisionLODMesh.hasRequestedMesh) {
-							collisionLODMesh.RequestMesh (mapData);
-						}
+						else if (!collisionLODMesh.hasRequestedMesh)
+							collisionLODMesh.RequestMesh(mapData);
 					}
 
-                    terrainChunksVisibleLastUpdate.Add(this);
-                   
-					if (currTime > TimeToUpdate)
-					{					
+					terrainChunksVisibleLastUpdate.Add(this);
+					if (visible)
 						navmeshSurface.BuildNavMesh();
-						currTime = 0;
-					}
+					
 				}
                 SetVisible (visible);
 			}

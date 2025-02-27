@@ -8615,6 +8615,7 @@ GameObject:
   - component: {fileID: 5510149902202921798}
   - component: {fileID: 5312399530424692081}
   - component: {fileID: 6086696181526826518}
+  - component: {fileID: 6565813962831683483}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -8719,8 +8720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f55ebec615d0dd418e1476d8d1311d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 10
-  attackRange: 3
+  detectionRange: 15
+  attackRange: 5
   patrolSpeed: 2
   chaseSpeed: 5
   _waypoints:
@@ -8730,12 +8731,33 @@ MonoBehaviour:
   - {fileID: 0}
   healthBar: {fileID: 2078099453432493662}
   _player: {fileID: 0}
-  _agent: {fileID: 0}
+  _agent: {fileID: 5510149902202921798}
   _maxHealth: 10
   _currentHealth: 1
   _damage: 50
   _speed: 5
   _animator: {fileID: 6573746491662340616}
+--- !u!65 &6565813962831683483
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935710162653732091}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.25, z: -0.6}
 --- !u!1 &1952679661102555481
 GameObject:
   m_ObjectHideFlags: 0

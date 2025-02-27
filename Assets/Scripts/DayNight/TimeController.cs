@@ -77,7 +77,7 @@ public class TimeController : MonoBehaviour
         if (currentTime.Hour == 0)
         {
             currentDay++;
-           // PFUserManager.instance.SendLeaderboard(currentDay);
+            PFUserManager.instance.SendLeaderboard(currentDay);
             calledonce = false;
         }
     }

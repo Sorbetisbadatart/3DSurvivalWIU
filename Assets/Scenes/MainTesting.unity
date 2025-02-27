@@ -721,12 +721,12 @@ PrefabInstance:
     - target: {fileID: 3003100396901900600, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.98817766
       objectReference: {fileID: 0}
     - target: {fileID: 3003100396901900600, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.15331322
       objectReference: {fileID: 0}
     - target: {fileID: 3003100396901900600, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
@@ -756,12 +756,12 @@ PrefabInstance:
     - target: {fileID: 3005561298468455155, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9819564
       objectReference: {fileID: 0}
     - target: {fileID: 3005561298468455155, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.18910755
       objectReference: {fileID: 0}
     - target: {fileID: 3005561298468455155, guid: aa1eee9e23498bb4c8efcae0c9d7a17b,
         type: 3}
@@ -6388,7 +6388,7 @@ MonoBehaviour:
   detectors:
   - {fileID: 1648400318}
   - {fileID: 942424998}
-  collider: {fileID: 1648400318}
+  _collider: {fileID: 1648400318}
   source: {fileID: 1648400317}
   Damageablelayer: Damagable
 --- !u!1001 &1588278194

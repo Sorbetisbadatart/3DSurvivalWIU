@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 using Unity.AI.Navigation;
-using UnityEngine.AI;
+
 
 public class EndlessGeneration: MonoBehaviour {
 
@@ -31,8 +29,8 @@ public class EndlessGeneration: MonoBehaviour {
 	public GameObject cloudPrefab;
 	public PlacementGenerator GenTerrain;
 
-	private float timer = 0;
-	bool bake = true;
+
+	
     void Start() {
 		mapGenerator = FindObjectOfType<MapGenerator> ();
 
@@ -44,8 +42,10 @@ public class EndlessGeneration: MonoBehaviour {
     }
 
 	void Update() {
-		timer += 1 * Time.deltaTime;
-		if (timer >2) { bake = true;timer = 0; }
+		
+	
+
+
 		viewerPosition = new Vector2 (viewer.position.x, viewer.position.z) / scale;
 		
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate) {

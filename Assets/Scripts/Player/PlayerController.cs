@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity;
     private InputAction lookAction;
     private Vector2 mouseDelta;
-    private float cameraPitch = 0f;
+    
 
     // Gravity
     [SerializeField] private float Gravity;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private InputAction JumpAction;
     private float JumpHeight = 3.0f;
 
-    private Vector3 move = Vector3.zero;
+  
     private  float Speed = 3;
 
     //interact
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetBool("IsFalling", false);
-            move = Vector3.zero;
+           
         }
 
         // Land

@@ -33,7 +33,7 @@ public class TimeController : MonoBehaviour
 
     private int currentDay = 0;
 
-    bool calledonce = false;
+
 
     private void Awake()
     {
@@ -77,7 +77,7 @@ public class TimeController : MonoBehaviour
         {
             currentDay++;
             PFUserManager.instance.SendLeaderboard(currentDay);
-            calledonce = false;
+
         }
     }
 

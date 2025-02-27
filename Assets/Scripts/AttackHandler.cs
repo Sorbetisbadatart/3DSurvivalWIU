@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttackHandler : MonoBehaviour
 {
     [SerializeField] private SphereCollider[] detectors;
-    [SerializeField] private new SphereCollider collider;
+    [SerializeField] private  SphereCollider _collider;
 
     [SerializeField] private CinemachineImpulseSource source;
     [SerializeField] private string Damageablelayer = "Damagable";
@@ -22,7 +22,7 @@ public class AttackHandler : MonoBehaviour
 
         // Only detect collision with any object on Target layer
         LayerMask layer = LayerMask.GetMask(Damageablelayer);
-        if (collider.enabled)
+        if (_collider.enabled)
         {
             foreach (SphereCollider sCollider in detectors)
             {
@@ -32,7 +32,7 @@ public class AttackHandler : MonoBehaviour
                 sCollider.radius, layer);
                 for (int i = 0; i < hitColliders.Length; i++)
                 {
-                    collider.enabled = false;
+                    _collider.enabled = false;
                     Debug.Log(hitColliders[i].gameObject.name);
 
 
@@ -69,10 +69,7 @@ public class AttackHandler : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-       
-    }
+   
 
     private void OnDrawGizmos()
     {

@@ -36,8 +36,13 @@ public class Animals : MonoBehaviour
 
     private bool isDamaged = false;
 
+    AudioSource _audioSource;
+    [SerializeField] private AudioClip _a;
+    private bool isAudioPlaying = false;
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+
         _currentHealth = _maxHealth;
         healthBar.SetMaxHealth(_maxHealth);
 
@@ -79,6 +84,11 @@ public class Animals : MonoBehaviour
 
         if (isDamaged == true)
         {
+            if (!isAudioPlaying)
+            {
+                _audioSource.PlayOneShot(_a);
+                isAudioPlaying = true;
+            }
             RunAway();
         }
 

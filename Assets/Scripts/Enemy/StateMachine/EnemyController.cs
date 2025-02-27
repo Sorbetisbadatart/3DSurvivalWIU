@@ -31,8 +31,6 @@ public class EnemyController : MonoBehaviour
     [Header("--Information--")]
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _currentHealth;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _speed;
     [SerializeField] public Animator _animator;
 
     [Header("--------------------------------------------------")]
@@ -53,6 +51,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+
         //FSM
         _stateMachine.Initialize(new PatrolState(this));
 

@@ -18,6 +18,12 @@ public class EnemyAttackCollider : MonoBehaviour
             //}
             Debug.Log($"Damageed from {transform.root.gameObject.name}");
             Debug.Log($"{other.gameObject.name}");
+
+                
+            if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController _plsyer))
+            {
+                //_plsyer.TakeDamage(_damage);
+            }
         }
     }
 }

@@ -123,6 +123,7 @@ public class Animals : MonoBehaviour
     {
         isDamaged = true;
 
+        AudioManager.Instance.PlaySFX("ChickenHurt");
         _currentHealth -= damage;
         healthBar.SetHealth(_currentHealth);
 

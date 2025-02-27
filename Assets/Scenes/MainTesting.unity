@@ -3330,7 +3330,7 @@ PrefabInstance:
     - target: {fileID: 700190796543528368, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
         type: 3}
       propertyPath: sfx.Array.size
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 700190796543528368, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
         type: 3}
@@ -3401,6 +3401,26 @@ PrefabInstance:
         type: 3}
       propertyPath: sfx.Array.data[9].name
       value: ChickenHurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 700190796543528368, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
+      propertyPath: sfx.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a70a54dea2abe7488b10f4ec8c6a212, type: 3}
+    - target: {fileID: 700190796543528368, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
+      propertyPath: sfx.Array.data[10].name
+      value: Cooking
+      objectReference: {fileID: 0}
+    - target: {fileID: 700190796543528368, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
+      propertyPath: sfx.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb990bcc1e19294f8c8e3e6b665e63e, type: 3}
+    - target: {fileID: 700190796543528368, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
+        type: 3}
+      propertyPath: sfx.Array.data[11].name
+      value: Eating
       objectReference: {fileID: 0}
     - target: {fileID: 922169390254459143, guid: 5a75b2362b1b0e349b691f4ad0a7afd9,
         type: 3}

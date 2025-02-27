@@ -122,6 +122,16 @@ public class PlayerController : MonoBehaviour
             sprintSfx.enabled = false;
         }
 
+        if (_inputActions["Attack"].IsPressed() && _isGrounded)
+        {
+            _animator.SetBool("IsAttack", true);
+   
+        }
+        else
+        {
+        
+        }
+
         // Jump
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
         {

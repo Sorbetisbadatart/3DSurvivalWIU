@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 458035890698504780, guid: f85fc0498a5646446a3e4390a01fec04, type: 3}
   - {fileID: 5292983051101853952, guid: 09ba6c8ad770a904da045b0eecd69696, type: 3}
   - {fileID: 5359015817009345122, guid: 1cf9f0468cd0ddc4a8ee065b42f114bd, type: 3}
+  - {fileID: 919132149155446097, guid: de14f7bb735646e4db0fea8613b579f3, type: 3}
   density: 1000
   minHeight: 0
   maxHeight: 5

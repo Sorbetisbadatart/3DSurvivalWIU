@@ -9,6 +9,13 @@ public class Campfire : MonoBehaviour
     private bool playerInside = false;
     private bool listOpen = false;
 
+    private void Start()
+    {
+        if(manager == null)
+        {
+            manager = GameObject.Find("CookingCanvas").GetComponent<CookingManger>();
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

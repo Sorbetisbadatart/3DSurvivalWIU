@@ -9,8 +9,6 @@ public class EndlessGeneration: MonoBehaviour {
 
 	const float scale = .5f;
 
-	
-
 	const float viewerMoveThresholdForChunkUpdate = 10f;
 	const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
 
@@ -53,9 +51,7 @@ public class EndlessGeneration: MonoBehaviour {
 		
 	void UpdateVisibleChunks() {
 
-		for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++) {
-			terrainChunksVisibleLastUpdate [i].SetVisible (false);
-		}
+		for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++) terrainChunksVisibleLastUpdate[i].SetVisible(false);
 		terrainChunksVisibleLastUpdate.Clear ();
 			
 		int currentChunkCoordX = Mathf.RoundToInt (viewerPosition.x / chunkSize);
@@ -65,11 +61,7 @@ public class EndlessGeneration: MonoBehaviour {
 			for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++) {
 				Vector2 viewedChunkCoord = new Vector2 (currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
 
-				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
-					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
-				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));	
-                }
+				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk(); else terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));
 			}
 		}
 	}
@@ -132,9 +124,7 @@ public class EndlessGeneration: MonoBehaviour {
             lodMeshes = new LODMesh[detailLevels.Length];
 			for (int i = 0; i < detailLevels.Length; i++) {
 				lodMeshes[i] = new LODMesh(detailLevels[i].lod, UpdateTerrainChunk);
-				if (detailLevels[i].useForCollider) {
-					collisionLODMesh = lodMeshes[i];
-				}
+				if (detailLevels[i].useForCollider) collisionLODMesh = lodMeshes[i];
 			}
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
             navmeshSurface.BuildNavMesh();
@@ -163,9 +153,7 @@ public class EndlessGeneration: MonoBehaviour {
 					for (int i = 0; i < detailLevels.Length - 1; i++)
 					{
 						if (viewerDstFromNearestEdge > detailLevels[i].visibleDstThreshold)
-						{
-							lodIndex = i + 1;
-						}
+						lodIndex = i + 1;
 						else
 						{
 							break;

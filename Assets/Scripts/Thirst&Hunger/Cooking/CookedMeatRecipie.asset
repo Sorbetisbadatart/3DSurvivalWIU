@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef7cec06adf37b4abce3e8336307bda, type: 3}
   m_Name: CookedMeatRecipie
   m_EditorClassIdentifier: 
-  item1: {fileID: 11400000, guid: fde972a274d3d0640ad19ed70f9efb1c, type: 2}
+  item1: {fileID: 11400000, guid: e338ae9e9315a4b4493c67def396544e, type: 2}
   item1Amt: 1
   item2: {fileID: 11400000, guid: 8a00da94258a775438732897c47bad70, type: 2}
   item2Amt: 1
-  result: {fileID: 11400000, guid: 9f0cceb443d0ac14e8685b46b3cc79a5, type: 2}
+  result: {fileID: 11400000, guid: 6b8dd55e8de863845b309167daea4ba6, type: 2}
   resultAmt: 1

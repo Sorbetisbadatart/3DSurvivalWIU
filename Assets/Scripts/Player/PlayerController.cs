@@ -1,19 +1,16 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR.Haptics;
-using UnityEngine.Rendering;
-using UnityEngine.Timeline;
-using static UnityEditor.Progress;
+
 
 public class PlayerController : MonoBehaviour
 {
 
     private int health = 100;
+
     // Camera
     [SerializeField] private CinemachineVirtualCamera _FirstPersonCamera;
     [SerializeField] private CinemachineFreeLook _FreeLookCamera;
@@ -28,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity;
     private InputAction lookAction;
     private Vector2 mouseDelta;
-    private float cameraPitch = 0f;
+    
 
     // Gravity
     [SerializeField] private float Gravity;
@@ -39,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private InputAction JumpAction;
     private float JumpHeight = 3.0f;
 
-    private Vector3 move = Vector3.zero;
+  
     private  float Speed = 3;
 
     //interact
@@ -51,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     ThirstNHunger ThirstHunger;
 
+    [SerializeField] private GameObject deathScreen;
+
     // Water Layer
     public LayerMask waterLayer;
 
@@ -60,6 +59,8 @@ public class PlayerController : MonoBehaviour
     private int _attackStep;
 
     [SerializeField] SkinnedMeshRenderer skinmesh;
+
+    public HealthBar healthBar;
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -128,9 +129,9 @@ public class PlayerController : MonoBehaviour
             sprintSfx.enabled = false;
         }
 
-        if (_inputActions["Attack"].IsPressed() && _isGrounded)
+        if (_inputActions["Attack"].WasPressedThisFrame() && _isGrounded)
         {
-            if (_attackQueue.Count < 3)
+            if (_attackQueue.Count < 2)
             {
 
                 _attackQueue.Add(PerformAttack());
@@ -145,7 +146,8 @@ public class PlayerController : MonoBehaviour
         }
       
 
-       
+
+
 
         // Jump
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
@@ -174,7 +176,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetBool("IsFalling", false);
-            move = Vector3.zero;
+           
         }
 
         // Land
@@ -199,11 +201,12 @@ public class PlayerController : MonoBehaviour
         while (!
         IsCurrentAnimationReadyForNextStep(_attackNames[_attackStep - 1]))
         {
+           
             yield return null;
         }
         if (_attackStep >= _attackQueue.Count)
         {
-            AudioManager.Instance.PlaySFX("Punch");
+          
             ResetCombo();
         }
         else
@@ -315,6 +318,25 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    
+    public void TakeDamage(int damage)
+    {
+
+        AudioManager.Instance.PlaySFX("Hurt");
+        health -= damage;
+        healthBar.SetHealth(health);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        deathScreen.SetActive(true);
+        Destroy(gameObject);
+    }
     private void OnAnimatorMove()
     {
         Vector3 velocity = _animator.deltaPosition;
@@ -355,5 +377,17 @@ public class PlayerController : MonoBehaviour
     {
         skinmesh.enabled = true;
     }
+
+    //public get set health
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void SetHealth(int h)
+    {
+        health = h;
+    }
+
 }
 

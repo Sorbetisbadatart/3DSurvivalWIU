@@ -17,7 +17,7 @@ public class PatrolState : EnemyState
     }
     public void OnEnter()
     {
-        Debug.Log("ENTER STATE PATROL");
+        //Debug.Log("ENTER STATE PATROL");
 
         _enemyController._animator.CrossFadeInFixedTime("Enemy1_Walk", 0.5f);
 
@@ -30,7 +30,7 @@ public class PatrolState : EnemyState
 
     public void OnUpdate()
     {
-        Debug.Log("ONUPDATE STATE PATROL");
+        //Debug.Log("ONUPDATE STATE PATROL");
 
         if (_enemyController._waypoints == null ||
             _enemyController._waypoints.Length == 0)
@@ -47,7 +47,7 @@ public class PatrolState : EnemyState
 
         if (distance <= _enemyController._agent.stoppingDistance)
         {
-            Debug.Log("reached");
+           // Debug.Log("reached");
 
             //set next waypoint randomly
             _currentWaypointIndex = Random.Range(0, _enemyController._waypoints.Length);

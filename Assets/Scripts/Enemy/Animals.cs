@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -119,8 +117,7 @@ public class Animals : MonoBehaviour
 
         _timeToNextMove = 0;
 
-        Destroy(gameObject, 8.0f);
-    }
+          }
 
 
     private void OnDrawGizmosSelected()
@@ -134,6 +131,7 @@ public class Animals : MonoBehaviour
     {
         isDamaged = true;
 
+        AudioManager.Instance.PlaySFX("ChickenHurt");
         _currentHealth -= damage;
         healthBar.SetHealth(_currentHealth);
 
@@ -146,9 +144,10 @@ public class Animals : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        
 
         _dropSystem.SpawnDropItem();
+        Destroy(gameObject);
 
     }
 

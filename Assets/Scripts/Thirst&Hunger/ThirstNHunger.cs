@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +6,7 @@ public class ThirstNHunger : MonoBehaviour
 {
     [SerializeField] private float thirst;
     [SerializeField]private float hunger;
+    
 
     [SerializeField] private float thirstRate;
     [SerializeField] private float hungerRate;
@@ -14,10 +14,16 @@ public class ThirstNHunger : MonoBehaviour
     [SerializeField] private Slider hungerSlider;
     [SerializeField] private Slider thirstSlider;
 
+    private PlayerController player;
+
+    [SerializeField] private float dmgTickDelay;
+    private float dmgTick;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GetComponent<PlayerController>();
+        dmgTick = dmgTickDelay;
     }
 
     // Update is called once per frame
@@ -29,6 +35,8 @@ public class ThirstNHunger : MonoBehaviour
         if(thirst > 0)
         {
             thirst -= thirstRate * Time.deltaTime;
+          
+
         }
         if(hunger > 0)
         {
@@ -37,12 +45,19 @@ public class ThirstNHunger : MonoBehaviour
 
         if(thirst <= 0)
         {
-            //Debug.Log("THIRSTY!");
+            dmgTick -= Time.deltaTime;
         }
 
         if (hunger <= 0)
         {
-            //Debug.Log("HUNGRY");
+           dmgTick -= Time.deltaTime;
+        }
+
+        if(dmgTick <= 0)
+        {
+            player.TakeDamage(5);
+            dmgTick = dmgTickDelay;
+    
         }
     }
 

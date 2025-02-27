@@ -108,7 +108,7 @@ MonoBehaviour:
   _collider: []
   sort: 0
   green: {fileID: 2100000, guid: d5180cfb8195e0645813aa65026d35cb, type: 2}
-  red: {fileID: -5283888208800200948, guid: 64480427887f0d645af3e0d10e9fac57, type: 3}
+  red: {fileID: 2100000, guid: a95cd341f2eb01a4481b663040bdfcec, type: 2}
   canBuild: 0
   second: 0
   ChildCollider: {fileID: 4874246742526204695}

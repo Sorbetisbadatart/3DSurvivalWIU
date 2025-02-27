@@ -1,6 +1,5 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -60,7 +59,7 @@ public class PlacementGenerator : MonoBehaviour
 
             selectedObject = Random.Range(0, preFab.Count);
 
-            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.preFab[selectedObject], transform);
+            GameObject instantiatedPrefab = Instantiate(this.preFab[selectedObject], transform);
             instantiatedPrefab.transform.position = hit.point;
             instantiatedPrefab.transform.Rotate(Vector3.up, Random.Range(rotationRange.x, rotationRange.y), Space.Self);
             instantiatedPrefab.transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.FromToRotation(instantiatedPrefab.transform.up, hit.normal), rotateTowardsNormal);

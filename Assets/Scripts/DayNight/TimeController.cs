@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
 
@@ -34,7 +33,7 @@ public class TimeController : MonoBehaviour
 
     private int currentDay = 0;
 
-    bool calledonce = false;
+
 
     private void Awake()
     {
@@ -77,8 +76,8 @@ public class TimeController : MonoBehaviour
         if (currentTime.Hour == 0)
         {
             currentDay++;
-           // PFUserManager.instance.SendLeaderboard(currentDay);
-            calledonce = false;
+            PFUserManager.instance.SendLeaderboard(currentDay);
+
         }
     }
 

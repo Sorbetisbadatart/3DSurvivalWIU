@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainTesting.unity
     guid: 7d99b664c11fc6d4083790cc71c6b844
   - enabled: 1
-    path: Assets/Scenes/Kenneth/InventoryScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: ec74c60d77508544d95f3cb9a9a38157
   m_configObjects: {}

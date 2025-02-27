@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 436089587}
   - component: {fileID: 436089586}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: PlayFabManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -763,14 +763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001b151cb7f11864eb23a39a1e2d1264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MessageBox: {fileID: 0}
-  IF_User: {fileID: 0}
-  IF_Email: {fileID: 0}
-  IF_Password: {fileID: 0}
-  IF_CurrentScore: {fileID: 0}
-  IF_DisplayName: {fileID: 0}
-  XP_Display: {fileID: 0}
-  XP_Input: {fileID: 0}
 --- !u!4 &436089587
 Transform:
   m_ObjectHideFlags: 0

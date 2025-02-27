@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8243693406835771304}
   - component: {fileID: 7388964332380165335}
   - component: {fileID: 4892104313214264326}
+  - component: {fileID: 4558297406829128478}
   m_Layer: 0
   m_Name: Food_Chicken
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.92, y: 2.449, z: 4.73}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -135,3 +136,18 @@ CapsuleCollider:
   m_Height: 0.41
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.05}
+--- !u!114 &4558297406829128478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4909740878102705389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dcc5d2485be5a4889fe907f0d15b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop: {fileID: 11400000, guid: e338ae9e9315a4b4493c67def396544e, type: 2}
+  dropAmt: 1
+  timeToObtain: 0

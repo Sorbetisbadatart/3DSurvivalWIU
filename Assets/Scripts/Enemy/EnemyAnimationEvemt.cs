@@ -1,6 +1,8 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class EnemyAnimationEvemt : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class EnemyAnimationEvemt : MonoBehaviour
     [SerializeField] private Transform _par2Position;
 
     [SerializeField] private Collider[] detectors;
+   
+   
 
 
     [SerializeField] private GameObject _tailTrail;
@@ -44,6 +48,8 @@ public class EnemyAnimationEvemt : MonoBehaviour
         //detector.isTrigger = true;
         Debug.Log($"Enable Collider: {detector.gameObject.name}");
         //Debug.Log($"Enable Collider: " + detector.gameObject.name);
+
+        
 
 
     }
@@ -88,13 +94,9 @@ public class EnemyAnimationEvemt : MonoBehaviour
             Destroy(_currentPar1);
             Vector3 worldPos = _par1Position.transform.position;
             _currentPar1 = Instantiate(_par1, _par1Position.transform.position, _par1Position.transform.rotation, _par1Position.transform);
-
-
-
         }
         else if (a == 2)
         {
-            
 
             _par2.SetActive(false);
             _par2.SetActive(true);

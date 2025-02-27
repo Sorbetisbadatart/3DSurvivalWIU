@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
+
 {
     [Header("--------------------------------------------------")]
     [Header("--State Settings--")]
@@ -135,8 +135,9 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        _dropSystem.SpawnDropItem();
         Destroy(gameObject);
 
-        _dropSystem.SpawnDropItem();
+       
     }
 }

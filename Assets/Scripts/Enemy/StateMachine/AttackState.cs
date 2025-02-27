@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class AttackState : EnemyState
@@ -26,7 +25,7 @@ public class AttackState : EnemyState
 
     public void OnEnter()
     {
-        Debug.Log("ENTER STATE ATTACK");
+       // Debug.Log("ENTER STATE ATTACK");
         _cooldownTimer = 0f;
         _attackFinished = false;
         _attackCooldown = Random.Range(0.2f, 3.5f);
@@ -38,8 +37,10 @@ public class AttackState : EnemyState
 
     public void OnUpdate()
     {
-        Debug.Log("ONUPDATE STATE ATTACK");
-        
+
+       // Debug.Log("ONUPDATE STATE ATTACK");
+
+
         AnimatorStateInfo stateInfo = _enemyController._animator.GetCurrentAnimatorStateInfo(0);    
 
         if (!_attackFinished && (stateInfo.IsName("Enemy1_Attack1_Left") ||
@@ -107,7 +108,7 @@ public class AttackState : EnemyState
 
     public void OnExit()
     {
-        Debug.Log("EXIT STATE ATTACK");
+      //  Debug.Log("EXIT STATE ATTACK");
     }
 
     private void PerformAttack()

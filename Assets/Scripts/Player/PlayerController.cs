@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 {
 
     private int health = 100;
+
     // Camera
     [SerializeField] private CinemachineVirtualCamera _FirstPersonCamera;
     [SerializeField] private CinemachineFreeLook _FreeLookCamera;
@@ -200,11 +201,12 @@ public class PlayerController : MonoBehaviour
         while (!
         IsCurrentAnimationReadyForNextStep(_attackNames[_attackStep - 1]))
         {
+           
             yield return null;
         }
         if (_attackStep >= _attackQueue.Count)
         {
-            AudioManager.Instance.PlaySFX("Punch");
+          
             ResetCombo();
         }
         else
@@ -356,5 +358,17 @@ public class PlayerController : MonoBehaviour
     {
         skinmesh.enabled = true;
     }
+
+    //public get set health
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void SetHealth(int h)
+    {
+        health = h;
+    }
+
 }
 

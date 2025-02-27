@@ -31,11 +31,15 @@ public class AttackState : EnemyState
         _attackCooldown = Random.Range(0.2f, 3.5f);
 
         PerformAttack();
+
+        
     }
 
     public void OnUpdate()
     {
+
        // Debug.Log("ONUPDATE STATE ATTACK");
+
 
         AnimatorStateInfo stateInfo = _enemyController._animator.GetCurrentAnimatorStateInfo(0);    
 
@@ -45,6 +49,17 @@ public class AttackState : EnemyState
                                   stateInfo.IsName("Enemy1_Attack4_Roar") ||
                                   stateInfo.IsName("Enemy1_Attack5_")))
         {
+            if (stateInfo.IsName("Enemy1_Attack1_Left"))
+            {
+
+            }
+            else if (stateInfo.IsName("Enemy1_Attack2_Right"))
+            {
+
+            }
+
+
+            else { }
             if (stateInfo.normalizedTime >= 1.0f)
             {
                 _attackFinished = true;

@@ -15,11 +15,13 @@ public class EnemyAttackCollider : MonoBehaviour
             Debug.Log($"{other.gameObject.name}");
 
 
+
             if (other.gameObject.GetComponent<PlayerController>())
             {
                 Debug.Log("Beat the player");
                 PlayerController targetController = other.GetComponent<PlayerController>();
                 targetController.TakeDamage(10);
+
             }
         }
     }

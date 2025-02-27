@@ -22,8 +22,13 @@ public class EnemyAnimationEvemt : MonoBehaviour
     [SerializeField] private GameObject _rightTrail;
     [SerializeField] private GameObject _leftTrail;
 
+    AudioSource _audioSource;
+    [SerializeField] private AudioClip attack1, attack2, attack3, attack4, attack5, _a, _b, _c, _footStep;
+
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+
         DisableCollider();
     }
 
@@ -150,6 +155,32 @@ public class EnemyAnimationEvemt : MonoBehaviour
                 break;
             case 3:
                 _tailTrail.SetActive(false);
+                break;
+        }
+    }
+
+    public void EnableSFX(int a)
+    {
+        switch (a)
+        {
+            case 1:
+                _audioSource.PlayOneShot(attack1);
+                break;
+            case 2:
+
+                break;
+            case 3:
+                _audioSource.PlayOneShot(_a);
+                _audioSource.PlayOneShot(attack2);
+                break;
+            case 4:
+                _audioSource.PlayOneShot(_b);
+                break;
+            case 5:
+                _audioSource.PlayOneShot(_c);
+                break;
+            case 6:
+                _audioSource.PlayOneShot(_footStep);
                 break;
         }
     }

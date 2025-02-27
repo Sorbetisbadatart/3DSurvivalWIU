@@ -7,6 +7,7 @@ public class ThirstNHunger : MonoBehaviour
 {
     [SerializeField] private float thirst;
     [SerializeField]private float hunger;
+    
 
     [SerializeField] private float thirstRate;
     [SerializeField] private float hungerRate;
@@ -23,6 +24,7 @@ public class ThirstNHunger : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerController>();
+        dmgTick = dmgTickDelay;
     }
 
     // Update is called once per frame
@@ -34,6 +36,8 @@ public class ThirstNHunger : MonoBehaviour
         if(thirst > 0)
         {
             thirst -= thirstRate * Time.deltaTime;
+          
+
         }
         if(hunger > 0)
         {
@@ -42,21 +46,19 @@ public class ThirstNHunger : MonoBehaviour
 
         if(thirst <= 0)
         {
-            //Debug.Log("THIRSTY!");
             dmgTick -= Time.deltaTime;
         }
 
         if (hunger <= 0)
         {
-            //Debug.Log("HUNGRY");
-            dmgTick -= Time.deltaTime;
+           dmgTick -= Time.deltaTime;
         }
 
         if(dmgTick <= 0)
         {
-            player.SetHealth(player.GetHealth() - 1);
+            player.TakeDamage(5);
             dmgTick = dmgTickDelay;
-            Debug.Log("PLAYER HEALTH: " + player.GetHealth());
+    
         }
     }
 

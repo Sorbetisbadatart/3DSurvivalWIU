@@ -20,7 +20,7 @@ public class EnemyAttackCollider : MonoBehaviour
             {
                 Debug.Log("Beat the player");
                 PlayerController targetController = other.GetComponent<PlayerController>();
-                targetController.TakeDamage(1);
+                targetController.TakeDamage(10);
             }
         }
     }

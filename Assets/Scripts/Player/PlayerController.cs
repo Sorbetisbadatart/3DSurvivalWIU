@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     ThirstNHunger ThirstHunger;
 
+    [SerializeField] private GameObject deathScreen;
+
     // Water Layer
     public LayerMask waterLayer;
 
@@ -332,6 +334,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        deathScreen.SetActive(true);
         Destroy(gameObject);
     }
     private void OnAnimatorMove()

@@ -109,8 +109,7 @@ public class Animals : MonoBehaviour
 
         _timeToNextMove = 0;
 
-        Destroy(gameObject, 8.0f);
-    }
+          }
 
 
     private void OnDrawGizmosSelected()
@@ -136,9 +135,10 @@ public class Animals : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        
 
         _dropSystem.SpawnDropItem();
+        Destroy(gameObject);
 
     }
 

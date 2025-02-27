@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         if (TimeController.Timeinstance.TimePassedThisTime(7))
         {
             Debug.Log("Go to Delete Enemy");
-            if (_enemy = GameObject.Find("Enemy1(Clone)"))
+            if (_enemy = GameObject.Find("Enemy(Clone)"))
             {
                 Destroy(_enemy);
                 TextManager.TextInstance.CreateText(new Vector3(350, 800, 1), "The beast now rests", Color.white);

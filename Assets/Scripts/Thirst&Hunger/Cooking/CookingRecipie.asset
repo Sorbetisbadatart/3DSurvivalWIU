@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ef7cec06adf37b4abce3e8336307bda, type: 3}
-  m_Name: CookedMeatRecipie
+  m_Name: CookingRecipie
   m_EditorClassIdentifier: 
   item1: {fileID: 11400000, guid: e338ae9e9315a4b4493c67def396544e, type: 2}
   item1Amt: 1
-  item2: {fileID: 11400000, guid: 8a00da94258a775438732897c47bad70, type: 2}
+  item2: {fileID: 11400000, guid: 295e8546e3a0f61429c5830e9d86123a, type: 2}
   item2Amt: 1
-  result: {fileID: 11400000, guid: 6b8dd55e8de863845b309167daea4ba6, type: 2}
-  resultAmt: 1
+  result: {fileID: 11400000, guid: 2df545f3b526cb74b82561593e7fb28f, type: 2}
+  resultAmt: 0

@@ -49,7 +49,7 @@ MonoBehaviour:
   - {fileID: 5292983051101853952, guid: 09ba6c8ad770a904da045b0eecd69696, type: 3}
   - {fileID: 5359015817009345122, guid: 1cf9f0468cd0ddc4a8ee065b42f114bd, type: 3}
   - {fileID: 2765449656425903593, guid: a5b4212e2ec36874a8067eb41604e958, type: 3}
-  density: 100
+  density: 400
   minHeight: 0
   maxHeight: 5
   xRange: {x: -120, y: 120}

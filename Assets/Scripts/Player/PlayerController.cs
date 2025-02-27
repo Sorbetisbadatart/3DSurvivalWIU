@@ -200,11 +200,12 @@ public class PlayerController : MonoBehaviour
         while (!
         IsCurrentAnimationReadyForNextStep(_attackNames[_attackStep - 1]))
         {
+           
             yield return null;
         }
         if (_attackStep >= _attackQueue.Count)
         {
-            AudioManager.Instance.PlaySFX("Punch");
+          
             ResetCombo();
         }
         else

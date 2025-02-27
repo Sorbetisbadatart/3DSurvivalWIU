@@ -128,9 +128,9 @@ public class PlayerController : MonoBehaviour
             sprintSfx.enabled = false;
         }
 
-        if (_inputActions["Attack"].IsPressed() && _isGrounded)
+        if (_inputActions["Attack"].WasPressedThisFrame() && _isGrounded)
         {
-            if (_attackQueue.Count < 3)
+            if (_attackQueue.Count < 2)
             {
 
                 _attackQueue.Add(PerformAttack());
@@ -145,7 +145,8 @@ public class PlayerController : MonoBehaviour
         }
       
 
-       
+
+
 
         // Jump
         if (_inputActions["Jump"].IsPressed() && _isGrounded)

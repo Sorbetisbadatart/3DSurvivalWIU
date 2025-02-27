@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour
     // Water Layer
     public LayerMask waterLayer;
 
+    private List<IEnumerator> _attackQueue = new List<IEnumerator>();
+    private bool _isAttack = false;
+    [SerializeField] private string[] _attackNames;
+    private int _attackStep;
+
     [SerializeField] SkinnedMeshRenderer skinmesh;
     void Awake()
     {
@@ -124,13 +129,22 @@ public class PlayerController : MonoBehaviour
 
         if (_inputActions["Attack"].IsPressed() && _isGrounded)
         {
-            _animator.SetBool("IsAttack", true);
-   
+            if (_attackQueue.Count < 3)
+            {
+
+                _attackQueue.Add(PerformAttack());
+                AudioManager.Instance.PlaySFX("Punch");
+            }
+
+            if (_attackQueue.Count == 1)
+            {
+                StartCombo();
+            }
+
         }
-        else
-        {
-        
-        }
+      
+
+       
 
         // Jump
         if (_inputActions["Jump"].IsPressed() && _isGrounded)
@@ -176,6 +190,50 @@ public class PlayerController : MonoBehaviour
         {
             Interact();
         }
+    }
+    private IEnumerator PerformAttack()
+    {
+        _attackStep++;
+        _animator.SetInteger("AttackStep", _attackStep);
+        while (!
+        IsCurrentAnimationReadyForNextStep(_attackNames[_attackStep - 1]))
+        {
+            yield return null;
+        }
+        if (_attackStep >= _attackQueue.Count)
+        {
+            AudioManager.Instance.PlaySFX("Punch");
+            ResetCombo();
+        }
+        else
+        {
+            StartCoroutine(_attackQueue[_attackStep]);
+        }
+    }
+
+    private void StartCombo()
+    {
+        _isAttack = true;
+        _animator.SetBool("IsAttack", _isAttack);
+        StartCoroutine(_attackQueue[0]);
+    }
+
+    private bool IsCurrentAnimationReadyForNextStep(string name)
+    {
+        // Check if the current animation has played enough to transition
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.normalizedTime >= 0.7f &&
+        stateInfo.IsName(name); // Adjust based on when you want to allow
+
+    }
+
+    private void ResetCombo()
+    {
+        _isAttack = false;
+        _attackStep = 0;
+        _animator.SetInteger("AttackStep", _attackStep);
+        _animator.SetBool("IsAttack", false);
+        _attackQueue.Clear();
     }
 
     private void Interact()

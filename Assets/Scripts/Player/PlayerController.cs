@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
 
         #region Animation Trigger
+
         if (_inputActions["Move"].IsPressed() && _isGrounded)
         {
             _animator.SetBool("IsWalking", true);
@@ -195,11 +196,21 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo1, InteractRange, waterLayer))
         {
             Debug.Log(hitInfo1.collider.gameObject.name);
-            ThirstHunger.GainThirst(10);
+            ThirstHunger.GainThirst(1);
             AudioManager.Instance.PlaySFX("Drink");
         }
     }
 
+    void OnTriggerEnter(Collider other){
+        if (other.gameObject.layer == 4)
+            _animator.SetBool("IsSwimming", true);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 4)
+            _animator.SetBool("IsSwimming", false);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), GetComponent<CapsuleCollider>().bounds.size.x / 2);

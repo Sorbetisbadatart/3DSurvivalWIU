@@ -136,8 +136,9 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        _dropSystem.SpawnDropItem();
         Destroy(gameObject);
 
-        _dropSystem.SpawnDropItem();
+       
     }
 }

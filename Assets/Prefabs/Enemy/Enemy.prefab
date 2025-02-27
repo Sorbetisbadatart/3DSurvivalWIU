@@ -8720,8 +8720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f55ebec615d0dd418e1476d8d1311d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 15
-  attackRange: 5
+  detectionRange: 25
+  attackRange: 10
   patrolSpeed: 2
   chaseSpeed: 5
   _waypoints:

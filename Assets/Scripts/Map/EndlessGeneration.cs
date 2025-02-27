@@ -117,7 +117,7 @@ public class EndlessGeneration: MonoBehaviour {
 			meshObject.transform.localScale = Vector3.one * scale;
 
 			waterPrefab = Instantiate(waterPrefab);
-            waterPrefab.transform.position = new Vector3(positionV3.x * scale,-4.6f,positionV3.z*scale);
+            waterPrefab.transform.position = new Vector3(positionV3.x * scale,-3.6f,positionV3.z*scale);
             waterPrefab.transform.parent = parent;
 			this.waterPrefab = waterPrefab; // For visibility
 

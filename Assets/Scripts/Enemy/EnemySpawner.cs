@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         //give estimate of player's location
-        for (int i = 0; i < PlayerWaypoints.Count - 1; i++)
+        for (int i = 0; i < PlayerWaypoints.Count; i++)
             EnemyPrefab.GetComponent<EnemyController>()._waypoints[i] = PlayerWaypoints[i].transform;
 
     }

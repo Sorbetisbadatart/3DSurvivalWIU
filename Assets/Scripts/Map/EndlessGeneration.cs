@@ -68,13 +68,9 @@ public class EndlessGeneration: MonoBehaviour {
 				Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
 
 				if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
-				{
 					terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
-                }
 				else
-				{
 					terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));
-                }
             }
 		}
 	}

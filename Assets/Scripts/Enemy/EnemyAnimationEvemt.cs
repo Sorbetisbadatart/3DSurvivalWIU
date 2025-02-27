@@ -6,8 +6,17 @@ public class EnemyAnimationEvemt : MonoBehaviour
 {
     [SerializeField] private GameObject _par1;
     [SerializeField] private GameObject _par2;
+    private GameObject _currentPar1;
+    private GameObject _currentPar2;
+    [SerializeField] private Transform _par1Position;
+    [SerializeField] private Transform _par2Position;
 
     [SerializeField] private Collider[] detectors;
+
+
+    [SerializeField] private GameObject _tailTrail;
+    [SerializeField] private GameObject _rightTrail;
+    [SerializeField] private GameObject _leftTrail;
 
     private void Start()
     {
@@ -16,7 +25,6 @@ public class EnemyAnimationEvemt : MonoBehaviour
 
     void Update()
     {
-        
     }
 
     public void EnableCollider(int index)
@@ -69,13 +77,27 @@ public class EnemyAnimationEvemt : MonoBehaviour
     {
         if (a == 1)
         {
-            _par1.SetActive(false);
-            _par1.SetActive(true);
+            //_par1.SetActive(false);
+            //_par1.SetActive(true);
+
+            Destroy(_currentPar1);
+            Vector3 worldPos = _par1Position.transform.position;
+            _currentPar1 = Instantiate(_par1, _par1Position.transform.position, _par1Position.transform.rotation, _par1Position.transform);
+
+
+
         }
         else if (a == 2)
         {
+            
+
             _par2.SetActive(false);
             _par2.SetActive(true);
+
+            //Vector3 worldPos = _par2Position.transform.position;
+            //_currentPar2 = Instantiate(_par2 , _par2Position.position, Quaternion.identity);
+            //_currentPar2 = Instantiate(_par2, _par2Position.transform.position, _par2Position.transform.rotation, transform);
+
         }
 
     }
@@ -84,11 +106,49 @@ public class EnemyAnimationEvemt : MonoBehaviour
     {
         if (a == 1)
         {
-            _par1.SetActive(false);
+            //_par1.SetActive(false);
+
+            if (_currentPar1 != null)
+            {
+                Destroy(_currentPar1);
+                Debug.Log("delete");
+            }
         }
         else if (a == 2)
         {
             _par2.SetActive(false);
+        }
+    }
+
+    public void EnableTrail(int a)
+    {
+        switch (a)
+        {
+            case 1:
+                _leftTrail.SetActive(true);
+                break;
+            case 2:
+                _rightTrail.SetActive(true);
+                break;
+            case 3:
+                _tailTrail.SetActive(true);
+                break;
+        }
+    }
+
+    public void DisableTrail(int a)
+    {
+        switch (a)
+        {
+            case 1:
+                _leftTrail.SetActive(false);
+                break;
+            case 2:
+                _rightTrail.SetActive(false);
+                break;
+            case 3:
+                _tailTrail.SetActive(false);
+                break;
         }
     }
 }

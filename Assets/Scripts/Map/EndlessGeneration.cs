@@ -51,9 +51,7 @@ public class EndlessGeneration: MonoBehaviour {
 		
 	void UpdateVisibleChunks() {
 
-		for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++) {
-			terrainChunksVisibleLastUpdate [i].SetVisible (false);
-		}
+		for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++) terrainChunksVisibleLastUpdate[i].SetVisible(false);
 		terrainChunksVisibleLastUpdate.Clear ();
 			
 		int currentChunkCoordX = Mathf.RoundToInt (viewerPosition.x / chunkSize);
@@ -63,11 +61,7 @@ public class EndlessGeneration: MonoBehaviour {
 			for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++) {
 				Vector2 viewedChunkCoord = new Vector2 (currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
 
-				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
-					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
-				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));	
-                }
+				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk(); else terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, waterPrefab, cloudPrefab, GenTerrain));
 			}
 		}
 	}
@@ -111,7 +105,7 @@ public class EndlessGeneration: MonoBehaviour {
 			meshObject.transform.localScale = Vector3.one * scale;
 
 			waterPrefab = Instantiate(waterPrefab);
-            waterPrefab.transform.position = new Vector3(positionV3.x * scale,-0.6f,positionV3.z*scale);
+            waterPrefab.transform.position = new Vector3(positionV3.x * scale,-2.6f,positionV3.z*scale);
             waterPrefab.transform.parent = parent;
 			this.waterPrefab = waterPrefab; // For visibility
 
@@ -130,11 +124,10 @@ public class EndlessGeneration: MonoBehaviour {
             lodMeshes = new LODMesh[detailLevels.Length];
 			for (int i = 0; i < detailLevels.Length; i++) {
 				lodMeshes[i] = new LODMesh(detailLevels[i].lod, UpdateTerrainChunk);
-				if (detailLevels[i].useForCollider) {
-					collisionLODMesh = lodMeshes[i];
-				}
+				if (detailLevels[i].useForCollider) collisionLODMesh = lodMeshes[i];
 			}
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
+            navmeshSurface.BuildNavMesh();
         }
 
         void OnMapDataReceived(MapData mapData) {
@@ -153,37 +146,44 @@ public class EndlessGeneration: MonoBehaviour {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
 
-				if (visible) {
+				if (visible)
+				{
 					int lodIndex = 0;
 
-					for (int i = 0; i < detailLevels.Length - 1; i++) {
-						if (viewerDstFromNearestEdge > detailLevels [i].visibleDstThreshold) {
-							lodIndex = i + 1;
-						} else {
+					for (int i = 0; i < detailLevels.Length - 1; i++)
+					{
+						if (viewerDstFromNearestEdge > detailLevels[i].visibleDstThreshold)
+						lodIndex = i + 1;
+						else
+						{
 							break;
 						}
 					}
 
-					if (lodIndex != previousLODIndex) {
-						LODMesh lodMesh = lodMeshes [lodIndex];
-						if (lodMesh.hasMesh) {
+					if (lodIndex != previousLODIndex)
+					{
+						LODMesh lodMesh = lodMeshes[lodIndex];
+						if (lodMesh.hasMesh)
+						{
 							previousLODIndex = lodIndex;
 							meshFilter.mesh = lodMesh.mesh;
-						} else if (!lodMesh.hasRequestedMesh) {
-							lodMesh.RequestMesh (mapData);
 						}
+						else if (!lodMesh.hasRequestedMesh)
+							lodMesh.RequestMesh(mapData);
 					}
 
-					if (lodIndex == 0) {
-						if (collisionLODMesh.hasMesh) {
+					if (lodIndex == 0)
+					{
+						if (collisionLODMesh.hasMesh)
 							meshCollider.sharedMesh = collisionLODMesh.mesh;
-						} else if (!collisionLODMesh.hasRequestedMesh) {
-							collisionLODMesh.RequestMesh (mapData);
-						}
+						else if (!collisionLODMesh.hasRequestedMesh)
+							collisionLODMesh.RequestMesh(mapData);
 					}
 
-					terrainChunksVisibleLastUpdate.Add (this);
-					navmeshSurface.BuildNavMesh();
+					terrainChunksVisibleLastUpdate.Add(this);
+					if (visible)
+						navmeshSurface.BuildNavMesh();
+					
 				}
                 SetVisible (visible);
 			}

@@ -23,35 +23,35 @@ public class EnemySpawner : MonoBehaviour
     {
         //give estimate of player's location
         for (int i = 0; i < PlayerWaypoints.Count - 1; i++)
-         EnemyPrefab.GetComponent<EnemyController>()._waypoints[i] = PlayerWaypoints[i].transform;
-        SpawnEnemy();
+            EnemyPrefab.GetComponent<EnemyController>()._waypoints[i] = PlayerWaypoints[i].transform;
+
     }
 
     private void Update()
     {
         if (TimeController.Timeinstance.TimePassedThisTime(0) && canSpawn)
         {
-            Debug.Log("pain1");
+            Debug.Log("Spawned Enemy");
             SpawnEnemy();
             canSpawn = false;
-            TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "The beast has awoke", Color.red);
+            TextManager.TextInstance.CreateText(new Vector3(350, 800, 1), "The beast has awoke", Color.red);
             AudioManager.Instance.PlaySFX("EnemyRoar");
         }
 
         if (TimeController.Timeinstance.TimePassedThisTime(7))
         {
-            Debug.Log("pain");
+            Debug.Log("Go to Delete Enemy");
             if (_enemy = GameObject.Find("Enemy1(Clone)"))
             {
                 Destroy(_enemy);
-                TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "The beast now rests", Color.white);
+                TextManager.TextInstance.CreateText(new Vector3(350, 800, 1), "The beast now rests", Color.white);
             }
         }
 
         if (TimeController.Timeinstance.TimePassedThisTime(23) && !canSpawn)
         {
-            Debug.Log("pain2");
-            TextManager.TextInstance.CreateText(new Vector3(200, 800, 1), "Better hide now", Color.red);
+            Debug.Log("Reset Enemy");
+            TextManager.TextInstance.CreateText(new Vector3(350, 800, 1), "Better hide now", Color.red);
             canSpawn = true;
         }
     }
